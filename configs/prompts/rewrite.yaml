@@ -1,0 +1,6 @@
+# Conversational query-rewrite prompt (Step O)
+# STATUS: placeholder — filled in Step O.
+name: rewrite_prompt
+version: 1
+template: |
+  TODO(Step O): rewrite follow-up questions into standalone queries using chat history.

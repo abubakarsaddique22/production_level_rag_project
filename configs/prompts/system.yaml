@@ -1,0 +1,7 @@
+# Grounded-answer system prompt (Step K)
+# STATUS: placeholder — real prompt text written in Step K.
+name: system_prompt
+version: 1
+template: |
+  TODO(Step K): "Answer only from the provided context. Cite sources.
+  Say 'I do not know' when the context is insufficient."

@@ -1,0 +1,76 @@
+documents:
+  - filename: "API Documentation"
+    doc_id: "NX-ENG-001"
+    title: "Nexora Platform API Documentation"
+    department: "Engineering"
+    version: "2.4"
+    effective_date: "2026-03-01"
+
+  - filename: "Deployment SOP"
+    doc_id: "NX-ENG-002"
+    title: "Deployment Standard Operating Procedure"
+    department: "Engineering"
+    version: "1.0"
+    effective_date: "2026-01-01"
+
+  - filename: "Coding Standards"
+    doc_id: "NX-ENG-003"
+    title: "Engineering Coding Standards"
+    department: "Engineering"
+    version: "1.0"
+    effective_date: "2026-01-01"
+
+  - filename: "Leave Policy"
+    doc_id: "NX-HR-001"
+    title: "Employee Leave Policy"
+    department: "HR"
+    version: "1.0"
+    effective_date: "2026-01-01"
+
+  - filename: "Employee Handbook"
+    doc_id: "NX-HR-002"
+    title: "Employee Handbook"
+    department: "HR"
+    version: "1.0"
+    effective_date: "2026-01-01"
+
+  - filename: "Benefits"
+    doc_id: "NX-HR-003"
+    title: "Employee Benefits Guide"
+    department: "HR"
+    version: "1.0"
+    effective_date: "2026-01-01"
+
+  - filename: "Expense Policy"
+    doc_id: "NX-FIN-001"
+    title: "Expense Policy"
+    department: "Finance"
+    version: "1.0"
+    effective_date: "2026-01-01"
+
+  - filename: "Procurement Policy"
+    doc_id: "NX-FIN-002"
+    title: "Procurement Policy"
+    department: "Finance"
+    version: "1.0"
+    effective_date: "2026-01-01"
+
+  - filename: "Product Documentation"
+    doc_id: "NX-PRD-001"
+    title: "Nexora Product Documentation"
+    department: "Product"
+    version: "1.0"
+    effective_date: "2026-01-01"
+
+  - filename: "Product FAQ"
+    doc_id: "NX-PRD-002"
+    title: "Product FAQ"
+    department: "Product"
+    version: "4.0"
+    effective_date: "2026-08-01"
+
+access_matrix:
+  Engineering: ["engineer", "admin"]
+  HR: ["employee", "engineer", "finance", "hr", "admin"]
+  Finance: ["finance", "admin"]
+  Product: ["employee", "engineer", "finance", "hr", "admin"]

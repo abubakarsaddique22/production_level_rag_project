@@ -1,0 +1,38 @@
+# Environments
+.venv/
+venv/
+.env
+__pycache__/
+*.pyc
+
+# Data (raw PDFs kept, processed/eval artifacts ignored)
+data/processed/
+data/eval/results/
+*.jsonl.bak
+
+# Model / cache
+.cache/
+*.faiss
+*.index
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.idea/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+qdrant_storage/
+pgdata/
+
+# Logs
+*.log

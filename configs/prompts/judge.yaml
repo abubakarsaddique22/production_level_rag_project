@@ -1,0 +1,6 @@
+# LLM-as-judge prompt for evaluation (Step V)
+# STATUS: placeholder — filled in Step V.
+name: judge_prompt
+version: 1
+template: |
+  TODO(Step V): used by RAGAS/DeepEval-style custom metrics.

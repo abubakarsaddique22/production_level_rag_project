@@ -1,0 +1,24 @@
+# Dev-profile overrides for tunable pipeline parameters.
+# These mirror src/nexora_rag/core/config.py defaults; env vars still win.
+# Filled in properly starting Step C.
+
+chunking:
+  strategy: structure_aware   # structure_aware | fixed | recursive
+  max_tokens: 600
+  overlap: 80
+
+retrieval:
+  top_k_retrieve: 30
+  top_k_final: 5
+  hybrid_weights:
+    dense: 0.5
+    sparse: 0.5
+
+reranker:
+  model: BAAI/bge-reranker-base
+  enabled: true
+
+llm:
+  provider: anthropic
+  model: claude-sonnet-4-6
+  temperature: 0.1
