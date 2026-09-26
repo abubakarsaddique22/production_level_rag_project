@@ -91,21 +91,28 @@ def chunk_document(document_dir: Path) -> list[dict]:
             continue
 
         chunk_id = create_chunk_id(
-            chunk.metadata["doc_id"],
-            page,
-            chunk_index,
-            content,
+        chunk.metadata["doc_id"],
+        page,
+        chunk_index,
+        content,
         )
+
+        # is chunk ke apne text se fresh, unique hash banao
+        chunk_content_hash = f"sha256:{hashlib.sha256(content.encode('utf-8')).hexdigest()}"
+
+        metadata = {
+            **chunk.metadata,
+            "chunk_index": chunk_index,
+            "chunk_type": detect_chunk_type(content),
+            "chunk_size": len(content),
+        }
+        metadata["page_content_hash"] = metadata["content_hash"]  # purana page-level hash reference ke liye
+        metadata["content_hash"] = chunk_content_hash             # ab per-chunk, sahi hash
 
         output_chunks.append({
             "chunk_id": chunk_id,
             "content": content,
-            "metadata": {
-                **chunk.metadata,
-                "chunk_index": chunk_index,
-                "chunk_type": detect_chunk_type(content),
-                "chunk_size": len(content),
-            },
+            "metadata": metadata,
         })
 
     return output_chunks

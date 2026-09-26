@@ -1,164 +1,164 @@
+"""
+Embeds RAG chunks into dense vectors using a local sentence-transformers model.
+
+Reads:  data/processed/<Document Folder>/chunk.json
+Writes: data/processed/<Document Folder>/embeddings.json
+
+Idempotency: re-running this on unchanged chunks does NOT call the model
+again — every chunk's content_hash is checked against embeddings/cache.py
+before encoding.
+"""
+
+from __future__ import annotations
+
 import json
 from pathlib import Path
 
-import torch
 from sentence_transformers import SentenceTransformer
 
 from ..core.config import settings
+from ..core.exceptions import EmbeddingError
+from ..core.logging import get_logger
+from ..embeddings.cache import EmbeddingCache
+
+log = get_logger(__name__)
+
+PROCESSED_DIR = Path("data/processed")
+CHUNK_FILENAME = "chunks.json"
+EMBEDDINGS_FILENAME = "embeddings.json"
 
 
 class Embedder:
-    def __init__(self) -> None:
-        self.device = "cpu"
+    def __init__(self, model_name: str | None = None, batch_size: int | None = None):
+        self.model_name = model_name or settings.embed_model
+        self.batch_size = batch_size or settings.embed_batch_size
 
-        self.model = SentenceTransformer(
-            settings.embed_model,
-            device=self.device,
-        )
+        log.info("loading_embedding_model", extra={"model": self.model_name})
+        try:
+            self._model = SentenceTransformer(self.model_name)
+        except Exception as exc:  # noqa: BLE001
+            raise EmbeddingError(
+                f"Could not load embedding model '{self.model_name}': {exc}"
+            ) from exc
 
-        self.embedding_dimension = self.model.get_sentence_embedding_dimension()
+        self.embedding_dim = self._model.get_embedding_dimension()
 
-    def embed_texts(self, texts: list[str]) -> list[list[float]]:
+    def encode(self, texts: list[str]) -> list[list[float]]:
         if not texts:
             return []
-
-        embeddings = self.model.encode(
-            texts,
-            batch_size=settings.embed_batch_size,
-            normalize_embeddings=True,
-            show_progress_bar=True,
-            convert_to_numpy=True,
-        )
-
-        return embeddings.tolist()
-
-    def embed_chunks(self, chunks: list[dict]) -> list[dict]:
-        if not chunks:
-            return []
-
-        texts = [chunk["content"] for chunk in chunks]
-        embeddings = self.embed_texts(texts)
-
-        embedded_chunks = []
-
-        for chunk, embedding in zip(chunks, embeddings):
-            embedded_chunks.append(
-                {
-                    **chunk,
-                    "embedding": embedding,
-                }
+        try:
+            vectors = self._model.encode(
+                texts,
+                batch_size=self.batch_size,
+                show_progress_bar=False,
+                normalize_embeddings=True,
+                convert_to_numpy=True,
             )
-
-        return embedded_chunks
-
-
-def load_chunks(chunks_path: Path) -> list[dict]:
-    with open(chunks_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        except Exception as exc:  # noqa: BLE001
+            raise EmbeddingError(f"Embedding call failed: {exc}") from exc
+        return vectors.tolist()
 
 
-def embed_document(document_dir: Path) -> list[dict]:
-    chunks_path = document_dir / "chunks.json"
+def _load_chunks(chunk_path: Path) -> list[dict]:
+    with chunk_path.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+    if isinstance(data, dict) and "chunks" in data:
+        return data["chunks"]
+    if isinstance(data, list):
+        return data
+    raise EmbeddingError(f"Unrecognized chunk.json structure in {chunk_path}")
 
-    if not chunks_path.exists():
-        print(f"SKIP: {document_dir.name} -> chunks.json not found")
-        return []
 
-    chunks = load_chunks(chunks_path)
+def _content_hash_of(chunk: dict) -> str | None:
+    meta = chunk.get("metadata", {})
+    return meta.get("content_hash") or chunk.get("content_hash")
 
-    if not chunks:
-        print(f"SKIP: {document_dir.name} -> no chunks found")
+
+def _write_embeddings(embeddings_path: Path, records: list[dict]) -> None:
+    embeddings_path.parent.mkdir(parents=True, exist_ok=True)
+    with embeddings_path.open("w", encoding="utf-8") as f:
+        json.dump(records, f, ensure_ascii=False, indent=2)
+
+
+def embed_chunk_file(chunk_path: Path, embedder: Embedder, cache: EmbeddingCache) -> dict:
+    chunks = _load_chunks(chunk_path)
+    doc_folder = chunk_path.parent
+    embeddings_path = doc_folder / EMBEDDINGS_FILENAME
+
+    records: list[dict | None] = [None] * len(chunks)
+    to_embed_texts: list[str] = []
+    to_embed_idx: list[int] = []
+
+    for i, chunk in enumerate(chunks):
+        chunk_id = chunk.get("chunk_id")
+        content = chunk.get("content", "")
+        content_hash = _content_hash_of(chunk)
+
+        if not chunk_id or not content_hash:
+            log.warning("chunk_missing_fields", extra={"chunk_path": str(chunk_path), "index": i})
+            continue
+
+        cached_vector = cache.get(content_hash, embedder.model_name)
+        if cached_vector is not None:
+            records[i] = {
+                "chunk_id": chunk_id,
+                "content_hash": content_hash,
+                "embedding_model": embedder.model_name,
+                "embedding_dim": embedder.embedding_dim,
+                "vector": cached_vector,
+            }
+        else:
+            to_embed_texts.append(content)
+            to_embed_idx.append(i)
+
+    if to_embed_texts:
+        vectors = embedder.encode(to_embed_texts)
+        for idx, vector in zip(to_embed_idx, vectors):
+            chunk = chunks[idx]
+            chunk_id = chunk["chunk_id"]
+            content_hash = _content_hash_of(chunk)
+            records[idx] = {
+                "chunk_id": chunk_id,
+                "content_hash": content_hash,
+                "embedding_model": embedder.model_name,
+                "embedding_dim": embedder.embedding_dim,
+                "vector": vector,
+            }
+            cache.set(content_hash, embedder.model_name, vector)
+
+    final_records = [r for r in records if r is not None]
+    _write_embeddings(embeddings_path, final_records)
+    cache.flush()
+
+    stats = {
+        "doc_folder": doc_folder.name,
+        "total_chunks": len(chunks),
+        "newly_embedded": len(to_embed_texts),
+        "from_cache": len(final_records) - len(to_embed_texts),
+        "output": str(embeddings_path),
+    }
+    log.info("embedded_document", extra=stats)
+    return stats
+
+
+def find_chunk_files(processed_dir: Path = PROCESSED_DIR) -> list[Path]:
+    return sorted(processed_dir.glob(f"*/{CHUNK_FILENAME}"))
+
+
+def embed_all(processed_dir: Path = PROCESSED_DIR) -> list[dict]:
+    chunk_files = find_chunk_files(processed_dir)
+    if not chunk_files:
+        log.warning("no_chunk_files_found", extra={"processed_dir": str(processed_dir)})
         return []
 
     embedder = Embedder()
-    embedded_chunks = embedder.embed_chunks(chunks)
+    cache = EmbeddingCache()
 
-    output_path = document_dir / "embedded_chunks.json"
-
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(
-            embedded_chunks,
-            f,
-            indent=2,
-            ensure_ascii=False,
-        )
-
-    print(
-        f"OK: {document_dir.name} -> "
-        f"{len(embedded_chunks)} embeddings -> {output_path}"
-    )
-    print(f"Embedding dimension: {embedder.embedding_dimension}")
-
-    return embedded_chunks
-
-
-def embed_all(processed_dir: Path | None = None) -> None:
-    processed_dir = processed_dir or settings.data_processed_dir
-
-    document_dirs = [
-        d for d in processed_dir.iterdir()
-        if d.is_dir()
-    ]
-
-    if not document_dirs:
-        print("No processed document directories found.")
-        return
-
-    embedder = Embedder()
-
-    total_documents = 0
-    total_chunks = 0
-
-    for document_dir in document_dirs:
-        chunks_path = document_dir / "chunks.json"
-
-        if not chunks_path.exists():
-            print(
-                f"SKIP: {document_dir.name} -> "
-                "chunks.json not found"
-            )
-            continue
-
-        chunks = load_chunks(chunks_path)
-
-        if not chunks:
-            print(
-                f"SKIP: {document_dir.name} -> "
-                "no chunks found"
-            )
-            continue
-
-        embedded_chunks = embedder.embed_chunks(chunks)
-
-        output_path = document_dir / "embedded_chunks.json"
-
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(
-                embedded_chunks,
-                f,
-                indent=2,
-                ensure_ascii=False,
-            )
-
-        total_documents += 1
-        total_chunks += len(embedded_chunks)
-
-        print(
-            f"OK: {document_dir.name} -> "
-            f"{len(embedded_chunks)} embeddings"
-        )
-
-    print(f"\nTotal documents: {total_documents}")
-    print(f"Total embedded chunks: {total_chunks}")
-    print(
-        f"Embedding dimension: "
-        f"{embedder.embedding_dimension}"
-    )
+    return [embed_chunk_file(cf, embedder, cache) for cf in chunk_files]
 
 
 if __name__ == "__main__":
-    print(f"Torch version: {torch.__version__}")
-    print(f"Device: cpu")
-    print(f"Embedding model: {settings.embed_model}")
-
-    embed_all()
+    results = embed_all()
+    total = sum(r["total_chunks"] for r in results)
+    new = sum(r["newly_embedded"] for r in results)
+    print(f"Embedded {total} chunks across {len(results)} documents ({new} new, {total - new} cached).")
