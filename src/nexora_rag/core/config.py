@@ -41,8 +41,7 @@ class Settings(BaseSettings):
     # ============================================================
     # Vector DB - Qdrant
     # ============================================================
-
-    qdrant_url: str = "http://localhost:6333"
+    qdrant_url: str
     qdrant_api_key: str | None = None
     collection: str = "nexora_kb"
 
