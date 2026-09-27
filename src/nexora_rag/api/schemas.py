@@ -1,7 +1,39 @@
 """
-Pydantic request/response models for the API.
-
-STATUS: placeholder — implemented in Step P.
+Pydantic request/response models for the API (Step P).
 """
 
-# TODO(Step P): implement this module
+from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
+
+class ChatRequest(BaseModel):
+    question: str
+
+
+class SourceItem(BaseModel):
+    id: int
+    doc_id: str | None = None
+    title: str | None = None
+    page: int | None = None
+    snippet: str | None = None
+
+
+class ChatResponse(BaseModel):
+    answer: str
+    sources: list[SourceItem]
+    trace_id: str
+    latency_ms: int
+
+
+
+# ============================================================
+# Auth schemas (Step Q)
+# ============================================================
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"

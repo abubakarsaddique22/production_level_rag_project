@@ -1,7 +1,17 @@
 """
-GET /health and /ready probes.
-
-STATUS: placeholder — implemented in Step P.
+GET /health and /ready -- liveness and readiness probes (Step P).
 """
 
-# TODO(Step P): implement this module
+from fastapi import APIRouter
+
+router = APIRouter(tags=["health"])
+
+
+@router.get("/health")
+def health():
+    return {"status": "ok"}
+
+
+@router.get("/ready")
+def ready():
+    return {"status": "ready"}

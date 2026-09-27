@@ -12,6 +12,13 @@ import re
 
 CITATION_RE = re.compile(r"\[(\d+)\]")
 
+# Safety net: some models occasionally emit tool-citation-style markers
+# like "\u3010123456\u2020L1-L4\u3011" instead of the instructed "[1]" format
+# (prompts.py explicitly forbids this, but models don't always comply).
+# These aren't recognized as valid citations either way, so they're just
+# stripped as noise rather than left visible in the answer.
+STRAY_CITATION_RE = re.compile(r"\u3010[^\u3011]*\u3011")
+
 
 def extract_citations(answer: str) -> list[int]:
     """Returns every citation number found in the answer, e.g. "...[1]
@@ -42,6 +49,7 @@ def validate_citations(answer: str, chunks: list[dict]) -> dict:
     clean_answer = answer
     for n in invalid:
         clean_answer = clean_answer.replace(f"[{n}]", "")
+    clean_answer = STRAY_CITATION_RE.sub("", clean_answer)
 
     return {
         "used": used,
