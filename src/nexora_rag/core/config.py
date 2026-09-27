@@ -94,13 +94,13 @@ class Settings(BaseSettings):
 
     redis_url: str = "redis://localhost:6379/0"
 
-    # ============================================================
+      # ============================================================
     # Authentication
     # ============================================================
 
-    jwt_secret: str = "change-me-in-env"
+    jwt_secret: str = "CHANGE_ME_IN_ENV"   # load from .env: RAG_JWT_SECRET
     jwt_algorithm: str = "HS256"
-    jwt_expires_minutes: int = 60
+    jwt_expire_minutes: int = 60
 
     # ============================================================
     # Observability - Langfuse

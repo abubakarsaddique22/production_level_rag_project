@@ -9,6 +9,12 @@ all with the same password, so you can manually test /v1/auth/login
 and RBAC on /v1/chat.
 """
 
+import sys
+from pathlib import Path
+
+# Make "src/" importable regardless of the current working directory.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
 import asyncio
 
 from sqlalchemy import select
