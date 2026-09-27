@@ -71,21 +71,12 @@ class Settings(BaseSettings):
     # LLM
     # ============================================================
 
-    llm_provider: str = "openrouter"
-    llm_model: str = "google/gemma-4-26b-a4b-it:free"
-    llm_temperature: float = 0.1
-
-    llm_fallback_provider: str | None = "groq"
-    llm_fallback_model: str | None = "llama-3.3-70b-versatile"
-
-    openrouter_api_key: str | None = None
-    openrouter_base_url: str = "https://openrouter.ai/api/v1"
+    # llm_provider: str = "openrouter"
+    # llm_model: str = "google/gemma-4-26b-a4b-it:free"
+    # llm_temperature: float = 0.1
 
     groq_api_key: str | None = None
-    groq_base_url: str = "https://api.groq.com/openai/v1"
-
-    gemini_api_key: str | None = None
-    gemini_base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai/"
+    groq_model: str = "openai/gpt-oss-120b"
 
     ollama_base_url: str = "http://localhost:11434"
 

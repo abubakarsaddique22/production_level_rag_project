@@ -1,13 +1,12 @@
 """
 LLM client using LangChain (Step K).
 
-Uses LangChain's ChatOpenAI pointed at OpenRouter (OpenRouter is
-OpenAI-API-compatible, so ChatOpenAI works with it by just changing
-base_url + api_key). Switching model/provider later is a .env change.
+Uses LangChain's ChatGroq for chat completions. Switching model is a
+.env change (GROQ_MODEL).
 """
 
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 
 from ..core.config import settings
 from ..core.exceptions import LLMError
@@ -22,16 +21,14 @@ def ask_llm(
     temperature: float | None = None,
     max_tokens: int = 1024,
 ) -> str:
-    """Sends one message to the LLM (via LangChain) and returns the
+    """Sends one message to the LLM (via LangChain/Groq) and returns the
     answer text. Retries once if the first call fails."""
-    temperature = settings.llm_temperature if temperature is None else temperature
 
-    model = ChatOpenAI(
-        base_url=settings.openrouter_base_url,
-        api_key=settings.openrouter_api_key,
-        model=settings.llm_model,
-        temperature=temperature,
+    model = ChatGroq(
+        api_key=settings.groq_api_key,
+        model=settings.groq_model,
         max_tokens=max_tokens,
+        max_retries=2,
     )
 
     messages = [

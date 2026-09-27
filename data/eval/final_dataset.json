@@ -1,0 +1,524 @@
+[
+    {
+        "id": "q001",
+        "query": "What products does Nexora offer?",
+        "ground_truth_answer": "Nexora offers NexaDesk (AI-powered helpdesk), NexaFlow (workflow automation) and NexaInsight (analytics), all sharing one login and one platform.",
+        "relevant_chunk_ids": [
+            "NX-PRD-002-p1-c0-9168511812e4"
+        ],
+        "relevant_contexts": [
+            "Nexora offers NexaDesk (AI-powered helpdesk), NexaFlow (workflow automation) and NexaInsight (analytics). They share one login and one platform."
+        ],
+        "category": "Product",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-PRD-002",
+            "page": 1
+        }
+    },
+    {
+        "id": "q002",
+        "query": "What is the discount for paying annually instead of monthly?",
+        "ground_truth_answer": "Annual billing is approximately 20% cheaper than monthly billing, and annual plans are invoiced once a year in advance.",
+        "relevant_chunk_ids": [
+            "NX-PRD-002-p1-c0-9168511812e4"
+        ],
+        "relevant_contexts": [
+            "Annual billing is approximately 20% cheaper than monthly billing. Annual plans are invoiced once a year in advance."
+        ],
+        "category": "Product",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-PRD-002",
+            "page": 1
+        }
+    },
+    {
+        "id": "q003",
+        "query": "If I cancel my subscription, how many days do I have to get a refund?",
+        "ground_truth_answer": "Refunds are available within 14 days of the first paid charge; after that, annual plans are not refunded pro rata.",
+        "relevant_chunk_ids": [
+            "NX-PRD-002-p2-c1-94229ed2db64"
+        ],
+        "relevant_contexts": [
+            "Refunds are available within 14 days of the first paid charge; after that, annual plans are not refunded pro rata."
+        ],
+        "category": "Product",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-PRD-002",
+            "page": 2
+        }
+    },
+    {
+        "id": "q004",
+        "query": "What file types can I upload to the NexaDesk knowledge base?",
+        "ground_truth_answer": "HTML, Markdown, PDF and DOCX files, up to 100,000 characters per article; ticket attachments can be up to 25 MB per file.",
+        "relevant_chunk_ids": [
+            "NX-PRD-002-p2-c1-94229ed2db64"
+        ],
+        "relevant_contexts": [
+            "HTML, Markdown, PDF and DOCX, up to 100,000 characters per article. Attachments on tickets can be up to 25 MB per file."
+        ],
+        "category": "Product",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-PRD-002",
+            "page": 2
+        }
+    },
+    {
+        "id": "q005",
+        "query": "What is the API rate limit on the Growth plan?",
+        "ground_truth_answer": "The Growth plan allows 300 API requests per minute, with short bursts of up to twice the limit for 10 seconds.",
+        "relevant_chunk_ids": [
+            "NX-PRD-002-p2-c1-94229ed2db64",
+            "NX-PRD-002-p1-c1-a3fe0237190b"
+        ],
+        "relevant_contexts": [
+            "60 requests per minute on Starter, 300 on Growth and 1,200 on Enterprise, with short bursts of up to twice the limit for 10 seconds."
+        ],
+        "category": "Product",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-PRD-002",
+            "page": 2
+        }
+    },
+    {
+        "id": "q006",
+        "query": "Is single sign-on (SSO) available on the Starter plan?",
+        "ground_truth_answer": "No. SAML 2.0 and OpenID Connect SSO are available only on the Enterprise plan; Starter and Growth use email and password with optional two-factor authentication.",
+        "relevant_chunk_ids": [
+            "NX-PRD-002-p2-c2-4c1a11368efc"
+        ],
+        "relevant_contexts": [
+            "SAML 2.0 and OpenID Connect SSO are available on the Enterprise plan only. Starter and Growth use email and password with optional two-factor authentication."
+        ],
+        "category": "Product",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-PRD-002",
+            "page": 2
+        }
+    },
+    {
+        "id": "q007",
+        "query": "What sourcing and approval are required for a purchase worth PKR 1,500,000?",
+        "ground_truth_answer": "A purchase of PKR 1,500,000 falls in Tier 3 (500,001 to 2,500,000), requiring 3 quotations and a comparative statement, approved by the department head and CFO.",
+        "relevant_chunk_ids": [
+            "NX-FIN-002-p1-c1-3df76a9e7fd3",
+            "NX-FIN-002-p1-c0-5c41600c54ce"
+        ],
+        "relevant_contexts": [
+            "500,001 to 2,500,000 | 3 quotations and a comparative statement | Department head and CFO"
+        ],
+        "category": "Finance",
+        "difficulty": "hard",
+        "metadata": {
+            "doc_id": "NX-FIN-002",
+            "page": 1
+        }
+    },
+    {
+        "id": "q008",
+        "query": "Can an emergency purchase to restore a production service skip the normal approval process?",
+        "ground_truth_answer": "Yes, emergency purchases needed to restore a production service may proceed with verbal approval from the CTO or CFO, but the purchase order must be raised within 2 working days.",
+        "relevant_chunk_ids": [
+            "NX-FIN-002-p2-c0-e0dbaad3d09f"
+        ],
+        "relevant_contexts": [
+            "Emergency purchases needed to restore a production service may proceed with verbal approval of the CTO or CFO; the PO must be raised within 2 working days."
+        ],
+        "category": "Finance",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-FIN-002",
+            "page": 2
+        }
+    },
+    {
+        "id": "q009",
+        "query": "What documents does a vendor need to provide before onboarding?",
+        "ground_truth_answer": "A vendor must provide its NTN and sales tax registration (STRN), active taxpayer status, bank account details on company letterhead, a signed conflict-of-interest declaration, and, for IT vendors, an InfoSec questionnaire. Vendors are re-reviewed every 2 years.",
+        "relevant_chunk_ids": [
+            "NX-FIN-002-p2-c0-e0dbaad3d09f"
+        ],
+        "relevant_contexts": [
+            "Procurement collects the vendor's NTN and sales tax registration (STRN), active taxpayer status, bank account details on company letterhead, a signed conflict-of-interest declaration and, for IT vendors, an InfoSec questionnaire. Vendors are re-reviewed every 2 years."
+        ],
+        "category": "Finance",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-FIN-002",
+            "page": 2
+        }
+    },
+    {
+        "id": "q010",
+        "query": "What three documents must agree for an invoice to be paid under the three-way match?",
+        "ground_truth_answer": "The purchase order (PO), the goods receipt or service acceptance, and the vendor invoice must agree on quantity, price and terms for the invoice to be paid.",
+        "relevant_chunk_ids": [
+            "NX-FIN-002-p3-c0-37666a5e2f16"
+        ],
+        "relevant_contexts": [
+            "An invoice is paid only when the three-way match succeeds: the PO, the goods receipt or service acceptance, and the vendor invoice agree on quantity, price and terms."
+        ],
+        "category": "Finance",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-FIN-002",
+            "page": 3
+        }
+    },
+    {
+        "id": "q011",
+        "query": "How long are procurement files kept?",
+        "ground_truth_answer": "Procurement files, including the requisition, quotations, evaluation, PO, GRN, invoice and payment, are retained for 7 years.",
+        "relevant_chunk_ids": [
+            "NX-FIN-002-p3-c0-37666a5e2f16"
+        ],
+        "relevant_contexts": [
+            "Procurement files (requisition, quotations, evaluation, PO, GRN, invoice, payment) are retained for 7 years."
+        ],
+        "category": "Finance",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-FIN-002",
+            "page": 3
+        }
+    },
+    {
+        "id": "q012",
+        "query": "How many days of annual leave does an employee get per year, and how many can be carried forward?",
+        "ground_truth_answer": "Employees get 20 days of annual leave per year, accruing at 1.67 days per month, and up to 10 days can be carried forward to the next year.",
+        "relevant_chunk_ids": [
+            "NX-HR-001-p2-c0-653a8dacc220",
+            "NX-HR-001-p2-c1-bd0235854dee"
+        ],
+        "relevant_contexts": [
+            "Annual leave | 20 days per year | Up to 10 days | Accrues at 1.67 days per month."
+        ],
+        "category": "HR",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-HR-001",
+            "page": 2
+        }
+    },
+    {
+        "id": "q013",
+        "query": "How many calendar days of maternity leave are employees entitled to?",
+        "ground_truth_answer": "Employees are entitled to 90 calendar days of paid maternity leave, which can start up to 4 weeks before the expected delivery date with medical documentation required.",
+        "relevant_chunk_ids": [
+            "NX-HR-001-p2-c0-653a8dacc220",
+            "NX-HR-001-p2-c1-bd0235854dee"
+        ],
+        "relevant_contexts": [
+            "Maternity leave | 90 calendar days (paid) | Not applicable | Can start up to 4 weeks before the expected delivery date. Medical documentation required."
+        ],
+        "category": "HR",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-HR-001",
+            "page": 2
+        }
+    },
+    {
+        "id": "q014",
+        "query": "By what date must carried-forward annual leave be used before it lapses?",
+        "ground_truth_answer": "Carried-forward annual leave (up to 10 days) must be used by 31 March; any balance not used by then lapses.",
+        "relevant_chunk_ids": [
+            "NX-HR-001-p3-c0-92e8476dcaf2"
+        ],
+        "relevant_contexts": [
+            "A maximum of 10 days of unused annual leave carries forward to the next calendar year and must be used by 31 March; any carried-forward balance not used by then lapses."
+        ],
+        "category": "HR",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-HR-001",
+            "page": 3
+        }
+    },
+    {
+        "id": "q015",
+        "query": "Who needs to approve a leave request of 6 working days?",
+        "ground_truth_answer": "A leave request of 4 to 10 working days requires approval from both the line manager and the department head, and should be requested with 2 weeks' advance notice.",
+        "relevant_chunk_ids": [
+            "NX-HR-001-p3-c0-92e8476dcaf2",
+            "NX-HR-001-p3-c1-d1b3d53cef28"
+        ],
+        "relevant_contexts": [
+            "4 to 10 working days | Line manager and department head | 2 weeks"
+        ],
+        "category": "HR",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-HR-001",
+            "page": 3
+        }
+    },
+    {
+        "id": "q016",
+        "query": "What happens if an employee is absent for 3 or more consecutive days without approval?",
+        "ground_truth_answer": "It is treated as unauthorised absence and may lead to action under the disciplinary process described in the Employee Handbook (NX-HR-002, Section 8).",
+        "relevant_chunk_ids": [
+            "NX-HR-001-p3-c0-92e8476dcaf2"
+        ],
+        "relevant_contexts": [
+            "Absence of 3 or more consecutive working days without approval or communication is treated as unauthorised absence and may lead to action under the disciplinary process in the Employee Handbook (NX-HR-002, Section 8)."
+        ],
+        "category": "HR",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-HR-001",
+            "page": 3
+        }
+    },
+    {
+        "id": "q017",
+        "query": "What is the daily per diem and hotel cap for a Grade G4 employee traveling domestically?",
+        "ground_truth_answer": "A Grade G4 employee traveling domestically gets a per diem of PKR 8,000 per day and a hotel cap of PKR 20,000 per night, flying economy class.",
+        "relevant_chunk_ids": [
+            "NX-FIN-001-p2-c0-7aec954f7ae9",
+            "NX-FIN-001-p2-c1-51a1d490a042"
+        ],
+        "relevant_contexts": [
+            "G4 | 8,000 | 20,000 | Economy"
+        ],
+        "category": "Finance",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-FIN-001",
+            "page": 2
+        }
+    },
+    {
+        "id": "q018",
+        "query": "What is the reimbursement limit for a business meal with colleagues?",
+        "ground_truth_answer": "Business meals (working lunch or dinner with colleagues) are reimbursed up to PKR 2,500 per person, with attendee names and business purpose required on the claim.",
+        "relevant_chunk_ids": [
+            "NX-FIN-001-p1-c0-1afe3079b987",
+            "NX-FIN-001-p1-c1-e19238a1c689"
+        ],
+        "relevant_contexts": [
+            "Business meals (working lunch or dinner with colleagues) | PKR 2,500 per person | Names of attendees and business purpose on the claim"
+        ],
+        "category": "Finance",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-FIN-001",
+            "page": 1
+        }
+    },
+    {
+        "id": "q019",
+        "query": "How many calendar days does an employee have to submit an expense claim?",
+        "ground_truth_answer": "Claims must be submitted in the Expense portal within 15 calendar days of the expense (or of return from travel); later claims need the CFO office's exception approval.",
+        "relevant_chunk_ids": [
+            "NX-FIN-001-p2-c0-7aec954f7ae9"
+        ],
+        "relevant_contexts": [
+            "All claims are submitted in the Expense portal within 15 calendar days of the expense (or of return from travel). Claims submitted later require the CFO office's exception approval."
+        ],
+        "category": "Finance",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-FIN-001",
+            "page": 2
+        }
+    },
+    {
+        "id": "q020",
+        "query": "Who must approve an expense claim above PKR 200,000?",
+        "ground_truth_answer": "An expense claim above PKR 200,000 requires approval from the department head and the CFO office.",
+        "relevant_chunk_ids": [
+            "NX-FIN-001-p3-c0-d70d09f3caff"
+        ],
+        "relevant_contexts": [
+            "Above PKR 200,000 | Department head and CFO office"
+        ],
+        "category": "Finance",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-FIN-001",
+            "page": 3
+        }
+    },
+    {
+        "id": "q021",
+        "query": "Are alcohol purchases reimbursable as a business expense?",
+        "ground_truth_answer": "No, alcohol or any prohibited item is listed as a non-reimbursable expense, along with traffic fines, personal shopping, and expenses without a receipt above PKR 500.",
+        "relevant_chunk_ids": [
+            "NX-FIN-001-p3-c0-d70d09f3caff"
+        ],
+        "relevant_contexts": [
+            "Traffic fines, parking penalties and vehicle repairs; alcohol or any prohibited item; personal shopping, entertainment or gifts."
+        ],
+        "category": "Finance",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-FIN-001",
+            "page": 3
+        }
+    },
+    {
+        "id": "q022",
+        "query": "What is the canary rollout schedule for stateless service deployments?",
+        "ground_truth_answer": "The new version first receives 5% of traffic for 15 minutes, then 25% for 15 minutes, and finally 100%; the API Gateway instead uses blue-green deployment.",
+        "relevant_chunk_ids": [
+            "NX-ENG-002-p2-c0-f46bcc4adf2f"
+        ],
+        "relevant_contexts": [
+            "Stateless services use a canary rollout: the new version first receives 5% of traffic for 15 minutes, then 25% for 15 minutes, and finally 100% (Figure 2). The API Gateway uses blue-green deployment."
+        ],
+        "category": "Engineering",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-ENG-002",
+            "page": 2
+        }
+    },
+    {
+        "id": "q023",
+        "query": "What conditions trigger an automatic rollback during a canary release?",
+        "ground_truth_answer": "A rollback is triggered if HTTP 5xx error rate exceeds 2% for 5 consecutive minutes, p95 latency exceeds 2x baseline for 5 consecutive minutes, failed health checks affect more than 20% of new pods or a crash loop occurs, or a confirmed SEV1/SEV2 defect originates from the release.",
+        "relevant_chunk_ids": [
+            "NX-ENG-002-p2-c0-f46bcc4adf2f",
+            "NX-ENG-002-p3-c0-35272d534fee"
+        ],
+        "relevant_contexts": [
+            "HTTP 5xx error rate above 2% for 5 consecutive minutes. p95 latency above 2 times the baseline for 5 consecutive minutes. Failed health checks on more than 20% of new pods, or a crash loop."
+        ],
+        "category": "Engineering",
+        "difficulty": "hard",
+        "metadata": {
+            "doc_id": "NX-ENG-002",
+            "page": 2
+        }
+    },
+    {
+        "id": "q024",
+        "query": "During what time window are standard releases allowed?",
+        "ground_truth_answer": "Standard releases are allowed on Tuesday and Thursday, 10:00 AM to 2:00 PM (Pakistan Standard Time), with approval from the release manager and service owner.",
+        "relevant_chunk_ids": [
+            "NX-ENG-002-p2-c0-f46bcc4adf2f",
+            "NX-ENG-002-p2-c1-342768d75b8c"
+        ],
+        "relevant_contexts": [
+            "Standard release | Tuesday and Thursday, 10:00 AM to 2:00 PM | Release manager and service owner"
+        ],
+        "category": "Engineering",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-ENG-002",
+            "page": 2
+        }
+    },
+    {
+        "id": "q025",
+        "query": "How quickly must a SEV1 incident be acknowledged, and how often should updates be sent?",
+        "ground_truth_answer": "A SEV1 incident (complete outage or data loss affecting many customers) must be acknowledged within 15 minutes, with updates sent every 30 minutes.",
+        "relevant_chunk_ids": [
+            "NX-ENG-002-p3-c0-35272d534fee",
+            "NX-ENG-002-p3-c1-5e3b529c2bae"
+        ],
+        "relevant_contexts": [
+            "SEV1 | Complete outage or data loss affecting many customers | 15 minutes | Every 30 minutes"
+        ],
+        "category": "Engineering",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-ENG-002",
+            "page": 3
+        }
+    },
+    {
+        "id": "q026",
+        "query": "Is a written post-mortem required after a SEV1 or SEV2 incident?",
+        "ground_truth_answer": "Yes, SEV1 and SEV2 incidents require a written post-mortem within 3 working days, following a blameless format.",
+        "relevant_chunk_ids": [
+            "NX-ENG-002-p3-c0-35272d534fee"
+        ],
+        "relevant_contexts": [
+            "SEV1 and SEV2 incidents require a written post-mortem within 3 working days, following a blameless format."
+        ],
+        "category": "Engineering",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-ENG-002",
+            "page": 3
+        }
+    },
+    {
+        "id": "q027",
+        "query": "What percentage of basic salary does an employee contribute to the provident fund, and does the company match it?",
+        "ground_truth_answer": "Every confirmed employee contributes 8% of basic salary to the Nexora Provident Fund, and the company matches it with another 8%. The employee's own contribution is always fully owned, while ownership of the company's contribution vests over time.",
+        "relevant_chunk_ids": [
+            "NX-HR-003-p1-c0-e5e8f06bdeb1"
+        ],
+        "relevant_contexts": [
+            "Every confirmed employee contributes 8% of basic salary to the Nexora Provident Fund, and the company contributes a matching 8%. The employee's own contribution is always fully owned; ownership of the company's contribution increases with service."
+        ],
+        "category": "HR",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-HR-003",
+            "page": 1
+        }
+    },
+    {
+        "id": "q028",
+        "query": "What is the hospitalisation insurance limit for a Grade G6 employee?",
+        "ground_truth_answer": "Grade G5 and G6 employees have a hospitalisation limit of PKR 1,500,000 per policy year, with an outpatient (OPD) limit of PKR 75,000.",
+        "relevant_chunk_ids": [
+            "NX-HR-003-p2-c0-3e997e408c5c",
+            "NX-HR-003-p2-c1-62de68145590"
+        ],
+        "relevant_contexts": [
+            "G5 and G6 | PKR 1,500,000 | PKR 75,000 | PKR 100,000 | PKR 150,000"
+        ],
+        "category": "HR",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-HR-003",
+            "page": 2
+        }
+    },
+    {
+        "id": "q029",
+        "query": "How much is the festival bonus paid before each Eid?",
+        "ground_truth_answer": "The festival bonus is 50% of basic salary, paid before each Eid (Eid ul-Fitr and Eid ul-Adha) to confirmed employees.",
+        "relevant_chunk_ids": [
+            "NX-HR-003-p3-c1-9e1d90ea9626"
+        ],
+        "relevant_contexts": [
+            "Festival bonus: 50% of basic salary paid before each Eid (Eid ul-Fitr and Eid ul-Adha) to confirmed employees."
+        ],
+        "category": "HR",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-HR-003",
+            "page": 3
+        }
+    },
+    {
+        "id": "q030",
+        "query": "How much on-call allowance does an engineer get per day, and extra for handling a SEV1 incident?",
+        "ground_truth_answer": "Engineers on the on-call rotation receive PKR 3,000 per day on call, plus PKR 8,000 for each SEV1 or SEV2 incident handled.",
+        "relevant_chunk_ids": [
+            "NX-HR-003-p3-c1-9e1d90ea9626",
+            "NX-HR-003-p3-c3-d8ee805c9443"
+        ],
+        "relevant_contexts": [
+            "On-call allowance | PKR 3,000 per day on call; PKR 8,000 for each SEV1 or SEV2 incident handled | Engineers in the on-call rotation"
+        ],
+        "category": "HR",
+        "difficulty": "medium",
+        "metadata": {
+            "doc_id": "NX-HR-003",
+            "page": 3
+        }
+    }
+]
