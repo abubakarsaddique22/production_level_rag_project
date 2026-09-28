@@ -42,6 +42,7 @@ def percentile(values: list[float], p: int) -> float:
 
 def main() -> None:
     label = sys.argv[1] if len(sys.argv) > 1 else "run"
+    pause = float(sys.argv[2]) if len(sys.argv) > 2 else 0.0
     questions = load_questions(GOLDEN_SET_PATH)
     departments = ROLE_DEPARTMENTS["admin"]  # all departments
 
@@ -50,6 +51,8 @@ def main() -> None:
 
     times: list[float] = []
     for i, question in enumerate(questions, start=1):
+        if i > 1:
+            time.sleep(pause)  # outside the timed section
         start = time.perf_counter()
         try:
             service.answer(question, departments=departments)

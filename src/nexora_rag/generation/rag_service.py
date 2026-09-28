@@ -15,15 +15,23 @@ needs to know about chunks, prompts, or citation-checking itself.
 
 import time
 import uuid
+import re 
 
 from ..retrieval.reranker import RerankingRetriever
 from .citations import build_sources, validate_citations
 from .llm import ask_llm
 from .prompts import SYSTEM_PROMPT, build_user_message
+from ..core.cache import get_cached_answer, make_key, set_cached_answer
 
+# Some LLM answers cite with fullwidth brackets (e.g. 【1】) instead of [1].
+_FULLWIDTH_CITATION = re.compile("\u3010\\s*(\\d+)[^\u3011]*\u3011")
+
+
+def normalize_citations(text: str) -> str:
+    return _FULLWIDTH_CITATION.sub(r"[\1]", text)
 
 class RagService:
-    def __init__(self, retriever: RerankingRetriever | None = None, top_k: int = 5):
+    def __init__(self, retriever: RerankingRetriever | None = None, top_k: int = 3):
         self.retriever = retriever or RerankingRetriever()
         self.top_k = top_k
 
@@ -43,6 +51,20 @@ class RagService:
         """
         start = time.time()
 
+
+        # Answer cache: key includes the user's departments (RBAC-safe)
+        cache_key = make_key(question, departments)
+        cached = get_cached_answer(cache_key)
+        if cached is not None:
+            return {
+                "answer": cached["answer"],
+                "sources": cached["sources"],
+                "trace_id": str(uuid.uuid4()),
+                "latency_ms": int((time.time() - start) * 1000),
+            }
+
+     
+        
         chunks = self.retriever.search(question, top_k=self.top_k,departments=departments)
 
         if not chunks:
@@ -58,6 +80,8 @@ class RagService:
 
         result = validate_citations(raw_answer, chunks)
         sources = build_sources(chunks, result["valid"])
+        if sources:  # refusals and uncited answers are not cached
+                    set_cached_answer(cache_key, result["clean_answer"], sources)
 
         return {
             "answer": result["clean_answer"],

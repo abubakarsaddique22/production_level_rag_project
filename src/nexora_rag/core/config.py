@@ -76,7 +76,8 @@ class Settings(BaseSettings):
     # llm_temperature: float = 0.1
 
     groq_api_key: str | None = None
-    groq_model: str = "openai/gpt-oss-120b"
+    # groq_model: str = "openai/gpt-oss-120b"
+    groq_model: str = "qwen/qwen3.8-27b"
 
     ollama_base_url: str = "http://localhost:11434"
 
@@ -111,6 +112,9 @@ class Settings(BaseSettings):
     langfuse_host: str = "https://cloud.langfuse.com"
 
 
+
+
+    answer_cache_ttl_seconds: int = 3600
 # ================================================================
 # Cached settings instance
 # ================================================================
