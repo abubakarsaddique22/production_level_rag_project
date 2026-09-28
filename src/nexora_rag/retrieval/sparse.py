@@ -71,8 +71,18 @@ class SparseIndex:
         self._bm25 = BM25Okapi(tokenized_corpus)
         log.info("sparse_index_built", extra={"n_chunks": len(self.chunk_ids)})
 
-    def search(self, query: str, top_k: int = 10) -> list[tuple[str, float]]:
-        """Returns [(chunk_id, bm25_score), ...] sorted best-first."""
+    def search(
+        self,
+        query: str,
+        top_k: int = 10,
+        departments: list[str] | None = None,
+    ) -> list[tuple[str, float]]:
+        """Returns [(chunk_id, bm25_score), ...] sorted best-first.
+
+        departments: if given, only chunks from these departments are
+        returned (role-based access). None means no filtering; an empty
+        list means nothing is allowed.
+        """
         if self._bm25 is None:
             return []
 
@@ -84,6 +94,15 @@ class SparseIndex:
             key=lambda pair: pair[1],
             reverse=True,
         )
+
+        if departments is not None:
+            allowed = set(departments)
+            ranked = [
+                (chunk_id, score)
+                for chunk_id, score in ranked
+                if self.chunks_by_id[chunk_id].get("metadata", {}).get("department") in allowed
+            ]
+
         return ranked[:top_k]
 
     def get_chunk(self, chunk_id: str) -> dict | None:

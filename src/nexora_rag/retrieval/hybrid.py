@@ -52,20 +52,31 @@ class HybridRetriever:
         self.rrf_k = rrf_k or settings.rrf_k
         self.candidates_per_source = candidates_per_source
 
-    def search(self, query: str, top_k: int = 5) -> list[dict]:
+    def search(
+        self,
+        query: str,
+        top_k: int = 5,
+        departments: list[str] | None = None,
+    ) -> list[dict]:
         dense_results = self.vector_store.search_by_text(
-            query, top_k=self.candidates_per_source
+            query,
+            top_k=self.candidates_per_source,
+            department_filter=departments,
         )
         dense_ranking = [r.payload["chunk_id"] for r in dense_results]
         dense_payload_by_id = {r.payload["chunk_id"]: r.payload for r in dense_results}
 
-        sparse_results = self.sparse_index.search(query, top_k=self.candidates_per_source)
+        sparse_results = self.sparse_index.search(
+            query,
+            top_k=self.candidates_per_source,
+            departments=departments,
+        )
         sparse_ranking = [chunk_id for chunk_id, _score in sparse_results]
 
         fused = reciprocal_rank_fusion([dense_ranking, sparse_ranking], k=self.rrf_k)
 
         output: list[dict] = []
-        for chunk_id, fused_score in fused[:top_k]:
+        for chunk_id, fused_score in fused:
             payload = dense_payload_by_id.get(chunk_id)
 
             if payload is None:
@@ -76,10 +87,20 @@ class HybridRetriever:
                     **(chunk.get("metadata", {}) if chunk else {}),
                 }
 
+            # Safety net: never return a chunk outside the user's departments,
+            # even if a filter upstream failed.
+            if departments is not None and payload.get("department") not in departments:
+                log.warning(
+                    "rbac_safety_net_dropped_chunk",
+                    extra={"chunk_id": chunk_id, "department": payload.get("department")},
+                )
+                continue
+
             output.append({**payload, "fused_score": fused_score})
+            if len(output) >= top_k:
+                break
 
         return output
-
 
 if __name__ == "__main__":
     retriever = HybridRetriever()

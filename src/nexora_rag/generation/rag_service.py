@@ -27,7 +27,10 @@ class RagService:
         self.retriever = retriever or RerankingRetriever()
         self.top_k = top_k
 
-    def answer(self, question: str) -> dict:
+    def answer(self, 
+               question: str,
+               departments: list[str],
+               user_id: str | None = None,) -> dict:
         """Answers one question, grounded in the retrieved documents.
 
         Returns:
@@ -40,7 +43,7 @@ class RagService:
         """
         start = time.time()
 
-        chunks = self.retriever.search(question, top_k=self.top_k)
+        chunks = self.retriever.search(question, top_k=self.top_k,departments=departments)
 
         if not chunks:
             return {
@@ -66,7 +69,7 @@ class RagService:
 
 if __name__ == "__main__":
     service = RagService()
-    response = service.answer("How many days of paid maternity leave are there?")
+    response = service.answer("How many days of paid maternity leave are there?",departments=["HR", "Product"],)
 
     print("Answer:", response["answer"])
     print("\nSources:")

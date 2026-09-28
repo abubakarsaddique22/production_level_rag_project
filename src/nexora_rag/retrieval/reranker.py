@@ -70,8 +70,17 @@ class RerankingRetriever:
         self.reranker = reranker or Reranker()
         self.candidate_pool_size = candidate_pool_size
 
-    def search(self, query: str, top_k: int = 5) -> list[dict]:
-        candidates = self.hybrid_retriever.search(query, top_k=self.candidate_pool_size)
+    def search(
+        self,
+        query: str,
+        top_k: int = 5,
+        departments: list[str] | None = None,
+    ) -> list[dict]:
+        candidates = self.hybrid_retriever.search(
+            query,
+            top_k=self.candidate_pool_size,
+            departments=departments,
+        )
         return self.reranker.rerank(query, candidates, top_k=top_k)
 
 
