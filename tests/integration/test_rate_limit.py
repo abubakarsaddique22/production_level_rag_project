@@ -16,6 +16,7 @@ from fastapi.testclient import TestClient
 from nexora_rag.api.deps import get_rag_service
 from nexora_rag.api.main import app
 from nexora_rag.core.security import create_access_token
+from nexora_rag.db.session import get_db
 
 
 class FakeRagService:
@@ -23,12 +24,30 @@ class FakeRagService:
         return {"answer": "ok", "sources": [], "trace_id": "t", "latency_ms": 1}
 
 
+class FakeDB:
+    """Stands in for the database session (no Postgres needed in this test)."""
+
+    def add(self, obj):
+        if getattr(obj, "id", None) is None:
+            obj.id = str(uuid.uuid4())
+
+    async def flush(self):
+        pass
+
+    async def commit(self):
+        pass
+
+
+async def fake_get_db():
+    yield FakeDB()
+
+
 @pytest.fixture
 def client():
     app.dependency_overrides[get_rag_service] = lambda: FakeRagService()
+    app.dependency_overrides[get_db] = fake_get_db
     yield TestClient(app)
     app.dependency_overrides.clear()
-
 
 def new_user_headers(role="employee"):
     token = create_access_token(user_id=str(uuid.uuid4()), role=role)

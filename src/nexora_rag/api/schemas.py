@@ -5,9 +5,11 @@ Pydantic request/response models for the API (Step P).
 from pydantic import BaseModel
 from pydantic import BaseModel, EmailStr
 
+
+
 class ChatRequest(BaseModel):
     question: str
-
+    session_id: str | None = None
 
 class SourceItem(BaseModel):
     id: int
@@ -22,6 +24,7 @@ class ChatResponse(BaseModel):
     sources: list[SourceItem]
     trace_id: str
     latency_ms: int
+    session_id: str
 
 
 
