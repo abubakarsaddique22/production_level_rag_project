@@ -139,3 +139,32 @@ async def test_user_cannot_use_another_users_session(client, make_user):
     assert response.status_code == 404
     messages = await load_messages(session_id)
     assert len(messages) == 2  # bob's question was not stored in alice's session
+
+
+async def test_owner_can_read_session_history(client, make_user):
+    headers = await make_user()
+    session_id = (await ask(client, headers, "hello")).json()["session_id"]
+    await ask(client, headers, "and again", session_id)
+
+    response = await client.get(f"/v1/sessions/{session_id}", headers=headers)
+
+    assert response.status_code == 200
+    messages = response.json()["messages"]
+    assert [m["role"] for m in messages] == ["user", "assistant", "user", "assistant"]
+    assert messages[0]["content"] == "hello"
+    assert messages[1]["sources"][0]["doc_id"] == "NX-TEST-001"
+
+
+async def test_other_user_cannot_read_session_history(client, make_user):
+    alice = await make_user()
+    bob = await make_user()
+    session_id = (await ask(client, alice, "alice question")).json()["session_id"]
+
+    response = await client.get(f"/v1/sessions/{session_id}", headers=bob)
+
+    assert response.status_code == 404
+
+
+async def test_session_history_requires_token(client):
+    response = await client.get(f"/v1/sessions/{uuid.uuid4()}")
+    assert response.status_code in (401, 403)

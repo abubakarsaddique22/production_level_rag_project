@@ -4,6 +4,7 @@ Pydantic request/response models for the API (Step P).
 
 from pydantic import BaseModel
 from pydantic import BaseModel, EmailStr
+from datetime import datetime
 
 
 
@@ -40,3 +41,18 @@ class LoginRequest(BaseModel):
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+
+
+
+class MessageItem(BaseModel):
+    role: str
+    content: str
+    sources: list[SourceItem] = []
+    trace_id: str | None = None
+    created_at: datetime
+
+
+class SessionResponse(BaseModel):
+    session_id: str
+    messages: list[MessageItem]
