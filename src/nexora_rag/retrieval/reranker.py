@@ -64,7 +64,7 @@ class RerankingRetriever:
         self,
         hybrid_retriever: HybridRetriever | None = None,
         reranker: Reranker | None = None,
-        candidate_pool_size: int = 30,
+        candidate_pool_size: int = 15,
     ):
         self.hybrid_retriever = hybrid_retriever or HybridRetriever()
         self.reranker = reranker or Reranker()

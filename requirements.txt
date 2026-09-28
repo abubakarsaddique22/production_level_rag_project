@@ -198,3 +198,5 @@ passlib[argon2]
 python-jose[cryptography]
 asyncpg
 sqlalchemy[asyncio]
+redis 
+slowapi
