@@ -24,6 +24,9 @@ from .prompts import SYSTEM_PROMPT, build_user_message
 from ..core.cache import get_cached_answer, make_key, set_cached_answer
 from ..retrieval.rewrite import rewrite_query
 from ..retrieval.routing import check_small_talk
+from ..guardrails.input_checks import check_input
+from ..guardrails.pii import mask_pii
+from ..guardrails.output_checks import check_output, OUTPUT_REFUSAL
 
 # Some LLM answers cite with fullwidth brackets (e.g. 【1】) instead of [1].
 _FULLWIDTH_CITATION = re.compile("\u3010\\s*(\\d+)[^\u3011]*\u3011")
@@ -31,6 +34,13 @@ _FULLWIDTH_CITATION = re.compile("\u3010\\s*(\\d+)[^\u3011]*\u3011")
 
 def normalize_citations(text: str) -> str:
     return _FULLWIDTH_CITATION.sub(r"[\1]", text)
+
+REFUSALS = {
+    "empty": "Please type a question.",
+    "too_long": "Your question is too long. Please shorten it.",
+    "jailbreak": "I can't help with that request. I can only answer questions about the company documents.",
+    "out_of_scope": "I can only answer questions about Nexora's company documents.",
+}
 
 class RagService:
     def __init__(self, retriever: RerankingRetriever | None = None, top_k: int = 3):
@@ -41,7 +51,7 @@ class RagService:
                question: str,
                departments: list[str],
                user_id: str | None = None,
-                history: list[dict] | None = None) -> dict:
+               history: list[dict] | None = None) -> dict:
         """Answers one question, grounded in the retrieved documents.
 
         Returns:
@@ -53,6 +63,16 @@ class RagService:
             latency_ms -- total time for retrieval + generation
         """
         start = time.time()
+
+       # Guardrail: bura ya ghalat input retriever/LLM/cache tak nahi jata
+        ok, reason = check_input(question)
+        if not ok:
+            return {
+                "answer": REFUSALS[reason],
+                "sources": [],
+                "trace_id": str(uuid.uuid4()),
+                "latency_ms": int((time.time() - start) * 1000),
+            }
 
         # Small talk: RAG, cache aur LLM ke bina seedha jawab
         reply = check_small_talk(question)
@@ -68,7 +88,8 @@ class RagService:
         standalone = rewrite_query(question, history) if history else question
 
         # Answer cache: key includes the user's departments (RBAC-safe)
-        cache_key = make_key(question, departments)
+        # cache_key = make_key(question, departments)
+        cache_key = make_key(standalone, departments)
         cached = get_cached_answer(cache_key)
         if cached is not None:
             return {
@@ -91,20 +112,35 @@ class RagService:
             }
 
         user_message = build_user_message(standalone, chunks)
+        # added output gardrial
         raw_answer = ask_llm(SYSTEM_PROMPT, user_message)
+        raw_answer = normalize_citations(raw_answer)
+
+        # Guardrail: leak ya jailbreak wala jawab user tak nahi jata, cache bhi nahi hota
+        ok, _ = check_output(raw_answer)
+        if not ok:
+            return {
+                "answer": OUTPUT_REFUSAL,
+                "sources": [],
+                "trace_id": str(uuid.uuid4()),
+                "latency_ms": int((time.time() - start) * 1000),
+            }
 
         result = validate_citations(raw_answer, chunks)
+        # added pii 
+        clean_answer = mask_pii(result["clean_answer"])
         sources = build_sources(chunks, result["valid"])
+        for s in sources:
+            s["snippet"] = mask_pii(s["snippet"])
         if sources:  # refusals and uncited answers are not cached
-                    set_cached_answer(cache_key, result["clean_answer"], sources)
+            set_cached_answer(cache_key, clean_answer, sources)
 
         return {
-            "answer": result["clean_answer"],
+            "answer": clean_answer,
             "sources": sources,
             "trace_id": str(uuid.uuid4()),
             "latency_ms": int((time.time() - start) * 1000),
         }
-
 
 if __name__ == "__main__":
     service = RagService()

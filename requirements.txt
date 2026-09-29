@@ -200,3 +200,6 @@ asyncpg
 sqlalchemy[asyncio]
 redis 
 slowapi
+presidio-analyzer 
+presidio-anonymizer
+spacy
