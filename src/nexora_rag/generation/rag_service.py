@@ -23,6 +23,7 @@ from .llm import ask_llm
 from .prompts import SYSTEM_PROMPT, build_user_message
 from ..core.cache import get_cached_answer, make_key, set_cached_answer
 from ..retrieval.rewrite import rewrite_query
+from ..retrieval.routing import check_small_talk
 
 # Some LLM answers cite with fullwidth brackets (e.g. 【1】) instead of [1].
 _FULLWIDTH_CITATION = re.compile("\u3010\\s*(\\d+)[^\u3011]*\u3011")
@@ -52,6 +53,17 @@ class RagService:
             latency_ms -- total time for retrieval + generation
         """
         start = time.time()
+
+        # Small talk: RAG, cache aur LLM ke bina seedha jawab
+        reply = check_small_talk(question)
+        if reply is not None:
+            return {
+                "answer": reply,
+                "sources": [],
+                "trace_id": str(uuid.uuid4()),
+                "latency_ms": int((time.time() - start) * 1000),
+            }
+        
         # Follow-up sawal ko standalone banao (history na ho to skip)
         standalone = rewrite_query(question, history) if history else question
 
