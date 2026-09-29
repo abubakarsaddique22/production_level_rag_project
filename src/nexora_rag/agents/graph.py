@@ -83,13 +83,15 @@ def router(state: AgentState) -> dict:
 
 
 def kb_node(state: AgentState) -> dict:
-    out = kb_search(get_service(), state["question"], state["departments"], state.get("user_id"))
+    service = state.get("service") or get_service()  # API se aaye to wahi, warna apni
+    out = kb_search(service, state["question"], state["departments"],
+                    state.get("user_id"), state.get("history"))
     return {
-        "kb_answer": out.answer,
-        "kb_found": out.found,
-        "sources": out.sources,
-        "tool_calls": state.get("tool_calls", 0) + 1,
-    }
+            "kb_answer": out.answer,
+            "kb_found": out.found,
+            "sources": out.sources,
+            "tool_calls": state.get("tool_calls", 0) + 1,
+        }
 
 
 def calc_node(state: AgentState) -> dict:
@@ -135,7 +137,10 @@ def make_answer(state: AgentState) -> str:
 
 
 def synth_node(state: AgentState) -> dict:
-    return {"answer": safe(make_answer(state))}
+    answer = safe(make_answer(state))
+    if answer == OUTPUT_REFUSAL:  # refuse hua jawab sources ke saath nahi jata
+        return {"answer": answer, "sources": []}
+    return {"answer": answer}
 
 
 def check_node(state: AgentState) -> dict:

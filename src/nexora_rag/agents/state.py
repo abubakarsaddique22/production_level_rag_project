@@ -6,6 +6,7 @@ class AgentState(TypedDict, total=False):
     user_id: str | None
     departments: list[str]   # user ke role se aate hain
     history: list
+    service: object          # API wali RagService (models dobara load na hon)
     route: str               # "kb" | "calc" | "ticket"
     kb_answer: str
     kb_found: bool

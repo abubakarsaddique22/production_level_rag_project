@@ -24,6 +24,11 @@ class ChatResponse(BaseModel):
     latency_ms: int
     session_id: str
 
+class AgentChatResponse(ChatResponse):
+    route: str                 # "kb" | "calc" | "ticket" | "direct"
+    grounded: bool | None = None
+    tool_calls: int = 0
+
 
 # ============================================================
 # Auth schemas (Step Q)

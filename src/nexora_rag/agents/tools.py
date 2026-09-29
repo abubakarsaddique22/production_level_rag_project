@@ -80,9 +80,10 @@ class KBOutput(BaseModel):
     trace_id: str
 
 
-def kb_search(service, question: str, departments: list[str], user_id: str | None = None) -> KBOutput:
+def kb_search(service, question: str, departments: list[str],
+              user_id: str | None = None, history: list | None = None) -> KBOutput:
     """Knowledge base search. departments hamesha user ke role se aate hain, LLM se nahi."""
-    result = service.answer(question, departments=departments, user_id=user_id)
+    result = service.answer(question, departments=departments, user_id=user_id, history=history)
     return KBOutput(
         question=question,
         found=bool(result["sources"]),

@@ -5,6 +5,8 @@ from slowapi.errors import RateLimitExceeded
 from nexora_rag.core.rate_limit import limiter
 from nexora_rag.api.middleware import RequestIDMiddleware
 from .routers import auth, chat, feedback, health, sessions
+from .routers import agent as agent_router
+
 
 app = FastAPI(
     title="Nexora Knowledge Assistant",
@@ -25,3 +27,4 @@ app.include_router(auth.router)   # Step Q: /v1/auth/login
 app.include_router(chat.router)
 app.include_router(sessions.router)
 app.include_router(feedback.router)  # Step S: /v1/feedback
+app.include_router(agent_router.router)
