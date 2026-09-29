@@ -4,7 +4,6 @@ import uuid
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ...agents.graph import agent
@@ -37,8 +36,8 @@ async def agent_chat(
     try:
         # RBAC: departments user ke role se aate hain, agent ke tools unhein badalte nahi.
         # agent.invoke blocking hai, isliye thread mein chalta hai.
-        state = await asyncio.wait_for(
-            run_in_threadpool(
+            state = await asyncio.wait_for(
+            asyncio.to_thread(
                 agent.invoke,
                 {
                     "question": req.question,
