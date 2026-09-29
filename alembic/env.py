@@ -20,9 +20,9 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# URL alembic.ini se nahi, seedha app ki settings se
-# (% ko double karna zaroori hai, warna configparser masla karta hai)
-config.set_main_option("sqlalchemy.url", settings.database_url.replace("%", "%%"))
+# alembic -x dburl=... se URL badla ja sakta hai (scratch database ke test ke liye)
+db_url = context.get_x_argument(as_dictionary=True).get("dburl") or settings.database_url
+config.set_main_option("sqlalchemy.url", db_url.replace("%", "%%"))
 
 # autogenerate ke liye models ka metadata
 target_metadata = Base.metadata
