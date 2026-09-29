@@ -1,16 +1,13 @@
-"""
-Pydantic request/response models for the API (Step P).
-"""
-
-from pydantic import BaseModel
-from pydantic import BaseModel, EmailStr
 from datetime import datetime
+from typing import Literal
 
+from pydantic import BaseModel, Field
 
 
 class ChatRequest(BaseModel):
     question: str
     session_id: str | None = None
+
 
 class SourceItem(BaseModel):
     id: int
@@ -28,7 +25,6 @@ class ChatResponse(BaseModel):
     session_id: str
 
 
-
 # ============================================================
 # Auth schemas (Step Q)
 # ============================================================
@@ -43,7 +39,9 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
 
 
-
+# ============================================================
+# Sessions schemas (Step S)
+# ============================================================
 
 class MessageItem(BaseModel):
     role: str
@@ -56,3 +54,19 @@ class MessageItem(BaseModel):
 class SessionResponse(BaseModel):
     session_id: str
     messages: list[MessageItem]
+
+
+# ============================================================
+# Feedback schemas (Step S)
+# ============================================================
+
+class FeedbackRequest(BaseModel):
+    trace_id: str
+    rating: Literal[1, -1]  # 1 = thumbs up, -1 = thumbs down
+    comment: str | None = Field(default=None, max_length=1000)
+
+
+class FeedbackResponse(BaseModel):
+    trace_id: str
+    rating: int
+    comment: str | None

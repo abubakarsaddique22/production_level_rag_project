@@ -25,7 +25,7 @@ pytestmark = pytest.mark.anyio
 
 
 class FakeRagService:
-    def answer(self, question, departments, user_id=None):
+    def answer(self, question, departments, user_id=None,history=None):
         return {
             "answer": f"answer to: {question}",
             "sources": [
@@ -167,4 +167,125 @@ async def test_other_user_cannot_read_session_history(client, make_user):
 
 async def test_session_history_requires_token(client):
     response = await client.get(f"/v1/sessions/{uuid.uuid4()}")
+    assert response.status_code in (401, 403)
+
+
+def _recording_service(calls: list):
+    """FakeRagService jo har call ka question aur history save karta hai."""
+
+    class RecordingRagService(FakeRagService):
+        def answer(self, question, departments, user_id=None, history=None):
+            calls.append({"question": question, "history": history})
+            return super().answer(question, departments, user_id, history)
+
+    return RecordingRagService
+
+
+async def test_history_is_passed_to_rag_service(client, make_user):
+    calls: list = []
+    app.dependency_overrides[get_rag_service] = lambda: _recording_service(calls)()
+    headers = await make_user()
+
+    first = await ask(client, headers, "first question")
+    session_id = first.json()["session_id"]
+    await ask(client, headers, "second question", session_id)
+
+    # Pehle sawal par history khali
+    assert calls[0]["history"] == []
+    # Doosre par pehla sawal + jawab, oldest first, current sawal shamil nahi
+    assert calls[1]["history"] == [
+        {"role": "user", "content": "first question"},
+        {"role": "assistant", "content": "answer to: first question"},
+    ]
+    assert "second question" not in [m["content"] for m in calls[1]["history"]]
+
+
+async def test_history_is_limited_to_last_6_messages(client, make_user):
+    calls: list = []
+    app.dependency_overrides[get_rag_service] = lambda: _recording_service(calls)()
+    headers = await make_user()
+
+    session_id = (await ask(client, headers, "q1")).json()["session_id"]
+    for q in ["q2", "q3", "q4", "q5"]:
+        await ask(client, headers, q, session_id)
+
+    history = calls[4]["history"]  # q5 ka call: pehle 8 messages (q1..q4) maujood the
+    assert len(history) == 6
+    assert history[0] == {"role": "user", "content": "q2"}  # q1 aur uska jawab bahar
+    assert history[-1]["content"] == "answer to: q4"
+
+
+# -- feedback 
+
+async def load_feedback(trace_id):
+    async with async_session_factory() as db:
+        result = await db.execute(select(Feedback).where(Feedback.trace_id == trace_id))
+        return result.scalars().all()
+
+
+async def give_feedback(client, headers, trace_id, rating, comment=None):
+    body = {"trace_id": trace_id, "rating": rating}
+    if comment is not None:
+        body["comment"] = comment
+    return await client.post("/v1/feedback", json=body, headers=headers)
+
+
+async def test_feedback_is_saved(client, make_user):
+    headers = await make_user()
+    trace_id = (await ask(client, headers, "hello")).json()["trace_id"]
+
+    response = await give_feedback(client, headers, trace_id, 1, "helpful")
+
+    assert response.status_code == 200
+    rows = await load_feedback(trace_id)
+    assert len(rows) == 1
+    assert rows[0].rating == 1
+    assert rows[0].comment == "helpful"
+
+
+async def test_feedback_twice_updates_the_same_row(client, make_user):
+    headers = await make_user()
+    trace_id = (await ask(client, headers, "hello")).json()["trace_id"]
+
+    await give_feedback(client, headers, trace_id, 1, "helpful")
+    response = await give_feedback(client, headers, trace_id, -1, "wrong answer")
+
+    assert response.status_code == 200
+    rows = await load_feedback(trace_id)
+    assert len(rows) == 1  # naya row nahi banna chahiye
+    assert rows[0].rating == -1
+    assert rows[0].comment == "wrong answer"
+
+
+async def test_feedback_unknown_trace_id_returns_404(client, make_user):
+    headers = await make_user()
+    response = await give_feedback(client, headers, "trace-does-not-exist", 1)
+    assert response.status_code == 404
+
+
+async def test_user_cannot_give_feedback_on_another_users_answer(client, make_user):
+    alice = await make_user()
+    bob = await make_user()
+    trace_id = (await ask(client, alice, "alice question")).json()["trace_id"]
+
+    response = await give_feedback(client, bob, trace_id, -1)
+
+    assert response.status_code == 404
+    assert await load_feedback(trace_id) == []  # bob ka feedback save nahi hua
+
+
+async def test_feedback_rejects_invalid_rating(client, make_user):
+    headers = await make_user()
+    trace_id = (await ask(client, headers, "hello")).json()["trace_id"]
+
+    response = await give_feedback(client, headers, trace_id, 5)
+
+    assert response.status_code == 422
+    assert await load_feedback(trace_id) == []
+
+
+async def test_feedback_requires_token(client):
+    response = await client.post(
+        "/v1/feedback", json={"trace_id": "x", "rating": 1}
+    )
     assert response.status_code in (401, 403)

@@ -1,13 +1,3 @@
-"""
-Rate limit tests (Step R): 20 requests/minute per user, tracked in Redis.
-
-Uses a fake RagService (no LLM, no models) and real JWTs (no login/DB).
-Redis must be running:  docker compose up -d redis
-
-Run from the project root:
-    pytest tests/integration/test_rate_limit.py -v
-"""
-
 import uuid
 
 import pytest
@@ -20,8 +10,18 @@ from nexora_rag.db.session import get_db
 
 
 class FakeRagService:
-    def answer(self, question, departments, user_id=None):
+    def answer(self, question, departments, user_id=None, history=None):
         return {"answer": "ok", "sources": [], "trace_id": "t", "latency_ms": 1}
+
+
+class _FakeResult:
+    """Empty query result: load_history() gets no messages."""
+
+    def scalars(self):
+        return self
+
+    def all(self):
+        return []
 
 
 class FakeDB:
@@ -37,6 +37,9 @@ class FakeDB:
     async def commit(self):
         pass
 
+    async def execute(self, *args, **kwargs):
+        return _FakeResult()
+
 
 async def fake_get_db():
     yield FakeDB()
@@ -48,6 +51,7 @@ def client():
     app.dependency_overrides[get_db] = fake_get_db
     yield TestClient(app)
     app.dependency_overrides.clear()
+
 
 def new_user_headers(role="employee"):
     token = create_access_token(user_id=str(uuid.uuid4()), role=role)

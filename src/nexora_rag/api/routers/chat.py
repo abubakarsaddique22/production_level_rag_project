@@ -1,8 +1,3 @@
-"""
-POST /v1/chat -- ask a question, get a grounded, cited answer (Step P).
-Step S: every conversation is stored per session in Postgres.
-"""
-
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
@@ -18,6 +13,8 @@ from ..deps import get_rag_service, current_user, CurrentUser
 from ..schemas import ChatRequest, ChatResponse
 
 router = APIRouter(prefix="/v1", tags=["chat"])
+
+HISTORY_LIMIT = 6
 
 
 async def get_or_create_session(
@@ -44,6 +41,19 @@ async def get_or_create_session(
     return session
 
 
+async def load_history(db: AsyncSession, session_id: str) -> list[dict]:
+    """Last HISTORY_LIMIT messages of the session, oldest first."""
+    result = await db.execute(
+        select(Message)
+        .where(Message.session_id == session_id)
+        .order_by(Message.id.desc())
+        .limit(HISTORY_LIMIT)
+    )
+    messages = result.scalars().all()
+    messages.reverse()
+    return [{"role": m.role, "content": m.content} for m in messages]
+
+
 @router.post("/chat", response_model=ChatResponse)
 @limiter.limit("20/minute")
 async def chat(
@@ -55,6 +65,10 @@ async def chat(
 ) -> ChatResponse:
     session = await get_or_create_session(db, req.session_id, user.id)
 
+    # History is loaded BEFORE saving the new question, so the current
+    # question is not in it.
+    history = await load_history(db, session.id)
+
     # RBAC: mandatory department filter, enforced here, never only in the prompt.
     # rag_service is blocking, so it runs in a thread and does not freeze the API.
     result = await run_in_threadpool(
@@ -62,6 +76,7 @@ async def chat(
         question=req.question,
         departments=user.departments,
         user_id=user.id,
+        history=history,
     )
 
     db.add(Message(session_id=session.id, role="user", content=req.question))

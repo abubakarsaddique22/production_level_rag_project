@@ -22,6 +22,7 @@ from .citations import build_sources, validate_citations
 from .llm import ask_llm
 from .prompts import SYSTEM_PROMPT, build_user_message
 from ..core.cache import get_cached_answer, make_key, set_cached_answer
+from ..retrieval.rewrite import rewrite_query
 
 # Some LLM answers cite with fullwidth brackets (e.g. 【1】) instead of [1].
 _FULLWIDTH_CITATION = re.compile("\u3010\\s*(\\d+)[^\u3011]*\u3011")
@@ -38,7 +39,8 @@ class RagService:
     def answer(self, 
                question: str,
                departments: list[str],
-               user_id: str | None = None,) -> dict:
+               user_id: str | None = None,
+                history: list[dict] | None = None) -> dict:
         """Answers one question, grounded in the retrieved documents.
 
         Returns:
@@ -50,7 +52,8 @@ class RagService:
             latency_ms -- total time for retrieval + generation
         """
         start = time.time()
-
+        # Follow-up sawal ko standalone banao (history na ho to skip)
+        standalone = rewrite_query(question, history) if history else question
 
         # Answer cache: key includes the user's departments (RBAC-safe)
         cache_key = make_key(question, departments)
@@ -65,7 +68,7 @@ class RagService:
 
      
         
-        chunks = self.retriever.search(question, top_k=self.top_k,departments=departments)
+        chunks = self.retriever.search(standalone, top_k=self.top_k,departments=departments)
 
         if not chunks:
             return {
@@ -75,7 +78,7 @@ class RagService:
                 "latency_ms": int((time.time() - start) * 1000),
             }
 
-        user_message = build_user_message(question, chunks)
+        user_message = build_user_message(standalone, chunks)
         raw_answer = ask_llm(SYSTEM_PROMPT, user_message)
 
         result = validate_citations(raw_answer, chunks)
