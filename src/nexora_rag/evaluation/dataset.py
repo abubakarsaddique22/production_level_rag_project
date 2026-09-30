@@ -23,8 +23,8 @@ from ..core.logging import get_logger
 
 log = get_logger(__name__)
 
-# GOLDEN_SET_PATH = Path("data/eval/golden_dataset.json")
-GOLDEN_SET_PATH = Path("data/eval/test.json")
+GOLDEN_SET_PATH = Path("data/eval/golden_dataset.json")
+# GOLDEN_SET_PATH = Path("data/eval/test.json")
 
 
 class GoldenSetItem(BaseModel):

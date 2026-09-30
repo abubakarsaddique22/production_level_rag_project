@@ -1,0 +1,460 @@
+{
+  "row": {
+    "label": "final_k3",
+    "date": "2026-09-30",
+    "model": "openai/gpt-oss-120b",
+    "top_k": 3,
+    "n_questions": 30,
+    "n_skipped": 0,
+    "dense_hit": 0.9,
+    "dense_mrr": 0.794,
+    "dense_recall": 0.85,
+    "hybrid_hit": 0.933,
+    "hybrid_mrr": 0.85,
+    "hybrid_recall": 0.867,
+    "rerank_hit": 1.0,
+    "rerank_mrr": 0.889,
+    "rerank_recall": 0.95,
+    "ctx_precision": 0.928,
+    "ctx_recall": 0.967,
+    "ctx_relevancy": 0.121,
+    "faithfulness": 0.989,
+    "answer_relevancy": 0.933
+  },
+  "retrieval_failures": {
+    "dense": [
+      "q004",
+      "q005",
+      "q019"
+    ],
+    "hybrid": [
+      "q004",
+      "q019"
+    ],
+    "rerank": []
+  },
+  "contextual": [
+    {
+      "id": "q001",
+      "query": "What products does Nexora offer?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.4444444444444444
+    },
+    {
+      "id": "q002",
+      "query": "What is the discount for paying annually instead of monthly?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.037037037037037035
+    },
+    {
+      "id": "q003",
+      "query": "If I cancel my subscription, how many days do I have to get a refund?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.06666666666666667
+    },
+    {
+      "id": "q004",
+      "query": "What file types can I upload to the NexaDesk knowledge base?",
+      "contextual_precision": 0.5,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.03225806451612903
+    },
+    {
+      "id": "q005",
+      "query": "What is the API rate limit on the Growth plan?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.0967741935483871
+    },
+    {
+      "id": "q006",
+      "query": "Is single sign-on (SSO) available on the Starter plan?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.16666666666666666
+    },
+    {
+      "id": "q007",
+      "query": "What sourcing and approval are required for a purchase worth PKR 1,500,000?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.21052631578947367
+    },
+    {
+      "id": "q008",
+      "query": "Can an emergency purchase to restore a production service skip the normal approval process?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.29411764705882354
+    },
+    {
+      "id": "q009",
+      "query": "What documents does a vendor need to provide before onboarding?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.037037037037037035
+    },
+    {
+      "id": "q010",
+      "query": "What three documents must agree for an invoice to be paid under the three-way match?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.11764705882352941
+    },
+    {
+      "id": "q011",
+      "query": "How long are procurement files kept?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.05263157894736842
+    },
+    {
+      "id": "q012",
+      "query": "How many days of annual leave does an employee get per year, and how many can be carried forward?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.17391304347826086
+    },
+    {
+      "id": "q013",
+      "query": "How many calendar days of maternity leave are employees entitled to?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.08333333333333333
+    },
+    {
+      "id": "q014",
+      "query": "By what date must carried-forward annual leave be used before it lapses?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.045454545454545456
+    },
+    {
+      "id": "q015",
+      "query": "Who needs to approve a leave request of 6 working days?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.16
+    },
+    {
+      "id": "q016",
+      "query": "What happens if an employee is absent for 3 or more consecutive days without approval?",
+      "contextual_precision": 0.5,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.09523809523809523
+    },
+    {
+      "id": "q017",
+      "query": "What is the daily per diem and hotel cap for a Grade G4 employee traveling domestically?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.0967741935483871
+    },
+    {
+      "id": "q018",
+      "query": "What is the reimbursement limit for a business meal with colleagues?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.13333333333333333
+    },
+    {
+      "id": "q019",
+      "query": "How many calendar days does an employee have to submit an expense claim?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.2222222222222222
+    },
+    {
+      "id": "q020",
+      "query": "Who must approve an expense claim above PKR 200,000?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.05263157894736842
+    },
+    {
+      "id": "q021",
+      "query": "Are alcohol purchases reimbursable as a business expense?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.024390243902439025
+    },
+    {
+      "id": "q022",
+      "query": "What is the canary rollout schedule for stateless service deployments?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.125
+    },
+    {
+      "id": "q023",
+      "query": "What conditions trigger an automatic rollback during a canary release?",
+      "contextual_precision": 0.5,
+      "contextual_recall": 0.0,
+      "contextual_relevancy": 0.23076923076923078
+    },
+    {
+      "id": "q024",
+      "query": "During what time window are standard releases allowed?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.10344827586206896
+    },
+    {
+      "id": "q025",
+      "query": "How quickly must a SEV1 incident be acknowledged, and how often should updates be sent?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.05714285714285714
+    },
+    {
+      "id": "q026",
+      "query": "Is a written post-mortem required after a SEV1 or SEV2 incident?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.1875
+    },
+    {
+      "id": "q027",
+      "query": "What percentage of basic salary does an employee contribute to the provident fund, and does the company match it?",
+      "contextual_precision": 0.5,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.04
+    },
+    {
+      "id": "q028",
+      "query": "What is the hospitalisation insurance limit for a Grade G6 employee?",
+      "contextual_precision": 0.8333333333333333,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.04
+    },
+    {
+      "id": "q029",
+      "query": "How much is the festival bonus paid before each Eid?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.1
+    },
+    {
+      "id": "q030",
+      "query": "How much on-call allowance does an engineer get per day, and extra for handling a SEV1 incident?",
+      "contextual_precision": 1.0,
+      "contextual_recall": 1.0,
+      "contextual_relevancy": 0.11538461538461539
+    }
+  ],
+  "generation": [
+    {
+      "id": "q001",
+      "query": "What products does Nexora offer?",
+      "answer": "Nexora offers three products: NexaDesk (AI‑powered helpdesk), NexaFlow (workflow automation), and NexaInsight (analytics).[1][2]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q002",
+      "query": "What is the discount for paying annually instead of monthly?",
+      "answer": "Annual billing is approximately 20% cheaper than monthly billing. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q003",
+      "query": "If I cancel my subscription, how many days do I have to get a refund?",
+      "answer": "You have 14 days from the first paid charge to request a refund. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q004",
+      "query": "What file types can I upload to the NexaDesk knowledge base?",
+      "answer": "You can upload articles to the NexaDesk knowledge base in the following file formats: HTML, Markdown, PDF, and DOCX (up to 100,000 characters per article)[2]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.3333333333333333
+    },
+    {
+      "id": "q005",
+      "query": "What is the API rate limit on the Growth plan?",
+      "answer": "The Growth plan allows up to 300 API requests per minute. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q006",
+      "query": "Is single sign-on (SSO) available on the Starter plan?",
+      "answer": "No. Single sign‑on is not available on the Starter plan. [1][2][3]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.5
+    },
+    {
+      "id": "q007",
+      "query": "What sourcing and approval are required for a purchase worth PKR 1,500,000?",
+      "answer": "For a purchase of PKR 1,500,000 the policy requires:\n\n- **Sourcing:** obtain 3 quotations and prepare a comparative statement.  \n- **Approval:** the purchase order must be approved by the Department head and the CFO.  \n\n[1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q008",
+      "query": "Can an emergency purchase to restore a production service skip the normal approval process?",
+      "answer": "Yes. An emergency purchase to restore a production service may be made with only a verbal approval from the CTO or CFO and the purchase order must be raised within 2 working days, bypassing the normal approval steps[1].",
+      "faithfulness": 0.6666666666666666,
+      "answer_relevancy": 0.6666666666666666
+    },
+    {
+      "id": "q009",
+      "query": "What documents does a vendor need to provide before onboarding?",
+      "answer": "A vendor must provide the following documents before onboarding:\n\n- Vendor’s NTN (National Tax Number) and sales tax registration (STRN)  \n- Proof of active taxpayer status  \n- Bank account details on company letterhead  \n- Signed conflict‑of‑interest declaration  \n- For IT vendors, an InfoSec questionnaire  \n\nThese documents are collected by Procurement prior to issuing the first purchase order. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q010",
+      "query": "What three documents must agree for an invoice to be paid under the three-way match?",
+      "answer": "The invoice can be paid only when the three‑way match succeeds: the purchase order (PO), the goods receipt or service acceptance, and the vendor invoice must all agree on quantity, price, and terms. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q011",
+      "query": "How long are procurement files kept?",
+      "answer": "Procurement files are retained for 7 years. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q012",
+      "query": "How many days of annual leave does an employee get per year, and how many can be carried forward?",
+      "answer": "An employee is entitled to 20 days of annual leave per year, and up to 10 of those unused days can be carried forward to the next calendar year. [1] [2]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q013",
+      "query": "How many calendar days of maternity leave are employees entitled to?",
+      "answer": "Employees are entitled to 90 calendar days of maternity leave. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q014",
+      "query": "By what date must carried-forward annual leave be used before it lapses?",
+      "answer": "Carried‑forward annual leave must be used by **31 March** of the following year before it lapses. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q015",
+      "query": "Who needs to approve a leave request of 6 working days?",
+      "answer": "A leave request of 6 working days must be approved by both the line manager and the department head. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q016",
+      "query": "What happens if an employee is absent for 3 or more consecutive days without approval?",
+      "answer": "Absence of 3 or more consecutive working days without approval or communication is treated as unauthorised absence and may lead to action under the disciplinary process in the Employee Handbook [2].",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q017",
+      "query": "What is the daily per diem and hotel cap for a Grade G4 employee traveling domestically?",
+      "answer": "The daily per diem for a Grade G4 employee traveling domestically is PKR 8,000, and the hotel cap is PKR 20,000 per night [1].",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q018",
+      "query": "What is the reimbursement limit for a business meal with colleagues?",
+      "answer": "The reimbursement limit for a business meal with colleagues is PKR 2,500 per person. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q019",
+      "query": "How many calendar days does an employee have to submit an expense claim?",
+      "answer": "An employee must submit an expense claim within 15 calendar days of the expense (or of return from travel). [1] [2] [3]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.5
+    },
+    {
+      "id": "q020",
+      "query": "Who must approve an expense claim above PKR 200,000?",
+      "answer": "The approval for a claim above PKR 200,000 must be obtained from the department head **and** the CFO office. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q021",
+      "query": "Are alcohol purchases reimbursable as a business expense?",
+      "answer": "No. Alcohol purchases are listed as a non‑reimbursable expense. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q022",
+      "query": "What is the canary rollout schedule for stateless service deployments?",
+      "answer": "The canary rollout schedule for stateless services is: 5 % of traffic for 15 minutes, then 25 % for 15 minutes, and finally 100 % (full rollout). [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q023",
+      "query": "What conditions trigger an automatic rollback during a canary release?",
+      "answer": "An automatic rollback during a canary release is triggered when the observed metrics do **not** meet the defined “healthy” thresholds, or when an incident is opened that is confirmed to originate from the release. In either case the pipeline rolls back to the previous version immediately. [2] [2]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q024",
+      "query": "During what time window are standard releases allowed?",
+      "answer": "Standard releases are allowed on **Tuesday and Thursday from 10:00 AM to 2:00 PM**[1][2]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q025",
+      "query": "How quickly must a SEV1 incident be acknowledged, and how often should updates be sent?",
+      "answer": "A SEV1 incident must be acknowledged within **15 minutes** and updates should be sent **every 30 minutes**[1].",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q026",
+      "query": "Is a written post-mortem required after a SEV1 or SEV2 incident?",
+      "answer": "Yes – SEV1 and SEV2 incidents require a written post‑mortem within 3 working days, following a blameless format. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q027",
+      "query": "What percentage of basic salary does an employee contribute to the provident fund, and does the company match it?",
+      "answer": "Employees contribute 8% of their basic salary to the Nexora Provident Fund, and the company matches that contribution at 8% of basic salary. [2]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q028",
+      "query": "What is the hospitalisation insurance limit for a Grade G6 employee?",
+      "answer": "The hospitalisation insurance limit for a Grade G6 employee is PKR 1,500,000. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q029",
+      "query": "How much is the festival bonus paid before each Eid?",
+      "answer": "The festival bonus is 50 % of the employee’s basic salary, paid before each Eid (Eid ul‑Fitr and Eid ul‑Adha) to confirmed employees. [1]",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    },
+    {
+      "id": "q030",
+      "query": "How much on-call allowance does an engineer get per day, and extra for handling a SEV1 incident?",
+      "answer": "An engineer receives PKR 3,000 per day while on call, plus PKR 8,000 for each SEV1 or SEV2 incident handled[1].",
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0
+    }
+  ]
+}
