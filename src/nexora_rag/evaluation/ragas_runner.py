@@ -1,31 +1,10 @@
-"""
-Generation evaluation -- END TO END, using the REAL pipeline (Step V).
-
-Despite the file name (kept to match the blueprint's suggested naming),
-this project uses DeepEval throughout -- there is no ragas dependency
-here. See metrics.py's docstring for the same note.
-
-Scope of this file, on purpose: GENERATION, with a REAL actual_output.
-    - metrics.py's contextual metrics use `ground_truth_answer` as a
-      placeholder actual_output, because they only test RETRIEVAL.
-    - This file instead runs each golden-set question through the ACTUAL
-      RagService (retrieve + rerank + LLM generate + citation-check), so
-      `actual_output` is a genuine generated answer.
-    - Faithfulness: does the generated answer only claim things the
-      retrieved context actually supports? (catches hallucination)
-    - Answer Relevancy: does the answer actually address the question
-      asked? (catches off-topic or rambling answers)
-
-Golden-set loading is centralized in dataset.py; the judge is
-centralized in judge.py -- this file only wires RagService's real
-output into DeepEval test cases and runs the two generation metrics.
-"""
-
 from __future__ import annotations
 
+import time
 from pathlib import Path
 from typing import Any
 
+from ..api.deps import ROLE_DEPARTMENTS
 from ..core.logging import get_logger
 from ..generation.rag_service import RagService
 from .dataset import GOLDEN_SET_PATH, load_golden_set
@@ -37,6 +16,7 @@ log = get_logger(__name__)
 def run_generation_eval(
     golden_set_path: Path = GOLDEN_SET_PATH,
     top_k: int = 5,
+    pause: float = 0.0,
 ) -> dict[str, Any]:
     """Runs every golden-set question through the REAL RagService and
     scores the real answers with DeepEval's Faithfulness and Answer
@@ -44,6 +24,8 @@ def run_generation_eval(
 
     Skips items with no relevant_chunk_ids (unanswerable / access-control
     questions) -- same convention as metrics.py.
+
+    pause: seconds to wait before each question (Groq free tier rate limit).
     """
     from deepeval import evaluate
     from deepeval.evaluate.configs import AsyncConfig
@@ -53,6 +35,7 @@ def run_generation_eval(
     golden_set = load_golden_set(golden_set_path)
     judge = get_judge()
     service = RagService(top_k=top_k)
+    departments = ROLE_DEPARTMENTS["admin"]  # all departments, like the other eval scripts
 
     test_cases = []
     ids_in_order = []
@@ -67,7 +50,8 @@ def run_generation_eval(
             skipped += 1
             continue
 
-        response = service.answer(item.query)
+        time.sleep(pause)  # avoid Groq 429 between back-to-back questions
+        response = service.answer(item.query, departments=departments)
 
         # Re-retrieve the full (untruncated) chunk content for the
         # faithfulness/relevancy judge -- response["sources"] only carries

@@ -1,0 +1,36 @@
+[
+    {
+        "id": "q001",
+        "query": "What products does Nexora offer?",
+        "ground_truth_answer": "Nexora offers NexaDesk (AI-powered helpdesk), NexaFlow (workflow automation) and NexaInsight (analytics), all sharing one login and one platform.",
+        "relevant_chunk_ids": [
+            "NX-PRD-002-p1-c0-9168511812e4"
+        ],
+        "relevant_contexts": [
+            "Nexora offers NexaDesk (AI-powered helpdesk), NexaFlow (workflow automation) and NexaInsight (analytics). They share one login and one platform."
+        ],
+        "category": "Product",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-PRD-002",
+            "page": 1
+        }
+    },
+    {
+        "id": "q002",
+        "query": "What is the discount for paying annually instead of monthly?",
+        "ground_truth_answer": "Annual billing is approximately 20% cheaper than monthly billing, and annual plans are invoiced once a year in advance.",
+        "relevant_chunk_ids": [
+            "NX-PRD-002-p1-c0-9168511812e4"
+        ],
+        "relevant_contexts": [
+            "Annual billing is approximately 20% cheaper than monthly billing. Annual plans are invoiced once a year in advance."
+        ],
+        "category": "Product",
+        "difficulty": "easy",
+        "metadata": {
+            "doc_id": "NX-PRD-002",
+            "page": 1
+        }
+    }
+]
