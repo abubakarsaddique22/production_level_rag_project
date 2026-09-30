@@ -61,6 +61,7 @@ def has_number(text: str, value: float) -> bool:
 
 def safe(text: str) -> str:
     """Final jawab par wahi output guardrails jo RagService mein hain."""
+    text = text.replace("【", "[").replace("】", "]")  # fullwidth citation 【1】 -> [1]
     ok, _ = check_output(text)
     return mask_pii(text) if ok else OUTPUT_REFUSAL
 

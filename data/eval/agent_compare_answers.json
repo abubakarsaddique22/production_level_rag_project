@@ -2,68 +2,68 @@
   {
     "id": "c001",
     "expected": "140000",
-    "plain": "The employee can claim up to:\n\n* Per‑diem: 5 days × PKR 8,000 = PKR 40,000  \n* Hotel: 5 nights × PKR 20,000 = PKR 100,000  \n\nMaximum total = PKR 40,000 + PKR 100,000 = PKR 140,000 [1]",
-    "agent": "The employee can claim a maximum total of PKR 140,000 for per‑diem and hotel expenses. This amount is confirmed by the calculation (5 × 8,000)+(5 × 20,000)=140,000. [1]"
+    "plain": "The policy sets the domestic per‑diem for a Grade G4 employee at PKR 8,000 per day and the hotel‑night cap at PKR 20,000 per night[1].  \n\n- Per‑diem for 5 days: 8,000 × 5 = PKR 40,000  \n- Hotel for 5 nights: 20,000 × 5 = PKR 100,000  \n\nMaximum total claim = 40,000 + 100,000 = **PKR 140,000**.",
+    "agent": "The policy allows a Grade G4 employee to claim PKR 8,000 per‑diem per day and PKR 20,000 per hotel night, so for 5 days and 5 nights the maximum claim is PKR 40,000 + PKR 100,000 = PKR 140,000 [1]. The calculator confirms this total as 140,000.0 PKR."
   },
   {
     "id": "c002",
     "expected": "124000",
-    "plain": "The G5 grade’s daily per‑diem is PKR 10,000 and the hotel cap is PKR 30,000 per night. Since Multan is not Lahore, Karachi or Islamabad, the hotel cap is reduced to 70 % of that amount (30,000 × 0.70 = PKR 21,000 per night)[1].  \n\n- Per‑diem for 4 days: 10,000 × 4 = PKR 40,000  \n- Hotel for 4 nights: 21,000 × 4 = PKR 84,000  \n\nMaximum total claim = 40,000 + 84,000 = **PKR 124,000**[1].",
-    "agent": "The per‑diem for 4 days is PKR 40,000 and the hotel allowance for 4 nights in Multan is PKR 84,000. Therefore the maximum total claim is PKR 124,000 [1]. The calculator confirms this amount as 124,000.0 PKR."
+    "plain": "The policy gives a G5 employee a per‑diem of PKR 10,000 per day and a hotel cap of PKR 30,000 per night for domestic travel. Because Multan is not Lahore, Karachi or Islamabad, the hotel cap is reduced to 70 % of the listed amount, i.e., 0.70 × 30,000 = PKR 21,000 per night.  \n\n- Per‑diem for 4 days: 10,000 × 4 = PKR 40,000.  \n- Hotel allowance for 4 nights: 21,000 × 4 = PKR 84,000.  \n\nMaximum total claim = 40,000 + 84,000 = **PKR 124,000**[1].",
+    "agent": "The maximum total claim for a G5 employee traveling to Multan for 4 days and 4 nights is PKR 124,000[1]. This equals the per‑diem of PKR 40,000 plus the hotel allowance of PKR 84,000, as confirmed by the calculator (PKR 124,000)."
   },
   {
     "id": "c003",
     "expected": "50400",
-    "plain": "The policy allows a travel advance of up to 80 % of the estimated trip cost.  \nFor a Grade G3 employee the estimated cost is:\n\n* Per‑diem: 6,000 PKR × 3 days = 18,000 PKR  \n* Hotel cap: 15,000 PKR × 3 nights = 45,000 PKR  \n\nTotal estimated cost = 18,000 + 45,000 = 63,000 PKR.  \n80 % of 63,000 PKR = 50,400 PKR.\n\n**Maximum travel advance:** **PKR 50,400**[1].",
-    "agent": "The policy permits a travel advance of up to 80 % of the estimated trip cost.  \nFor a Grade G3 employee on a 3‑day, 3‑night trip, 80 % of PKR 63,000 equals PKR 50,400【1】.  \nThus, the maximum travel advance they can request is PKR 50,400."
+    "plain": "The policy allows a travel advance of up to 80 % of the estimated trip cost.  \nFor a G3 employee on a domestic trip, the estimated cost is:\n\n* Per‑diem = PKR 6,000 per day × 3 days = PKR 18,000[1]  \n* Hotel cap = PKR 15,000 per night × 3 nights = PKR 45,000[1]\n\nEstimated total = 18,000 + 45,000 = PKR 63,000.  \n80 % of PKR 63,000 = PKR 50,400[1].\n\n**Maximum travel advance the G3 employee can request: PKR 50,400.**",
+    "agent": "The policy permits a travel advance of up to 80 % of the estimated trip cost.  \nFor the G3 employee’s 3‑day, 3‑night trip, 80 % of PKR 63,000 equals **PKR 50,400**[1]."
   },
   {
     "id": "c004",
     "expected": "900",
-    "plain": "A G6 employee receives a USD 150 per‑day international per diem. Over a 6‑day trip this totals 150 × 6 = USD 900[1].",
-    "agent": "A G6 employee receives USD 150 per day for international travel. Over a 6‑day trip the total per diem is USD 900 [1]. The calculator confirms this result: 150 × 6 = 900.0 USD."
+    "plain": "The international per‑diem for a G6 employee is USD 150 per day. Over a 6‑day trip this totals **USD 900**[1].",
+    "agent": "The international per‑diem for a G6 employee is USD 150 per day. Over a 6‑day trip this amounts to **USD 900**[1], which matches the calculator result of 900.0 USD."
   },
   {
     "id": "c005",
     "expected": "20000",
-    "plain": "The employee can encash the 4 days that exceed the 10‑day carry‑forward limit (14 – 10 = 4 days).  \nEncashment is calculated at the rate of monthly basic salary divided by 30 per day:  \n\n\\(150{,}000 ÷ 30 = 5{,}000 PKR\\) per day  \n\n\\(5{,}000 × 4 = 20{,}000 PKR\\)\n\nSo, the employee may receive **PKR 20,000** in January.  \n\n[3]",
-    "agent": "The employee can encash the 4 days that exceed the 10‑day carry‑forward limit, which amounts to PKR 20,000 in January. This is calculated as (150,000 ÷ 30) × 4 = 20,000 PKR【3】."
+    "plain": "The employee can encash the 4 days that exceed the 10‑day carry‑forward limit (14 − 10 = 4 days).  \nEncashment rate = monthly basic salary ÷ 30 = 150,000 PKR ÷ 30 = 5,000 PKR per day.  \nEncashable amount = 4 days × 5,000 PKR = **20,000 PKR**.  \n\n[3]",
+    "agent": "The employee can encash the 4 days that exceed the 10‑day carry‑forward limit, which at 5,000 PKR per day equals 20,000 PKR. This matches the calculator result of 20,000 PKR. [3]"
   },
   {
     "id": "c006",
     "expected": "28800",
-    "plain": "The employee contributes 8 % of the basic salary and the company matches that 8 %.  \n8 % + 8 % = 16 % of PKR 180,000 = PKR 28,800 per month.  \n\n**Total monthly provident‑fund contribution (employee + company): PKR 28,800**[3]",
-    "agent": "The total monthly provident‑fund contribution (employee + company) is PKR 28,800. This matches the calculation 180,000 × 16 % = 28,800. [3]"
+    "plain": "The employee contributes 8 % of the basic salary and the company matches this with 8 % of the basic salary.  \n8 % + 8 % = 16 % of PKR 180,000 = PKR 28,800 per month.  \n\n**Total monthly provident‑fund contribution:** **PKR 28,800**[3].",
+    "agent": "The employee’s 8 % contribution plus the company’s matching 8 % equals 16 % of the PKR 180,000 salary. This results in a total monthly provident‑fund contribution of **PKR 28,800**[3]."
   },
   {
     "id": "c007",
     "expected": "720000",
-    "plain": "The employee is entitled to one month’s basic salary for each completed year. With 4 years of service and a last drawn basic salary of PKR 180,000, the gratuity is 4 × 180,000 = PKR 720,000[1].",
-    "agent": "The employee is entitled to one month’s basic salary for each completed year, so for 4 years the gratuity is 4 × 180,000 = PKR 720,000[1]. The calculator confirms this result: 720,000.0 PKR."
+    "plain": "The employee is entitled to one month’s basic salary for each completed year. With 4 years of service and a last drawn basic salary of PKR 180,000, the gratuity is 4 × 180,000 = PKR 720,000 [1].",
+    "agent": "The employee is entitled to one month’s basic salary for each completed year, so with 4 years and a last drawn basic salary of PKR 180,000 the gratuity is 4 × 180,000 = PKR 720,000[1]. The calculator confirms this result as 720,000.0 PKR."
   },
   {
     "id": "c008",
     "expected": "150000",
-    "plain": "The basic salary is 60 % of the gross salary, so for a PKR 250,000 gross it is PKR 150,000 (0.60 × 250,000)[3].  \nThe festival bonus is 50 % of basic salary per Eid, i.e., PKR 75,000 each (0.50 × 150,000)[1].  \nWith two Eids in a year, the total festival bonus is PKR 75,000 × 2 = PKR 150,000.",
-    "agent": "The basic salary for a PKR 250,000 gross is PKR 150,000 (0.60 × 250,000)[3].  \nEach Eid’s festival bonus is 50 % of that basic, i.e., PKR 75,000 (0.50 × 150,000)[1].  \nWith two Eids per year, the total festival bonus is PKR 75,000 × 2 = PKR 150,000."
+    "plain": "The basic salary is 60 % of the gross monthly salary, so:\n\n- Basic salary = 60 % × PKR 250,000 = PKR 150,000.\n\nThe festival bonus is 50 % of basic salary for each Eid, and there are two Eids per year:\n\n- Bonus per Eid = 50 % × PKR 150,000 = PKR 75,000.  \n- Total for both Eids = 2 × PKR 75,000 = PKR 150,000.\n\n**Total festival bonus per year: PKR 150,000**[3][1]",
+    "agent": "The employee’s total festival bonus for both Eids is PKR 150,000[3][1]. This matches the calculator result of 150,000.0 PKR."
   },
   {
     "id": "c009",
     "expected": "37000",
-    "plain": "The engineer earns PKR 3,000 per day for 7 days = PKR 21,000, plus PKR 8,000 for each of the 2 SEV1 incidents = PKR 16,000. Total on‑call allowance = PKR 21,000 + PKR 16,000 = PKR 37,000 [2].",
-    "agent": "The engineer’s on‑call allowance for a full week (7 days) is PKR 21,000, and the two SEV1 incidents add PKR 16,000, giving a total of PKR 37,000. This matches the calculator result of 37,000.0 PKR [2]."
+    "plain": "The engineer earns PKR 3,000 for each of the 7 on‑call days (7 × 3,000 = 21,000 PKR) plus PKR 8,000 for each of the 2 SEV1 incidents (2 × 8,000 = 16,000 PKR).  \nTotal on‑call allowance = 21,000 + 16,000 = PKR 37,000[2].",
+    "agent": "The engineer’s on‑call allowance for the week is PKR 37,000. This comes from PKR 21,000 for the 7 on‑call days plus PKR 16,000 for the 2 SEV1 incidents, giving a total of PKR 37,000 [2]."
   },
   {
     "id": "c010",
     "expected": "23700",
-    "plain": "The Enterprise plan requires a minimum of 25 agents. At the annual‑billing rate of USD 79 per agent per month, the yearly cost is:\n\n\\(79 \\text{USD} × 12 \\text{months} × 25 \\text{agents} = 23,700 \\text{USD}\\).\n\nSo the minimum yearly cost for the Enterprise plan with annual billing is **USD 23,700**[1][3].",
-    "agent": "The minimum yearly cost of the Enterprise plan with annual billing is **USD 23,700**[1][3]. This matches the calculator result of 79 × 12 × 25 = 23,700.0 USD."
+    "plain": "The Enterprise plan requires a minimum of 25 agents. Its annual‑billing price is USD 79 per agent per month, so the yearly cost is:\n\n\\(79 \\text{USD} × 12 \\text{months} × 25 \\text{agents} = 23,700 \\text{USD}\\)[1][3]",
+    "agent": "The Enterprise plan’s minimum yearly cost with annual billing is **23,700 USD**. This comes from 79 USD × 12 months × 25 agents = 23,700 USD [1][3]."
   },
   {
     "id": "l001",
     "expected": "43",
-    "plain": "The Growth plan allows 43 minutes of downtime per 30‑day month [3].",
-    "agent": "The Growth plan allows 43 minutes of downtime per 30‑day month [3]."
+    "plain": "The Growth plan allows 43 minutes of downtime per a 30‑day month [3].",
+    "agent": "The Growth plan allows 43 minutes of downtime per a 30‑day month [3]."
   },
   {
     "id": "l002",
@@ -74,31 +74,49 @@
   {
     "id": "c011",
     "expected": "186000",
-    "plain": "The policy gives a G5 employee a per‑diem of PKR 10,000 per day and a hotel cap of PKR 30,000 per night. Because Peshawar is not Lahore, Karachi or Islamabad, the hotel cap is reduced to 70 % of the listed amount (30,000 × 0.70 = PKR 21,000 per night)[1].  \n\n- Per‑diem for 6 days: 6 × 10,000 = PKR 60,000  \n- Hotel for 6 nights: 6 × 21,000 = PKR 126,000  \n\nMaximum total claim = 60,000 + 126,000 = **PKR 186,000**.",
-    "agent": "The per‑diem for 6 days is PKR 60,000 and the hotel allowance for 6 nights is PKR 126,000 (70 % of the PKR 30,000 cap) [1].  \nAdding these amounts gives a maximum claim of **PKR 186,000** (calculator result: 186,000.0 PKR)."
+    "plain": "The G5 per‑diem is PKR 10,000 per day and the standard hotel cap is PKR 30,000 per night. Because Peshawar is not Lahore, Karachi or Islamabad, the hotel cap is reduced to 70 % of the listed amount (30,000 × 0.70 = PKR 21,000 per night)[1].  \n\n- Per‑diem total: 6 days × 10,000 = PKR 60,000  \n- Hotel total: 6 nights × 21,000 = PKR 126,000  \n\nMaximum claim = 60,000 + 126,000 = **PKR 186,000**[1].",
+    "agent": "The maximum claim for a G5 employee traveling to Peshawar for 6 days and 6 nights is the sum of the per‑diem (6 × 10,000 = PKR 60,000) and the reduced hotel cap (6 × 21,000 = PKR 126,000), which equals **PKR 186,000**[1]. The calculator confirms this result: 6 * 10,000 + 6 * 21,000 = 186,000.0 PKR."
   },
   {
     "id": "c012",
     "expected": "78",
-    "plain": "The weighted total score is **78**.\n\nCalculation (using the scoring weights from the policy):\n- Price: 70 × 35 % = 24.5  \n- Quality & fit: 90 × 25 % = 22.5  \n- Delivery time: 80 × 15 % = 12.0  \n- Support & SLA: 60 × 15 % = 9.0  \n- Compliance & stability: 100 × 10 % = 10.0  \n\nTotal = 24.5 + 22.5 + 12.0 + 9.0 + 10.0 = 78.0 [1]",
-    "agent": "The weighted total score for the vendor is 78.0 points. This matches the calculation shown in the policy weighting example [1]."
+    "plain": "The weighted total score is **78**:\n\n- Price: 70 × 35% = 24.5  \n- Quality & fit: 90 × 25% = 22.5  \n- Delivery time: 80 × 15% = 12.0  \n- Support & SLA: 60 × 15% = 9.0  \n- Compliance & stability: 100 × 10% = 10.0  \n\nSum = 24.5 + 22.5 + 12.0 + 9.0 + 10.0 = 78 [1].",
+    "agent": "The weighted total score is 78 [1]. This matches the calculator result of 78.0 points."
   },
   {
     "id": "c013",
     "expected": "408000",
     "plain": "I don't have enough information to answer that.",
-    "agent": "I don't have enough information to answer that."
+    "agent": "The employee’s gratuity is 3 × 120,000 = 360,000 PKR (one month’s salary per completed year) [1].  \nLeave encashment covers the 2 days beyond the 10‑day limit: 2 × (120,000 ÷ 30) = 8,000 PKR [3].  \nAdding both amounts gives a total final‑settlement payment of **368,000 PKR** (calculator result = 368,000.0)."
   },
   {
     "id": "c014",
     "expected": "50000",
-    "plain": "The maximum advance is two months’ gross salary = 2 × 300,000 = 600,000 PKR.  \nRepayment can be spread over up to 12 months, so the smallest possible monthly instalment is 600,000 ÷ 12 = 50,000 PKR.  \n\n**Answer:** PKR 50,000 per month [1].",
-    "agent": "The maximum advance is 600,000 PKR, and spreading it over the full 12‑month period yields the smallest monthly instalment of **PKR 50,000** [1]. This matches the calculator result of 50,000.0 PKR."
+    "plain": "The maximum advance is two months’ gross salary = 2 × 300,000 = 600,000 PKR.  \nRepayment can be spread over up to 12 monthly instalments, so the smallest possible instalment is 600,000 ÷ 12 = 50,000 PKR.  \n\n[1]",
+    "agent": "The maximum advance is 2 × 300,000 = 600,000 PKR, and it can be repaid over up to 12 months, giving a smallest instalment of 600,000 ÷ 12 = 50,000 PKR.  \nThus the smallest monthly instalment is **50,000 PKR**[1]."
   },
   {
     "id": "c015",
     "expected": "4800",
-    "plain": "The Growth plan costs USD 39 per agent per month with annual billing and USD 49 per agent per month with monthly billing [1].  \n\n* Annual‑billing cost per agent per year: 39 × 12 = USD 468.  \n* Monthly‑billing cost per agent per year: 49 × 12 = USD 588.  \n\nFor 40 agents:  \n\n* Annual billing: 468 × 40 = USD 18,720.  \n* Monthly billing: 588 × 40 = USD 23,520.  \n\nSavings by choosing annual billing: 23,520 − 18,720 = USD 4,800 per year.",
-    "agent": "The company saves **USD 4,800 per year** by choosing annual billing instead of monthly billing. This matches the calculator result of 4,800.0 USD. [1]"
+    "plain": "The Growth plan costs USD 39 per agent per month with annual billing and USD 49 per agent per month with monthly billing [1][3].  \n\nFor 40 agents:  \n\n- Annual‑billing cost = 40 × $39 × 12 = $18,720 per year.  \n- Monthly‑billing cost = 40 × $49 × 12 = $23,520 per year.  \n\nSavings = $23,520 − $18,720 = **$4,800 per year**.",
+    "agent": "The company saves **$4,800 per year** by choosing annual billing instead of monthly billing for 40 agents on the Growth plan [1][3]. This matches the calculator result of 4,800.0 USD."
+  },
+  {
+    "id": "c016",
+    "expected": "84000",
+    "plain": "I don't have enough information to answer that.",
+    "agent": "I don't have enough information to answer that."
+  },
+  {
+    "id": "c017",
+    "expected": "460000",
+    "plain": "I don't have enough information to answer that.",
+    "agent": "The standard notice period for a Manager (grade G4) is 2 months after confirmation [3]."
+  },
+  {
+    "id": "c018",
+    "expected": "16500",
+    "plain": "I don't have enough information to answer that.",
+    "agent": "I don't have enough information to answer that."
   }
 ]

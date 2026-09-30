@@ -17,7 +17,7 @@ from .chat import get_or_create_session, load_history
 
 router = APIRouter(prefix="/v1/agent", tags=["agent"])
 
-AGENT_TIMEOUT_SECONDS = 20
+AGENT_TIMEOUT_SECONDS = 45
 
 
 @router.post("/chat", response_model=AgentChatResponse)

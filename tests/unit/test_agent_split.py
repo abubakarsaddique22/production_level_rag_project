@@ -48,6 +48,10 @@ def test_split_question_returns_empty_when_llm_fails(monkeypatch):
     assert agent_graph.split_question(QUESTION) == []
 
 
+def test_safe_converts_fullwidth_citations():
+    assert agent_graph.safe("Leave is paid at basic/30【1】 and more【2】.") == "Leave is paid at basic/30[1] and more[2]."
+
+
 def test_shift_citations():
     assert agent_graph.shift_citations("A [1] and B [2]", 2) == "A [3] and B [4]"
     assert agent_graph.shift_citations("no citations", 5) == "no citations"

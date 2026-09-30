@@ -291,5 +291,65 @@
         2
       ]
     }
+  },
+  {
+    "id": "c016",
+    "query": "A Senior Engineer travels to Karachi for 4 days and stays 4 nights in a hotel. What is the maximum total of per diem plus hotel that can be claimed, in PKR?",
+    "ground_truth_answer": "A Senior Engineer is grade G3 (Employee Handbook). For G3 the per diem is PKR 6,000 per day and the hotel cap is PKR 15,000 per night, and Karachi gets the full cap. 6,000 x 4 + 15,000 x 4 = 24,000 + 60,000 = PKR 84,000.",
+    "expected": "84000",
+    "type": "calc",
+    "category": "Finance",
+    "difficulty": "hard",
+    "held_out": true,
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-002",
+        "NX-FIN-001"
+      ],
+      "pages": [
+        2,
+        2
+      ]
+    }
+  },
+  {
+    "id": "c017",
+    "query": "A Manager with a monthly basic salary of PKR 200,000 resigns and serves the full notice period, receiving the fuel allowance for their grade. What is the total of basic salary plus fuel allowance for the notice period, in PKR?",
+    "ground_truth_answer": "A Manager is grade G4. After confirmation the notice period for G4 to G6 is 2 months (Employee Handbook). The G4 fuel allowance is PKR 30,000 per month (Benefits Guide). 2 x (200,000 + 30,000) = PKR 460,000.",
+    "expected": "460000",
+    "type": "calc",
+    "category": "HR",
+    "difficulty": "hard",
+    "held_out": true,
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-002",
+        "NX-HR-003"
+      ],
+      "pages": [
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "id": "c018",
+    "query": "An employee has a gross monthly salary of PKR 250,000 and receives a performance rating of 4. What is the maximum increase in their monthly basic salary from the annual increment, in PKR?",
+    "ground_truth_answer": "Basic salary is 60% of gross salary (Benefits Guide) = PKR 150,000. A rating of 4 gives an increment band of 8% to 11% (Employee Handbook). The maximum is 11% x 150,000 = PKR 16,500.",
+    "expected": "16500",
+    "type": "calc",
+    "category": "HR",
+    "difficulty": "hard",
+    "held_out": true,
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-002",
+        "NX-HR-003"
+      ],
+      "pages": [
+        3,
+        1
+      ]
+    }
   }
 ]
