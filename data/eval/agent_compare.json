@@ -1,0 +1,295 @@
+[
+  {
+    "id": "c001",
+    "query": "An employee in grade G4 travels to Karachi for 5 days and stays 5 nights in a hotel. What is the maximum total of per diem plus hotel that can be claimed, in PKR?",
+    "ground_truth_answer": "Per diem for G4 is PKR 8,000 per day and the hotel cap is PKR 20,000 per night (Karachi gets the full cap). 8,000 x 5 + 20,000 x 5 = PKR 140,000.",
+    "expected": "140000",
+    "type": "calc",
+    "category": "Finance",
+    "difficulty": "medium",
+    "metadata": {
+      "doc_ids": [
+        "NX-FIN-001"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "c002",
+    "query": "A G5 employee travels to Multan for 4 days and stays 4 nights in a hotel. What is the maximum total of per diem plus hotel that can be claimed, in PKR?",
+    "ground_truth_answer": "Per diem for G5 is PKR 10,000 per day. The G5 hotel cap is PKR 30,000, but outside Lahore, Karachi and Islamabad it is 70% of that, i.e. PKR 21,000 per night. 10,000 x 4 + 21,000 x 4 = PKR 124,000.",
+    "expected": "124000",
+    "type": "calc",
+    "category": "Finance",
+    "difficulty": "hard",
+    "metadata": {
+      "doc_ids": [
+        "NX-FIN-001"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "c003",
+    "query": "A G3 employee is going on a 3-day, 3-night business trip to Islamabad. What is the maximum travel advance they can request, in PKR?",
+    "ground_truth_answer": "Estimated maximum trip cost = per diem 6,000 x 3 + hotel 15,000 x 3 = PKR 63,000. An advance of up to 80% is allowed, so 63,000 x 0.8 = PKR 50,400.",
+    "expected": "50400",
+    "type": "calc",
+    "category": "Finance",
+    "difficulty": "hard",
+    "metadata": {
+      "doc_ids": [
+        "NX-FIN-001"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "c004",
+    "query": "What is the total international per diem, in USD, for a G6 employee on a 6-day international trip?",
+    "ground_truth_answer": "International per diem for G6 is USD 150 per day. 150 x 6 = USD 900.",
+    "expected": "900",
+    "type": "calc",
+    "category": "Finance",
+    "difficulty": "easy",
+    "metadata": {
+      "doc_ids": [
+        "NX-FIN-001"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "c005",
+    "query": "An employee with a monthly basic salary of PKR 150,000 has 14 unused annual leave days at the end of the year. How much can be encashed in January, in PKR?",
+    "ground_truth_answer": "A maximum of 10 days carries forward, so 14 - 10 = 4 days can be encashed. The rate is monthly basic salary divided by 30 = 5,000 per day. 4 x 5,000 = PKR 20,000.",
+    "expected": "20000",
+    "type": "calc",
+    "category": "HR",
+    "difficulty": "medium",
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-001"
+      ],
+      "pages": [
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "id": "c006",
+    "query": "An employee has a basic salary of PKR 180,000 per month. What is the total monthly provident fund amount going in (employee plus company contribution), in PKR?",
+    "ground_truth_answer": "The employee contributes 8% of basic salary and the company matches 8%. 8% of 180,000 = 14,400, so the total is 14,400 + 14,400 = PKR 28,800 per month.",
+    "expected": "28800",
+    "type": "calc",
+    "category": "HR",
+    "difficulty": "easy",
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-003"
+      ],
+      "pages": [
+        1
+      ]
+    }
+  },
+  {
+    "id": "c007",
+    "query": "An employee with a last drawn basic salary of PKR 180,000 leaves after completing 4 years of service. How much gratuity do they receive, in PKR?",
+    "ground_truth_answer": "Gratuity is one month's last drawn basic salary for each completed year of service. 180,000 x 4 = PKR 720,000.",
+    "expected": "720000",
+    "type": "calc",
+    "category": "HR",
+    "difficulty": "easy",
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-003"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "c008",
+    "query": "An employee has a gross monthly salary of PKR 250,000. What is the total festival bonus they receive for both Eids in a year, in PKR?",
+    "ground_truth_answer": "Basic salary is 60% of gross = 150,000. Festival bonus is 50% of basic salary before each Eid = 75,000. For Eid ul-Fitr and Eid ul-Adha, 75,000 x 2 = PKR 150,000.",
+    "expected": "150000",
+    "type": "calc",
+    "category": "HR",
+    "difficulty": "hard",
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-003"
+      ],
+      "pages": [
+        1,
+        3
+      ]
+    }
+  },
+  {
+    "id": "c009",
+    "query": "An engineer is on call for a full week (7 days) and handles 2 SEV1 incidents during that week. What is the total on-call allowance in PKR?",
+    "ground_truth_answer": "The on-call allowance is PKR 3,000 per day on call and PKR 8,000 for each SEV1 or SEV2 incident handled. 3,000 x 7 + 8,000 x 2 = 21,000 + 16,000 = PKR 37,000.",
+    "expected": "37000",
+    "type": "calc",
+    "category": "HR",
+    "difficulty": "medium",
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-003"
+      ],
+      "pages": [
+        3
+      ]
+    }
+  },
+  {
+    "id": "c010",
+    "query": "What is the minimum yearly cost, in USD, of the Enterprise plan with annual billing?",
+    "ground_truth_answer": "Enterprise annual billing is USD 79 per agent per month with a minimum of 25 agents. 79 x 25 x 12 = USD 23,700 per year.",
+    "expected": "23700",
+    "type": "calc",
+    "category": "Product",
+    "difficulty": "medium",
+    "metadata": {
+      "doc_ids": [
+        "NX-PRD-001"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "l001",
+    "query": "How many minutes of downtime per 30-day month does the Growth plan allow?",
+    "ground_truth_answer": "The Growth plan has 99.9% monthly uptime, which allows approximately 43 minutes of downtime in a 30-day month.",
+    "expected": "43",
+    "type": "lookup",
+    "category": "Product",
+    "difficulty": "easy",
+    "metadata": {
+      "doc_ids": [
+        "NX-PRD-001"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "l002",
+    "query": "How many days of paid maternity leave does an employee get?",
+    "ground_truth_answer": "Maternity leave is 90 calendar days (paid).",
+    "expected": "90",
+    "type": "lookup",
+    "category": "HR",
+    "difficulty": "easy",
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-001"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "c011",
+    "query": "A G5 employee travels to Peshawar for 6 days and stays 6 nights in a hotel. What is the maximum total of per diem plus hotel that can be claimed, in PKR?",
+    "ground_truth_answer": "Per diem for G5 is PKR 10,000 per day, so 10,000 x 6 = 60,000. Peshawar is not Lahore, Karachi or Islamabad, so the hotel cap is 70% of PKR 30,000 = 21,000 per night, and 21,000 x 6 = 126,000. Total = PKR 186,000.",
+    "expected": "186000",
+    "type": "calc",
+    "category": "Finance",
+    "difficulty": "hard",
+    "metadata": {
+      "doc_ids": [
+        "NX-FIN-001"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "c012",
+    "query": "Using Nexora's vendor evaluation scoring weights, a vendor scores 70 on price, 90 on quality and fit, 80 on delivery time, 60 on support and SLA, and 100 on compliance and stability. What is the weighted total score?",
+    "ground_truth_answer": "The weights are price 35%, quality and fit 25%, delivery time 15%, support and SLA 15%, compliance and stability 10%. 0.35x70 + 0.25x90 + 0.15x80 + 0.15x60 + 0.10x100 = 24.5 + 22.5 + 12 + 9 + 10 = 78.",
+    "expected": "78",
+    "type": "calc",
+    "category": "Finance",
+    "difficulty": "hard",
+    "metadata": {
+      "doc_ids": [
+        "NX-FIN-002"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  },
+  {
+    "id": "c013",
+    "query": "A G3 employee with a monthly basic salary of PKR 120,000 resigns after 3 completed years of service and has 12 unused annual leave days. What is the total of leave encashment plus gratuity in the final settlement, in PKR?",
+    "ground_truth_answer": "On resignation, unused annual leave (up to 20 days) is encashed at monthly basic divided by 30 = 4,000 per day, so 12 x 4,000 = 48,000. Gratuity is one month's last drawn basic per completed year: 120,000 x 3 = 360,000. Total = PKR 408,000.",
+    "expected": "408000",
+    "type": "calc",
+    "category": "HR",
+    "difficulty": "hard",
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-001",
+        "NX-HR-003"
+      ],
+      "pages": [
+        4,
+        2
+      ]
+    }
+  },
+  {
+    "id": "c014",
+    "query": "An employee with a gross monthly salary of PKR 300,000 takes the maximum allowed salary advance and repays it over the longest allowed period. What is the smallest monthly instalment, in PKR?",
+    "ground_truth_answer": "The maximum interest-free salary advance is 2 months' gross salary = 600,000, recoverable in up to 12 monthly instalments. 600,000 / 12 = PKR 50,000 per month.",
+    "expected": "50000",
+    "type": "calc",
+    "category": "HR",
+    "difficulty": "medium",
+    "metadata": {
+      "doc_ids": [
+        "NX-HR-003"
+      ],
+      "pages": [
+        3
+      ]
+    }
+  },
+  {
+    "id": "c015",
+    "query": "A company has 40 agents on the Growth plan. How much does it save in USD per year by choosing annual billing instead of monthly billing?",
+    "ground_truth_answer": "Monthly billing: 49 x 40 x 12 = USD 23,520 per year. Annual billing: 39 x 40 x 12 = USD 18,720 per year. Saving = USD 4,800 per year.",
+    "expected": "4800",
+    "type": "calc",
+    "category": "Product",
+    "difficulty": "hard",
+    "metadata": {
+      "doc_ids": [
+        "NX-PRD-001"
+      ],
+      "pages": [
+        2
+      ]
+    }
+  }
+]

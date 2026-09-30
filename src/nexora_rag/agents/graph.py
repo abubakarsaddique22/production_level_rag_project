@@ -13,12 +13,20 @@ from .tools import calculator, kb_search, lookup_ticket
 
 MAX_TOOL_CALLS = 4
 MAX_RETRIES = 2
+MAX_SUB_QUESTIONS = 3
 NOT_ENOUGH = "I don't have enough information to answer that."
 
 ROUTER_PROMPT = """Classify the user's question. Reply with ONE word only:
 kb - answer needs company documents only
 calc - answer needs numbers from company documents AND arithmetic (totals, rate x days)
 ticket - question is about a support ticket status"""
+
+SPLIT_PROMPT = """The question needs facts from company documents and then arithmetic.
+List the separate facts (rules, rates, limits) that must be looked up in the documents.
+Write one short standalone question per line, at most 3 lines.
+Ask only about the rules in the documents: never ask for arithmetic and never include
+the employee's own numbers (salary, days, years).
+Reply with the questions only: no numbering, no extra words."""
 
 CALC_PROMPT = """Write ONE arithmetic expression (numbers, + - * / and brackets only)
 that answers the question using the numbers in the facts.
@@ -57,6 +65,37 @@ def safe(text: str) -> str:
     return mask_pii(text) if ok else OUTPUT_REFUSAL
 
 
+def split_question(question: str) -> list[str]:
+    """Sawal ko chhote document-sawalon mein todta hai. LLM fail ho to khali list."""
+    try:
+        text = ask_llm(SPLIT_PROMPT, question)
+    except Exception:
+        return []
+    lines = [re.sub(r"^\s*(?:[-*]|\d+[.)])\s*", "", line).strip() for line in text.splitlines()]
+    return [line for line in lines if line][:MAX_SUB_QUESTIONS]
+
+
+def shift_citations(text: str, offset: int) -> str:
+    """Sub-jawab ke [1], [2] ko [offset+1], [offset+2] banata hai (sources list jud rahi hai)."""
+    return re.sub(r"\[(\d+)\]", lambda m: f"[{int(m.group(1)) + offset}]", text)
+
+
+def search_by_parts(service, state: AgentState) -> tuple[str, list]:
+    """Sawal todo, har hisse ka alag KB search karo, mile hue jawab jodo.
+    departments state se aate hain (user ke role se), todne wale LLM se nahi."""
+    parts = split_question(state["question"])
+    if len(parts) < 2:  # todne ka faida nahi
+        return "", []
+    answers, sources = [], []
+    for part in parts:
+        out = kb_search(service, part, state["departments"],
+                        state.get("user_id"), state.get("history"))
+        if out.found:
+            answers.append(shift_citations(out.answer, len(sources)))
+            sources.extend(out.sources)
+    return " ".join(answers), sources
+
+
 # ---------- nodes ----------
 
 def guard_node(state: AgentState) -> dict:
@@ -86,12 +125,23 @@ def kb_node(state: AgentState) -> dict:
     service = state.get("service") or get_service()  # API se aaye to wahi, warna apni
     out = kb_search(service, state["question"], state["departments"],
                     state.get("user_id"), state.get("history"))
+    answer, found, sources = out.answer, out.found, out.sources
+
+    if not found and state.get("route") == "calc":
+        # Poora sawal ek search mein nahi mila (jaise 2 documents ke facts): tukron mein try karo.
+        try:
+            parts_answer, parts_sources = search_by_parts(service, state)
+        except Exception:
+            parts_answer, parts_sources = "", []
+        if parts_sources:
+            answer, found, sources = parts_answer, True, parts_sources
+
     return {
-            "kb_answer": out.answer,
-            "kb_found": out.found,
-            "sources": out.sources,
-            "tool_calls": state.get("tool_calls", 0) + 1,
-        }
+        "kb_answer": answer,
+        "kb_found": found,
+        "sources": sources,
+        "tool_calls": state.get("tool_calls", 0) + 1,  # ek logical KB tool call
+    }
 
 
 def calc_node(state: AgentState) -> dict:

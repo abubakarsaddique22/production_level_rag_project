@@ -142,6 +142,8 @@ class RagService:
             "latency_ms": int((time.time() - start) * 1000),
         }
 
+
+
 if __name__ == "__main__":
     service = RagService()
     response = service.answer("How many days of paid maternity leave are there?",departments=["HR", "Product"],)
@@ -152,3 +154,4 @@ if __name__ == "__main__":
         print(f"  [{s['id']}] {s['title']}, page {s['page']}")
     print(f"\nLatency: {response['latency_ms']}ms")
     print(f"Trace ID: {response['trace_id']}")
+
