@@ -3,11 +3,11 @@ from pathlib import Path
 
 import pytest
 
-from src.nexora_rag.generation import rag_service
-from src.nexora_rag.generation.prompts import build_user_message
-from src.nexora_rag.generation.rag_service import RagService
-from src.nexora_rag.guardrails.input_checks import check_input
-from src.nexora_rag.guardrails.output_checks import OUTPUT_REFUSAL
+from nexora_rag.generation import rag_service
+from nexora_rag.generation.prompts import build_user_message
+from nexora_rag.generation.rag_service import RagService
+from nexora_rag.guardrails.input_checks import check_input
+from nexora_rag.guardrails.output_checks import OUTPUT_REFUSAL
 
 DATA = json.loads((Path(__file__).parent / "attacks.json").read_text(encoding="utf-8"))
 

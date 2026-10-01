@@ -1,5 +1,5 @@
 """Agent kb node: poora sawal na mile to calc route sawal ko tukron mein todta hai."""
-import src.nexora_rag.agents.graph as agent_graph
+import nexora_rag.agents.graph as agent_graph
 
 NOT_FOUND = "I don't have enough information to answer that."
 QUESTION = "A G3 employee resigns with 12 unused leave days after 3 years. Total settlement?"

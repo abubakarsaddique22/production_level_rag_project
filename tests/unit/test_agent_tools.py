@@ -2,7 +2,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from src.nexora_rag.agents.tools import calculator, kb_search, lookup_ticket
+from nexora_rag.agents.tools import calculator, kb_search, lookup_ticket
 
 
 # ---------- calculator ----------

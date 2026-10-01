@@ -1,5 +1,5 @@
 import pytest
-from src.nexora_rag.guardrails.output_checks import check_output
+from nexora_rag.guardrails.output_checks import check_output
 
 
 def test_normal_answer_passes():

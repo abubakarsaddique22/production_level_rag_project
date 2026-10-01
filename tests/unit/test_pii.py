@@ -1,5 +1,5 @@
 import pytest
-from src.nexora_rag.guardrails.pii import mask_pii
+from nexora_rag.guardrails.pii import mask_pii
 
 
 def test_normal_answer_is_unchanged():

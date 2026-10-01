@@ -1,8 +1,8 @@
 from types import SimpleNamespace
 
-from src.nexora_rag.agents import graph as g
-from src.nexora_rag.generation.rag_service import REFUSALS
-from src.nexora_rag.guardrails.input_checks import MAX_QUESTION_CHARS
+from nexora_rag.agents import graph as g
+from nexora_rag.generation.rag_service import REFUSALS
+from nexora_rag.guardrails.input_checks import MAX_QUESTION_CHARS
 
 
 # ---------- fakes ----------

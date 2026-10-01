@@ -1,6 +1,6 @@
 import pytest
-from src.nexora_rag.generation import rag_service
-from src.nexora_rag.generation.rag_service import RagService
+from nexora_rag.generation import rag_service
+from nexora_rag.generation.rag_service import RagService
 
 
 class BoomRetriever:

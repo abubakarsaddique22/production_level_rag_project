@@ -1,5 +1,5 @@
 import pytest
-from src.nexora_rag.guardrails.input_checks import check_input, MAX_QUESTION_CHARS
+from nexora_rag.guardrails.input_checks import check_input, MAX_QUESTION_CHARS
 
 
 def test_normal_question_passes():
