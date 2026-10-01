@@ -1,7 +1,7 @@
 # Multi-stage build — finalized properly in Step Y (Containerisation).
 # This is a working baseline so `docker build .` succeeds today.
 
-FROM python:3.11-slim AS base
+FROM python:3.12-slim AS base
 
 WORKDIR /app
 
