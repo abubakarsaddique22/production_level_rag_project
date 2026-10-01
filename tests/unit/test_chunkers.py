@@ -1,5 +1,5 @@
 import json
-
+from nexora_rag.ingestion.chunkers import chunk_all
 from nexora_rag.core.config import settings
 from nexora_rag.ingestion.chunkers import (
     chunk_document,
@@ -113,3 +113,22 @@ def test_table_text_is_marked_as_table_chunk(tmp_path):
     chunks = chunk_document(tmp_path)
 
     assert chunks[0]["metadata"]["chunk_type"] == "table"
+
+
+# ---------- chunk_all ----------
+
+def test_chunk_all_writes_chunks_json_for_each_document(tmp_path):
+    for name in ("doc_a", "doc_b"):
+        folder = tmp_path / name
+        folder.mkdir()
+        write_pages(folder, [make_page(content=f"Text of {name}.")])
+    (tmp_path / "notes.txt").write_text("not a folder", encoding="utf-8")  # files are ignored
+    (tmp_path / "empty_doc").mkdir()  # no clean_pages.json -> skipped
+
+    chunk_all(tmp_path)
+
+    assert (tmp_path / "doc_a" / "chunks.json").exists()
+    assert (tmp_path / "doc_b" / "chunks.json").exists()
+    assert not (tmp_path / "empty_doc" / "chunks.json").exists()
+    saved = json.loads((tmp_path / "doc_a" / "chunks.json").read_text(encoding="utf-8"))
+    assert saved[0]["content"] == "Text of doc_a."

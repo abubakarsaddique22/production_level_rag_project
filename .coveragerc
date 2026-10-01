@@ -1,0 +1,15 @@
+[run]
+source = src/nexora_rag
+omit =
+    */nexora_rag/api/*
+    */nexora_rag/db/*
+    */nexora_rag/embeddings/*
+    */nexora_rag/evaluation/*
+    */nexora_rag/ingestion/loaders.py
+    */nexora_rag/ingestion/cleaners.py
+    */nexora_rag/ingestion/pipeline.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:

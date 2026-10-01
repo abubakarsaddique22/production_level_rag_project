@@ -36,3 +36,9 @@ pgdata/
 
 # Logs
 *.log
+
+
+# new add 
+
+.deepeval/
+coverage.xml

@@ -1,12 +1,111 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  RAG_QDRANT_URL: "http://localhost:6333"
+  LANGSMITH_TRACING: "false"   # CI must never send traces
 
 jobs:
-  tests:
+  # ------------------------------------------------------------------
+  # 1. Lint. Informational for now: flip continue-on-error to false
+  #    after `ruff check src tests scripts` and `mypy src` pass locally.
+  # ------------------------------------------------------------------
+  lint:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install ruff and mypy (versions pinned in requirements.txt)
+        run: grep -E '^(ruff|mypy)==' requirements.txt | xargs pip install
+
+      - name: Ruff
+        continue-on-error: true
+        run: ruff check src tests scripts
+
+      - name: Mypy
+        continue-on-error: true
+        run: mypy src --ignore-missing-imports
+
+  # ------------------------------------------------------------------
+  # 2. Unit + red-team tests with coverage. No external services.
+  # ------------------------------------------------------------------
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install CPU-only torch
+        run: pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+      # requirements.txt already installs the spaCy model en_core_web_sm from a wheel URL
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Unit and red-team tests with coverage (core modules, gate 80%)
+        run: >
+          python -m pytest tests/unit tests/redteam -v
+          --cov=src/nexora_rag --cov-report=term-missing --cov-report=xml
+          --cov-fail-under=80
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+
+  # ------------------------------------------------------------------
+  # 3. Integration tests against real Postgres and Redis (fake RagService).
+  #    test_rbac.py is excluded: it needs a Qdrant collection filled with the
+  #    real documents and the embedding models, so it stays a local test.
+  #    Informational at first; make it blocking once it is green.
+  # ------------------------------------------------------------------
+  integration:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: nexora
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     env:
-      RAG_QDRANT_URL: "http://localhost:6333"
+      RAG_DATABASE_URL: "postgresql+asyncpg://postgres:postgres@localhost:5432/nexora"
+      RAG_REDIS_URL: "redis://localhost:6379/0"
+      RAG_JWT_SECRET: "ci-only-secret"
     steps:
       - uses: actions/checkout@v4
 
@@ -21,8 +120,19 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Install spaCy model for Presidio
-        run: python -m spacy download en_core_web_sm
+      - name: Create tables
+        run: python scripts/create_tables.py
 
-      - name: Unit and red-team tests
-        run: python -m pytest tests/unit tests/redteam -v
+      - name: Integration tests
+        run: python -m pytest tests/integration -v --ignore=tests/integration/test_rbac.py
+
+  # ------------------------------------------------------------------
+  # 4. The Docker image must build.
+  # ------------------------------------------------------------------
+  docker:
+    runs-on: ubuntu-latest
+    needs: unit
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t nexora-rag:ci .
