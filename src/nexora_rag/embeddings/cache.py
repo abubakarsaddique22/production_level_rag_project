@@ -20,8 +20,9 @@ from __future__ import annotations
 import json
 import sqlite3
 from pathlib import Path
-
+from typing import Self
 from ..core.logging import get_logger
+
 
 log = get_logger(__name__)
 
@@ -96,7 +97,7 @@ class EmbeddingCache:
         self.flush()
         self._conn.close()
 
-    def __enter__(self) -> EmbeddingCache:
+    def __enter__(self) -> Self:
         return self
 
     def __exit__(self, exc_type, exc, tb) -> None:

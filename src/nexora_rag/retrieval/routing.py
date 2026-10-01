@@ -7,8 +7,10 @@ _SMALL_TALK = [
             r"(hi|hello|hey|salam|assalam o alaikum|assalamualaikum|"
             r"good morning|good afternoon|good evening)( there)?"
         ),
-        "Hello! Ask me anything about Nexora's HR, Engineering, Finance or "
-        "Product documents.",
+        (
+            "Hello! Ask me anything about Nexora's HR, Engineering, Finance or "
+            "Product documents."
+        ),
     ),
     (
         re.compile(r"(thanks|thank you|thx|shukriya|shukria)( a lot| so much)?"),

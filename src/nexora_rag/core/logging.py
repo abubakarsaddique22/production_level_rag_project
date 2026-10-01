@@ -19,6 +19,7 @@ import json
 import logging
 import sys
 from datetime import datetime, timezone
+from typing import ClassVar
 
 # request_id is set per-request by API middleware and picked up automatically
 request_id_ctx: contextvars.ContextVar[str] = contextvars.ContextVar(
@@ -27,7 +28,7 @@ request_id_ctx: contextvars.ContextVar[str] = contextvars.ContextVar(
 
 
 class JSONFormatter(logging.Formatter):
-    RESERVED = {
+    RESERVED: ClassVar[set[str]] = {
         "name", "msg", "args", "levelname", "levelno", "pathname", "filename",
         "module", "exc_info", "exc_text", "stack_info", "lineno", "funcName",
         "created", "msecs", "relativeCreated", "thread", "threadName",

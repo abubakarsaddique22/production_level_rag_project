@@ -7,6 +7,9 @@ load_dotenv()  # LANGSMITH_* os.environ mein chahiye, SDK yahin se padhta hai
 
 from langsmith import Client, traceable
 from langsmith.run_helpers import get_current_run_tree
+from ..core.logging import get_logger
+
+log = get_logger(__name__)
 
 __all__ = ["current_trace_id", "send_feedback", "traceable", "tracing_enabled"]
 
@@ -30,4 +33,5 @@ def send_feedback(trace_id: str, score: float, comment: str | None = None) -> No
         Client().create_feedback(run_id=trace_id, key="user_rating",
                                  score=score, comment=comment)
     except Exception:
-        pass
+        # a LangSmith outage must never break the user's request
+        log.warning("langsmith_feedback_failed", exc_info=True)

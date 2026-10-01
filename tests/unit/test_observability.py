@@ -1,4 +1,5 @@
 import uuid
+from typing import ClassVar
 
 import pytest
 from prometheus_client import REGISTRY
@@ -55,7 +56,7 @@ def test_traceable_function_still_works_with_tracing_off():
 # ---------- send_feedback ----------
 
 class RecordingClient:
-    calls: list = []
+    calls: ClassVar[list]= []
 
     def create_feedback(self, **kwargs):
         RecordingClient.calls.append(kwargs)

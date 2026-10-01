@@ -1,0 +1,9 @@
+extend-exclude = [".venvold"]
+
+[lint.flake8-bugbear]
+# FastAPI's Depends()/Query()/Header() in default arguments is the intended pattern
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.Header"]
+
+[lint.per-file-ignores]
+# CLI scripts: keep a batch running when one item fails; dates are only report labels
+"scripts/*" = ["BLE001", "DTZ011"]
