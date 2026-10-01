@@ -1,4 +1,5 @@
 import pytest
+
 from nexora_rag.generation import rag_service
 from nexora_rag.generation.rag_service import RagService
 

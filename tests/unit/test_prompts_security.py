@@ -1,5 +1,6 @@
 from nexora_rag.generation.prompts import SYSTEM_PROMPT, build_user_message
 
+
 def chunk(content, title="Leave Policy"):
     return {"title": title, "page": 3, "content": content}
 

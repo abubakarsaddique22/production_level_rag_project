@@ -4,7 +4,6 @@ from nexora_rag.agents import graph as g
 from nexora_rag.generation.rag_service import REFUSALS
 from nexora_rag.guardrails.input_checks import MAX_QUESTION_CHARS
 
-
 # ---------- fakes ----------
 
 def make_llm(route="kb", exprs=None, synth="Total is PKR 40,000 [1]."):

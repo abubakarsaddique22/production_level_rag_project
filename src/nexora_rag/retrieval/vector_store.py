@@ -67,7 +67,7 @@ class VectorStore:
                 url=self.url,
                 api_key=api_key or settings.qdrant_api_key,
             )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             raise VectorStoreError(f"Could not connect to Qdrant at {self.url}: {exc}") from exc
 
     def collection_exists(self) -> bool:
@@ -144,7 +144,7 @@ class VectorStore:
 
         try:
             self.client.upsert(collection_name=self.collection, points=points)
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             raise VectorStoreError(f"Qdrant upsert failed: {exc}") from exc
 
         return len(points)
@@ -193,7 +193,7 @@ class VectorStore:
                 limit=top_k,
                 with_payload=True,
         )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             raise VectorStoreError(f"Qdrant search failed: {exc}") from exc
 
     def search_by_text(

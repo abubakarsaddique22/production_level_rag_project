@@ -30,10 +30,9 @@ import asyncio
 import os
 import re
 
+from deepeval.models import DeepEvalBaseLLM
 from openai import AsyncOpenAI, OpenAI
 from pydantic import BaseModel
-
-from deepeval.models import DeepEvalBaseLLM
 
 from ..core.logging import get_logger
 

@@ -9,9 +9,9 @@ from ...core.rate_limit import limiter
 from ...db.models import ChatSession, Message
 from ...db.session import get_db
 from ...generation.rag_service import RagService
-from ..deps import get_rag_service, current_user, CurrentUser
-from ..schemas import ChatRequest, ChatResponse
 from ...observability.metrics import LATENCY, REQUESTS
+from ..deps import CurrentUser, current_user, get_rag_service
+from ..schemas import ChatRequest, ChatResponse
 
 router = APIRouter(prefix="/v1", tags=["chat"])
 

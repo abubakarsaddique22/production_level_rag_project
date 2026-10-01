@@ -1,4 +1,3 @@
-import pytest
 import redis
 
 from nexora_rag.core import cache

@@ -36,7 +36,7 @@ class Embedder:
         log.info("loading_embedding_model", extra={"model": self.model_name})
         try:
             self._model = SentenceTransformer(self.model_name)
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             raise EmbeddingError(
                 f"Could not load embedding model '{self.model_name}': {exc}"
             ) from exc
@@ -54,7 +54,7 @@ class Embedder:
                 normalize_embeddings=True,
                 convert_to_numpy=True,
             )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             raise EmbeddingError(f"Embedding call failed: {exc}") from exc
         return vectors.tolist()
 

@@ -25,6 +25,7 @@ from ..core.cache import get_cached_answer, make_key, set_cached_answer
 from ..guardrails.input_checks import check_input
 from ..guardrails.output_checks import OUTPUT_REFUSAL, check_output
 from ..guardrails.pii import mask_pii
+from ..observability.metrics import CACHE_LOOKUPS
 from ..observability.tracing import current_trace_id, traceable
 from ..retrieval.reranker import RerankingRetriever
 from ..retrieval.rewrite import rewrite_query
@@ -32,7 +33,6 @@ from ..retrieval.routing import check_small_talk
 from .citations import build_sources, validate_citations
 from .llm import ask_llm
 from .prompts import SYSTEM_PROMPT, build_user_message
-from ..observability.metrics import CACHE_LOOKUPS
 
 # Some LLM answers cite with fullwidth brackets (e.g. 【1】) instead of [1].
 _FULLWIDTH_CITATION = re.compile("\u3010\\s*(\\d+)[^\u3011]*\u3011")

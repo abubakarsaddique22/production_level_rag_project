@@ -17,9 +17,9 @@ image_records.json) ko leta hai aur:
 Output: data/processed/<pdf_name>/clean_pages.json
 """
 
+import hashlib
 import json
 import re
-import hashlib
 from pathlib import Path
 
 import yaml

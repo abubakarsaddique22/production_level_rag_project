@@ -11,7 +11,7 @@ from ...core.rate_limit import limiter
 from ...db.models import Message
 from ...db.session import get_db
 from ...generation.rag_service import RagService
-from ..deps import get_rag_service, current_user, CurrentUser
+from ..deps import CurrentUser, current_user, get_rag_service
 from ..schemas import AgentChatResponse, ChatRequest
 from .chat import get_or_create_session, load_history
 

@@ -1,14 +1,15 @@
+import argparse
+import json
 import os
 import sys
-import json
-import argparse
-import fitz  # PyMuPDF
-import pdfplumber
-import pandas as pd
-import pytesseract
-from PIL import Image
 from pathlib import Path
+
+import fitz  # PyMuPDF
+import pandas as pd
+import pdfplumber
+import pytesseract
 from langchain_core.documents import Document
+from PIL import Image
 
 # ------------------------------------------------------------------
 # WINDOWS: Tesseract path set kar diya hai (confirmed installed here).
@@ -79,7 +80,7 @@ def run_ocr_on_image(image_path):
         text = pytesseract.image_to_string(img)
         return text.strip()
     except Exception as e:
-        return f"[OCR_SKIPPED_OR_FAILED: {str(e)}]"
+        return f"[OCR_SKIPPED_OR_FAILED: {e!s}]"
 
 
 # ============================================================

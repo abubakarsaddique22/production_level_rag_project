@@ -40,7 +40,7 @@ def ask_llm(
         try:
             response = model.invoke(messages)
             return response.content
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             log.warning("llm_call_failed", extra={"attempt": attempt, "error": str(exc)})
             if attempt == 2:
                 raise LLMError(f"LLM call failed: {exc}") from exc

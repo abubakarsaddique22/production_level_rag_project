@@ -5,9 +5,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ...db.models import ChatSession, Feedback, Message
 from ...db.session import get_db
+from ...observability.tracing import send_feedback
 from ..deps import CurrentUser, current_user
 from ..schemas import FeedbackRequest, FeedbackResponse
-from ...observability.tracing import send_feedback
 
 router = APIRouter(prefix="/v1", tags=["feedback"])
 

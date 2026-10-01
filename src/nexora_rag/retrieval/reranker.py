@@ -34,7 +34,7 @@ class Reranker:
         log.info("loading_reranker_model", extra={"model": model_name})
         try:
             self._model = CrossEncoder(model_name)
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             raise VectorStoreError(
                 f"Could not load reranker model '{model_name}': {exc}"
             ) from exc

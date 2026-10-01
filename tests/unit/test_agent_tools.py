@@ -4,7 +4,6 @@ import pytest
 
 from nexora_rag.agents.tools import calculator, kb_search, lookup_ticket
 
-
 # ---------- calculator ----------
 
 def test_calculator_basic():

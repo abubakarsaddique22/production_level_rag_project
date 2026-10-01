@@ -1,7 +1,8 @@
 import json
-from nexora_rag.ingestion.chunkers import chunk_all
+
 from nexora_rag.core.config import settings
 from nexora_rag.ingestion.chunkers import (
+    chunk_all,
     chunk_document,
     create_chunk_id,
     detect_chunk_type,

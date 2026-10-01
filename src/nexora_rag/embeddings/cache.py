@@ -96,7 +96,7 @@ class EmbeddingCache:
         self.flush()
         self._conn.close()
 
-    def __enter__(self) -> "EmbeddingCache":
+    def __enter__(self) -> EmbeddingCache:
         return self
 
     def __exit__(self, exc_type, exc, tb) -> None:
