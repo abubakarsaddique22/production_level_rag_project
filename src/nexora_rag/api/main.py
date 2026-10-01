@@ -2,11 +2,11 @@ from fastapi import FastAPI
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
-from nexora_rag.core.rate_limit import limiter
-from nexora_rag.api.middleware import RequestIDMiddleware
-from .routers import auth, chat, feedback, health, sessions
+from src.nexora_rag.core.rate_limit import limiter
+from src.nexora_rag.api.middleware import RequestIDMiddleware
+from src.nexora_rag.api.routers import auth, chat, feedback, health, sessions
 from .routers import agent as agent_router
-from nexora_rag.observability.metrics import metrics_app
+from src.nexora_rag.observability.metrics import metrics_app
 
 
 app = FastAPI(
