@@ -6,6 +6,7 @@ from nexora_rag.core.rate_limit import limiter
 from nexora_rag.api.middleware import RequestIDMiddleware
 from .routers import auth, chat, feedback, health, sessions
 from .routers import agent as agent_router
+from nexora_rag.observability.metrics import metrics_app
 
 
 app = FastAPI(
@@ -28,3 +29,4 @@ app.include_router(chat.router)
 app.include_router(sessions.router)
 app.include_router(feedback.router)  # Step S: /v1/feedback
 app.include_router(agent_router.router)
+app.mount("/metrics", metrics_app)

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.concurrency import run_in_threadpool
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -6,6 +7,7 @@ from ...db.models import ChatSession, Feedback, Message
 from ...db.session import get_db
 from ..deps import CurrentUser, current_user
 from ..schemas import FeedbackRequest, FeedbackResponse
+from ...observability.tracing import send_feedback
 
 router = APIRouter(prefix="/v1", tags=["feedback"])
 
@@ -52,6 +54,9 @@ async def submit_feedback(
         feedback.comment = req.comment
 
     await db.commit()
+    await run_in_threadpool(
+       send_feedback, req.trace_id, 1.0 if req.rating == 1 else 0.0, req.comment
+    )
     return FeedbackResponse(
         trace_id=req.trace_id, rating=req.rating, comment=req.comment
     )

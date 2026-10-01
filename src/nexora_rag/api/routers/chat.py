@@ -11,6 +11,7 @@ from ...db.session import get_db
 from ...generation.rag_service import RagService
 from ..deps import get_rag_service, current_user, CurrentUser
 from ..schemas import ChatRequest, ChatResponse
+from ...observability.metrics import LATENCY, REQUESTS
 
 router = APIRouter(prefix="/v1", tags=["chat"])
 
@@ -78,7 +79,8 @@ async def chat(
         user_id=user.id,
         history=history,
     )
-
+    REQUESTS.labels(outcome="answered" if result["sources"] else "refused").inc()
+    LATENCY.observe(result["latency_ms"] / 1000)
     db.add(Message(session_id=session.id, role="user", content=req.question))
     db.add(
         Message(
