@@ -1,4 +1,8 @@
+from pathlib import Path
+
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
@@ -29,3 +33,15 @@ app.include_router(sessions.router)
 app.include_router(feedback.router)  # Step S: /v1/feedback
 app.include_router(agent_router.router)
 app.mount("/metrics", metrics_app)
+
+# --- Web UI (plain HTML/CSS/JS in frontend/) ---
+# Same origin as the API, so no CORS setup is needed.
+# Local: <repo>/src/nexora_rag/api/main.py -> parents[3] = <repo>. Docker: /app.
+FRONTEND_DIR = Path(__file__).resolve().parents[3] / "frontend"
+
+if FRONTEND_DIR.is_dir():
+    app.mount("/ui", StaticFiles(directory=FRONTEND_DIR, html=True), name="ui")
+
+    @app.get("/", include_in_schema=False)
+    async def root() -> RedirectResponse:
+        return RedirectResponse(url="/ui/")

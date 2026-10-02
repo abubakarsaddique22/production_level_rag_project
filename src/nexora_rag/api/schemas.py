@@ -61,6 +61,12 @@ class SessionResponse(BaseModel):
     messages: list[MessageItem]
 
 
+class SessionSummary(BaseModel):
+    session_id: str
+    title: str            # first question of the chat, shortened
+    updated_at: datetime
+
+
 # ============================================================
 # Feedback schemas (Step S)
 # ============================================================

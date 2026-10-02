@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nexora Knowledge Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== LOGIN ===================== -->
+  <main id="login-view" class="login-wrap" hidden>
+    <form id="login-form" class="card login-card" autocomplete="on">
+      <div class="brand">
+        <span class="logo">N</span>
+        <div>
+          <h1>Nexora Knowledge Assistant</h1>
+          <p class="muted">Sign in to ask questions about company documents.</p>
+        </div>
+      </div>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="employee@nexora.test" required autocomplete="username" />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required autocomplete="current-password" />
+
+      <p id="login-error" class="error" role="alert" hidden></p>
+      <button id="login-btn" type="submit" class="btn primary">Sign in</button>
+
+      <div class="demo">
+        <span class="muted small">Test accounts (fills the email only):</span>
+        <div class="chips" id="demo-accounts">
+          <button type="button" class="chip" data-email="employee@nexora.test">employee</button>
+          <button type="button" class="chip" data-email="engineer@nexora.test">engineer</button>
+          <button type="button" class="chip" data-email="finance@nexora.test">finance</button>
+          <button type="button" class="chip" data-email="hr@nexora.test">hr</button>
+          <button type="button" class="chip" data-email="admin@nexora.test">admin</button>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <!-- ===================== APP ===================== -->
+  <div id="app-view" class="app" hidden>
+
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-head">
+        <div class="brand small-brand">
+          <span class="logo">N</span>
+          <strong>Nexora Assistant</strong>
+        </div>
+        <button id="new-chat" class="btn primary wide" type="button">+ New chat</button>
+      </div>
+
+      <nav id="session-list" class="session-list" aria-label="Chat history"></nav>
+
+      <div class="sidebar-foot">
+        <span id="user-badge" class="badge"></span>
+        <button id="logout" class="btn ghost" type="button">Sign out</button>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button id="menu-btn" class="btn ghost menu-btn" type="button" aria-label="Chat history">&#9776;</button>
+        <div class="mode" role="group" aria-label="Answer mode">
+          <button id="mode-rag" class="mode-btn active" type="button" title="Plain RAG: fast, cited answers">RAG</button>
+          <button id="mode-agent" class="mode-btn" type="button" title="Agent: router, calculator and groundedness check">Agent</button>
+        </div>
+      </header>
+
+      <section id="messages" class="messages" aria-live="polite">
+        <div id="empty" class="empty">
+          <h2>Ask anything about Nexora documents</h2>
+          <p class="muted">You only see answers from documents your role is allowed to access. Every answer shows its sources.</p>
+          <div class="chips center" id="examples">
+            <button type="button" class="chip big">What is the discount for paying annually instead of monthly?</button>
+            <button type="button" class="chip big">Are alcohol purchases reimbursable as a business expense?</button>
+            <button type="button" class="chip big">What documents does a vendor need to provide before onboarding?</button>
+            <button type="button" class="chip big">What file types can I upload to the NexaDesk knowledge base?</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="composer">
+        <form id="chat-form">
+          <textarea id="question" rows="1" maxlength="2000" placeholder="Type your question...  (Enter to send, Shift+Enter for a new line)"></textarea>
+          <button id="send" class="btn primary" type="submit">Send</button>
+        </form>
+        <p class="muted small center">Answers are generated from company documents. Check the sources before acting on them.</p>
+      </footer>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -31,6 +31,7 @@ COPY --chown=appuser:appuser src/ src/
 COPY --chown=appuser:appuser data/ data/
 COPY --chown=appuser:appuser alembic/ alembic/
 COPY --chown=appuser:appuser alembic.ini .
+COPY --chown=appuser:appuser frontend/ frontend/
 
 USER appuser
 EXPOSE 8000

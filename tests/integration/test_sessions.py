@@ -289,3 +289,57 @@ async def test_feedback_requires_token(client):
         "/v1/feedback", json={"trace_id": "x", "rating": 1}
     )
     assert response.status_code in (401, 403)
+
+
+# -- session list (sidebar)
+
+async def test_list_sessions_returns_own_chats_newest_first(client, make_user):
+    headers = await make_user()
+    first = (await ask(client, headers, "first chat question")).json()["session_id"]
+    second = (await ask(client, headers, "second chat question")).json()["session_id"]
+
+    response = await client.get("/v1/sessions", headers=headers)
+
+    assert response.status_code == 200
+    rows = response.json()
+    assert [r["session_id"] for r in rows] == [second, first]  # newest first
+    assert rows[0]["title"] == "second chat question"
+    assert rows[1]["title"] == "first chat question"
+
+
+async def test_list_sessions_moves_a_chat_to_the_top_after_a_follow_up(client, make_user):
+    headers = await make_user()
+    first = (await ask(client, headers, "old chat")).json()["session_id"]
+    second = (await ask(client, headers, "newer chat")).json()["session_id"]
+
+    await ask(client, headers, "follow up", first)
+
+    rows = (await client.get("/v1/sessions", headers=headers)).json()
+    assert [r["session_id"] for r in rows] == [first, second]
+    assert rows[0]["title"] == "old chat"  # title stays the first question
+
+
+async def test_list_sessions_never_shows_another_users_chats(client, make_user):
+    alice = await make_user()
+    bob = await make_user()
+    await ask(client, alice, "alice secret question")
+
+    response = await client.get("/v1/sessions", headers=bob)
+
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+async def test_list_sessions_shortens_long_titles(client, make_user):
+    headers = await make_user()
+    await ask(client, headers, "word " * 40)
+
+    title = (await client.get("/v1/sessions", headers=headers)).json()[0]["title"]
+
+    assert len(title) <= 60
+    assert title.endswith("\u2026")
+
+
+async def test_list_sessions_requires_token(client):
+    response = await client.get("/v1/sessions")
+    assert response.status_code in (401, 403)
