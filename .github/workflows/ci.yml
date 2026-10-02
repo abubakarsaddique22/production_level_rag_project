@@ -20,8 +20,7 @@ env:
 
 jobs:
   # ------------------------------------------------------------------
-  # 1. Lint. Informational for now: flip continue-on-error to false
-  #    after `ruff check src tests scripts` and `mypy src` pass locally.
+  # 1. Lint. Blocking: `ruff check src tests scripts` and `mypy src` must pass.
   # ------------------------------------------------------------------
   lint:
     runs-on: ubuntu-latest
