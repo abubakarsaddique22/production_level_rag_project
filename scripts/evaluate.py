@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
 CLI entrypoint for running the evaluation suite against the golden set.
 Usage: python scripts/evaluate.py
