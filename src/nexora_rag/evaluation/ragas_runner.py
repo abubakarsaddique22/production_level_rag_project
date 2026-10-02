@@ -99,7 +99,7 @@ def run_generation_eval(
     for tc_id, query, answer, test_result in zip(
         ids_in_order, queries_in_order, real_answers, eval_result.test_results
     ):
-        scores = {m.name: m.score for m in test_result.metrics_data}
+        scores = {m.name: m.score for m in (test_result.metrics_data or [])}
         per_question.append({
             "id": tc_id,
             "query": query,

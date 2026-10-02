@@ -128,7 +128,7 @@ def get_settings() -> Settings:
     Settings are loaded once from environment variables / .env
     and reused throughout the application.
     """
-    return Settings()
+    return Settings()  # type: ignore[call-arg]  # qdrant_url is read from the environment
 
 
 settings = get_settings()

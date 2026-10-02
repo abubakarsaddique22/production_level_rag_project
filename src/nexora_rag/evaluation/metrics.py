@@ -111,7 +111,7 @@ def compute_exact_match_metrics(
     against, so counting them as misses would understate retrieval
     quality on the questions that ARE meant to retrieve something.
     """
-    per_question = []
+    per_question: list[dict[str, Any]] = []
     skipped = 0
 
     for item in golden_set:
@@ -239,9 +239,9 @@ def compute_contextual_metrics(
         },
     )
 
-    per_question = []
+    per_question: list[dict[str, Any]] = []
     for tc_id, query, test_result in zip(ids_in_order, queries_in_order, eval_result.test_results):
-        scores = {m.name: m.score for m in test_result.metrics_data}
+        scores = {m.name: m.score for m in (test_result.metrics_data or [])}
         per_question.append({
             "id": tc_id,
             "query": query,

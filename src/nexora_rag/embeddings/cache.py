@@ -21,8 +21,8 @@ import json
 import sqlite3
 from pathlib import Path
 from typing import Self
-from ..core.logging import get_logger
 
+from ..core.logging import get_logger
 
 log = get_logger(__name__)
 

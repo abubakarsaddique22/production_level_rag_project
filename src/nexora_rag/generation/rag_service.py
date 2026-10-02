@@ -95,7 +95,7 @@ class RagService:
         ok, reason = check_input(question)
         if not ok:
             return {
-                "answer": REFUSALS[reason],
+                "answer": REFUSALS[reason or "out_of_scope"],
                 "sources": [],
                 "trace_id": _trace_id(),
                 "latency_ms": int((time.time() - start) * 1000),

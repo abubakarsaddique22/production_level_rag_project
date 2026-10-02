@@ -124,7 +124,8 @@ def embed_chunk_file(chunk_path: Path, embedder: Embedder, cache: EmbeddingCache
                 "embedding_dim": embedder.embedding_dim,
                 "vector": vector,
             }
-            cache.set(content_hash, embedder.model_name, vector)
+            if content_hash is not None:  # always true here: chunks without a hash were skipped above
+                cache.set(content_hash, embedder.model_name, vector)
 
     final_records = [r for r in records if r is not None]
     _write_embeddings(embeddings_path, final_records)

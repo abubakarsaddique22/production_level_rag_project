@@ -34,12 +34,12 @@ async def get_or_create_session(
             ChatSession.id == session_id, ChatSession.user_id == user_id
         )
     )
-    session = result.scalar_one_or_none()
-    if session is None:
+    existing = result.scalar_one_or_none()
+    if existing is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Session not found"
         )
-    return session
+    return existing
 
 
 async def load_history(db: AsyncSession, session_id: str) -> list[dict]:
@@ -50,7 +50,7 @@ async def load_history(db: AsyncSession, session_id: str) -> list[dict]:
         .order_by(Message.id.desc())
         .limit(HISTORY_LIMIT)
     )
-    messages = result.scalars().all()
+    messages = list(result.scalars().all())
     messages.reverse()
     return [{"role": m.role, "content": m.content} for m in messages]
 

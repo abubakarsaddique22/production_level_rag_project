@@ -88,7 +88,7 @@ def load_golden_set(path: Path = GOLDEN_SET_PATH) -> list[GoldenSetItem]:
     raw_records = _read_raw(path)
 
     try:
-        golden_set = GoldenSet(items=raw_records)
+        golden_set = GoldenSet.model_validate({"items": raw_records})
     except Exception as exc:
         raise ValueError(
             f"Golden set validation failed for {path}: {exc}"

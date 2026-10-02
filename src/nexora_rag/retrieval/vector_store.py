@@ -18,6 +18,7 @@ from __future__ import annotations
 import json
 import uuid
 from pathlib import Path
+from typing import Any
 
 from qdrant_client import QdrantClient
 from qdrant_client.http import models as qmodels
@@ -60,7 +61,7 @@ class VectorStore:
     ):
         self.url = url or settings.qdrant_url
         self.collection = collection or settings.collection
-        self._embedder = None  # lazy-loaded on first search_by_text() call
+        self._embedder: Any = None  # lazy-loaded on first search_by_text() call
 
         try:
             self.client = QdrantClient(
@@ -186,7 +187,7 @@ class VectorStore:
                     with_payload=True,
                 )
                 return response.points
-            return self.client.search(
+            return self.client.search(  # type: ignore[attr-defined]  # removed in newer qdrant-client
                 collection_name=self.collection,
                 query_vector=query_vector,
                 query_filter=query_filter,
@@ -227,7 +228,7 @@ class VectorStore:
 
     def count(self) -> int:
         info = self.client.get_collection(self.collection)
-        return info.points_count
+        return info.points_count or 0
 
 
 def index_document_folder(doc_folder: Path, store: VectorStore) -> dict:

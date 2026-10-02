@@ -7,3 +7,7 @@ extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.Header"]
 [lint.per-file-ignores]
 # CLI scripts: keep a batch running when one item fails; dates are only report labels
 "scripts/*" = ["BLE001", "DTZ011"]
+# Ingestion must keep going when one page, table or image fails to parse
+"src/nexora_rag/ingestion/loaders.py" = ["BLE001", "S112"]
+# The agent falls back to a safe default (route "kb", no sub-questions) when an LLM or tool call fails
+"src/nexora_rag/agents/graph.py" = ["BLE001"]

@@ -87,7 +87,8 @@ def search_by_parts(service, state: AgentState) -> tuple[str, list]:
     parts = split_question(state["question"])
     if len(parts) < 2:  # todne ka faida nahi
         return "", []
-    answers, sources = [], []
+    answers: list[str] = []
+    sources: list = []
     for part in parts:
         out = kb_search(service, part, state["departments"],
                         state.get("user_id"), state.get("history"))
@@ -103,7 +104,7 @@ def guard_node(state: AgentState) -> dict:
     """Ghalat input aur small talk tools/LLM tak nahi jate."""
     ok, reason = check_input(state["question"])
     if not ok:
-        return {"route": "direct", "answer": REFUSALS[reason], "grounded": False, "tool_calls": 0}
+        return {"route": "direct", "answer": REFUSALS[reason or "out_of_scope"], "grounded": False, "tool_calls": 0}
     reply = check_small_talk(state["question"])
     if reply is not None:
         return {"route": "direct", "answer": reply, "grounded": True, "tool_calls": 0}

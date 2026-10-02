@@ -78,7 +78,7 @@ def chunk_document(document_dir: Path) -> list[dict]:
     chunks = splitter.split_documents(documents)
 
     output_chunks = []
-    page_chunk_counts = {}
+    page_chunk_counts: dict[int, int] = {}
 
     for chunk in chunks:
         page = chunk.metadata["page"]

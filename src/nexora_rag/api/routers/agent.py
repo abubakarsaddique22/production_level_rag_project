@@ -1,7 +1,9 @@
 import asyncio
 import time
 import uuid
+from collections.abc import Callable
 from datetime import datetime, timezone
+from typing import Any, cast
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -32,13 +34,16 @@ async def agent_chat(
     session = await get_or_create_session(db, req.session_id, user.id)
     history = await load_history(db, session.id)  # naya sawal save hone se pehle
 
+    # LangGraph's invoke() is typed with its own output class; at runtime it returns a dict.
+    invoke = cast("Callable[[dict[str, Any]], dict[str, Any]]", agent.invoke)
+
     start = time.time()
     try:
         # RBAC: departments user ke role se aate hain, agent ke tools unhein badalte nahi.
         # agent.invoke blocking hai, isliye thread mein chalta hai.
-            state = await asyncio.wait_for(
+        state = await asyncio.wait_for(
             asyncio.to_thread(
-                agent.invoke,
+                invoke,
                 {
                     "question": req.question,
                     "departments": user.departments,

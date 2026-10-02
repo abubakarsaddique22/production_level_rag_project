@@ -13,7 +13,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from ...db.models import ChatSession, Message
 from ...db.session import get_db
 from ..deps import CurrentUser, current_user
-from ..schemas import MessageItem, SessionResponse, SessionSummary
+from ..schemas import MessageItem, SessionResponse, SessionSummary, SourceItem
 from .chat import get_or_create_session
 
 router = APIRouter(prefix="/v1", tags=["sessions"])
@@ -74,7 +74,7 @@ async def get_session(
         MessageItem(
             role=m.role,
             content=m.content,
-            sources=m.sources or [],
+            sources=[SourceItem(**s) for s in (m.sources or [])],
             trace_id=m.trace_id,
             created_at=m.created_at,
         )

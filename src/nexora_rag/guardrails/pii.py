@@ -32,4 +32,5 @@ def mask_pii(text: str) -> str:
     found = analyzer.analyze(text=text, entities=ENTITIES, language="en")
     if not found:
         return text
-    return anonymizer.anonymize(text=text, analyzer_results=found).text
+    # presidio-analyzer and presidio-anonymizer each define their own RecognizerResult class
+    return anonymizer.anonymize(text=text, analyzer_results=found).text  # type: ignore[arg-type]

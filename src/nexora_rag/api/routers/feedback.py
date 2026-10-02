@@ -20,7 +20,7 @@ async def submit_feedback(
 ) -> FeedbackResponse:
     # Sirf apne session ka assistant message. Doosre ka trace_id aur
     # jo exist hi nahi karta, dono ek jaisa 404 dete hain.
-    result = await db.execute(
+    owned = await db.execute(
         select(Message.id)
         .join(ChatSession, ChatSession.id == Message.session_id)
         .where(
@@ -29,18 +29,18 @@ async def submit_feedback(
             ChatSession.user_id == user.id,
         )
     )
-    if result.first() is None:
+    if owned.first() is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Answer not found"
         )
 
     # Pehle se feedback hai to update, warna naya
-    result = await db.execute(
+    existing = await db.execute(
         select(Feedback).where(
             Feedback.user_id == user.id, Feedback.trace_id == req.trace_id
         )
     )
-    feedback = result.scalar_one_or_none()
+    feedback = existing.scalar_one_or_none()
     if feedback is None:
         feedback = Feedback(
             user_id=user.id,
@@ -55,7 +55,7 @@ async def submit_feedback(
 
     await db.commit()
     await run_in_threadpool(
-       send_feedback, req.trace_id, 1.0 if req.rating == 1 else 0.0, req.comment
+        send_feedback, req.trace_id, 1.0 if req.rating == 1 else 0.0, req.comment
     )
     return FeedbackResponse(
         trace_id=req.trace_id, rating=req.rating, comment=req.comment

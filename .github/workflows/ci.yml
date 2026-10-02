@@ -37,11 +37,9 @@ jobs:
         run: grep -E '^(ruff|mypy)==' requirements.txt | xargs pip install
 
       - name: Ruff
-        continue-on-error: true   # TODO: remove once ruff passes locally
         run: ruff check src tests scripts
 
       - name: Mypy
-        continue-on-error: true   # TODO: remove once mypy passes locally
         run: mypy src --ignore-missing-imports
 
   # ------------------------------------------------------------------
