@@ -1,0 +1,21 @@
+# Caddy gets and renews the HTTPS certificate by itself. DOMAIN comes from .env.prod
+# (it must be a real domain that points to this server, for example nexora.example.com).
+{$DOMAIN} {
+	encode gzip zstd
+
+	# Prometheus scrapes the API inside the Docker network. Do not expose the metrics publicly.
+	@metrics path /metrics /metrics/*
+	respond @metrics 404
+
+	reverse_proxy api:8000 {
+		# Do not buffer: needed if a streaming (SSE) endpoint is added later.
+		flush_interval -1
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "no-referrer"
+		-Server
+	}
+}

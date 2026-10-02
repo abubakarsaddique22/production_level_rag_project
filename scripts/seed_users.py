@@ -16,6 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 import asyncio
+import os
 
 from sqlalchemy import select
 
@@ -23,7 +24,10 @@ from nexora_rag.core.security import hash_password
 from nexora_rag.db.models import User
 from nexora_rag.db.session import async_session_factory
 
-TEST_PASSWORD = "Test@1234"
+# On production set SEED_PASSWORD. The default below is for local testing only.
+TEST_PASSWORD = os.getenv("SEED_PASSWORD", "Test@1234")
+if os.getenv("RAG_ENV") == "prod" and TEST_PASSWORD == "Test@1234":
+    raise SystemExit("Set SEED_PASSWORD to a strong value before seeding production users.")
 
 TEST_USERS = [
     {"email": "employee@nexora.test", "role": "employee", "full_name": "Test Employee"},

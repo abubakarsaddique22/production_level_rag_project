@@ -1,0 +1,151 @@
+name: CD
+
+# Runs when you push a version tag, for example:  git tag v1.0.0 && git push origin v1.0.0
+# 1. builds the Docker image and pushes it to Amazon ECR (login with the AWS access keys stored in GitHub secrets)
+# 2. writes the production settings from GitHub secrets into AWS Parameter Store (encrypted)
+# 3. tells the EC2 server (through AWS Systems Manager, so port 22 can stay closed) to download
+#    the settings and run scripts/deploy.sh <tag>  (health check + automatic rollback)
+#
+# One-time setup is described in docs/deployment.md.
+#   Repository secrets:    AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, RAG_QDRANT_URL, RAG_QDRANT_API_KEY,
+#                          RAG_GROQ_API_KEY, RAG_JWT_SECRET, PG_PASSWORD, GRAFANA_PASSWORD, LANGSMITH_API_KEY
+#   Repository variables:  AWS_REGION, ECR_REPOSITORY, EC2_INSTANCE_ID, DOMAIN, S3_BACKUP_BUCKET
+#
+# Tip: use letters and digits only in generated passwords (no $ and no quotes), because the
+# values are written into a .env file that Docker Compose reads.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing image tag to deploy again (rollback), for example v1.0.0"
+        required: true
+
+concurrency:
+  group: cd
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check BM25 corpus is committed
+        run: |
+          if ! ls data/processed/*/chunks.json >/dev/null 2>&1; then
+            echo "::error::data/processed/*/chunks.json missing"
+            exit 1
+          fi
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build and push image (tag = git tag and git SHA)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ steps.ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ github.ref_name }}
+            ${{ steps.ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build
+    if: always() && (needs.build.result == 'success' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+      INSTANCE_ID: ${{ vars.EC2_INSTANCE_ID }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Publish production settings to Parameter Store
+        env:
+          DOMAIN: ${{ vars.DOMAIN }}
+          S3_BACKUP_BUCKET: ${{ vars.S3_BACKUP_BUCKET }}
+          ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+          PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
+          RAG_JWT_SECRET: ${{ secrets.RAG_JWT_SECRET }}
+          GRAFANA_PASSWORD: ${{ secrets.GRAFANA_PASSWORD }}
+          RAG_QDRANT_URL: ${{ secrets.RAG_QDRANT_URL }}
+          RAG_QDRANT_API_KEY: ${{ secrets.RAG_QDRANT_API_KEY }}
+          RAG_GROQ_API_KEY: ${{ secrets.RAG_GROQ_API_KEY }}
+          LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
+        run: |
+          ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text)"
+          {
+            printf '%s=%s\n' DOMAIN "$DOMAIN"
+            printf '%s=%s\n' IMAGE "$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY"
+            printf '%s=%s\n' AWS_REGION "$AWS_REGION"
+            printf '%s=%s\n' PG_PASSWORD "$PG_PASSWORD"
+            printf '%s=%s\n' RAG_JWT_SECRET "$RAG_JWT_SECRET"
+            printf '%s=%s\n' GRAFANA_PASSWORD "$GRAFANA_PASSWORD"
+            printf '%s=%s\n' RAG_QDRANT_URL "$RAG_QDRANT_URL"
+            printf '%s=%s\n' RAG_QDRANT_API_KEY "$RAG_QDRANT_API_KEY"
+            printf '%s=%s\n' RAG_COLLECTION nexora_kb
+            printf '%s=%s\n' RAG_GROQ_API_KEY "$RAG_GROQ_API_KEY"
+            printf '%s=%s\n' RAG_GROQ_MODEL openai/gpt-oss-120b
+            printf '%s=%s\n' LANGSMITH_TRACING true
+            printf '%s=%s\n' LANGSMITH_API_KEY "$LANGSMITH_API_KEY"
+            printf '%s=%s\n' LANGSMITH_PROJECT nexora-rag
+            printf '%s=%s\n' S3_BACKUP_BUCKET "$S3_BACKUP_BUCKET"
+          } > env.prod
+          aws ssm put-parameter --name /nexora/env-prod --type SecureString --overwrite \
+            --value file://env.prod > /dev/null
+          rm -f env.prod
+
+      - name: Deploy on EC2 through SSM
+        run: |
+          # The tag ends up inside a shell command on the server, so only allow safe characters.
+          if ! [[ "$TAG" =~ ^v[0-9A-Za-z._-]+$ ]]; then
+            echo "::error::Invalid tag '$TAG' (expected something like v1.0.0)"
+            exit 1
+          fi
+
+          CMD="runuser -l ubuntu -c 'cd /opt/nexora-rag && git fetch --tags --force && git checkout -q $TAG && bash scripts/server_deploy.sh $TAG $AWS_REGION'"
+          jq -n --arg c "$CMD" '{commands:[$c]}' > params.json
+
+          CMD_ID="$(aws ssm send-command \
+            --instance-ids "$INSTANCE_ID" \
+            --document-name AWS-RunShellScript \
+            --comment "deploy $TAG" \
+            --parameters file://params.json \
+            --timeout-seconds 900 \
+            --query Command.CommandId --output text)"
+          echo "SSM command: $CMD_ID"
+
+          # Poll (up to 15 minutes). `aws ssm wait` gives up after about 100 s, which is too short.
+          STATUS="Pending"
+          for _ in $(seq 1 90); do
+            sleep 10
+            STATUS="$(aws ssm get-command-invocation --command-id "$CMD_ID" --instance-id "$INSTANCE_ID" \
+              --query Status --output text 2>/dev/null || echo Pending)"
+            case "$STATUS" in Pending|InProgress|Delayed) continue ;; *) break ;; esac
+          done
+
+          # The output only has deploy logs (no secrets): .env.prod is never printed.
+          aws ssm get-command-invocation --command-id "$CMD_ID" --instance-id "$INSTANCE_ID" \
+            --query '{Status:Status,Out:StandardOutputContent,Err:StandardErrorContent}' --output json
+          [ "$STATUS" = "Success" ]

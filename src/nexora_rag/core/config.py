@@ -105,17 +105,13 @@ class Settings(BaseSettings):
     jwt_expire_minutes: int = 60
 
     # ============================================================
-    # Observability - Langfuse
+    # Observability - Langsmith
     # ============================================================
 
-    langfuse_public_key: str | None = None
-    langfuse_secret_key: str | None = None
-    langfuse_host: str = "https://cloud.langfuse.com"
 
 
 
 
-    answer_cache_ttl_seconds: int = 3600
 # ================================================================
 # Cached settings instance
 # ================================================================

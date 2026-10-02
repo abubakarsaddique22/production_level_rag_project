@@ -44,4 +44,6 @@ pgdata/
 # new add 
 
 .deepeval/
+.env.prod
+backups/
 coverage.xml

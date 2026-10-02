@@ -1,0 +1,34 @@
+groups:
+  - name: nexora-api
+    rules:
+      - alert: ApiDown
+        expr: up{job="nexora-api"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Nexora API is not reachable"
+          description: "Prometheus could not scrape the API for 2 minutes."
+
+      - alert: HighP95Latency
+        expr: histogram_quantile(0.95, sum(rate(rag_latency_seconds_bucket[5m])) by (le)) > 5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "p95 latency is above the 5 s target"
+          description: "End-to-end RAG p95 latency has been above 5 seconds for 5 minutes."
+
+      - alert: HighRefusalRate
+        expr: |
+          (
+            sum(rate(rag_requests_total{outcome="refused"}[10m]))
+            / sum(rate(rag_requests_total[10m]))
+          ) > 0.5
+          and sum(rate(rag_requests_total[10m])) > 0.02
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "More than half of the requests are refused"
+          description: "Refusals are above 50% for 10 minutes. Check the LLM key, Qdrant and recent changes."

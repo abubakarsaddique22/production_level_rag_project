@@ -1,0 +1,124 @@
+# Production stack (Step Y): one VM, HTTPS through Caddy, images pulled from GHCR.
+#
+#   docker compose --env-file .env.prod -f docker-compose.prod.yml up -d
+#
+# Or use scripts/deploy.sh <tag>, which also checks health and rolls back on failure.
+# Only Caddy (80/443) is public. Postgres, Redis and the API are reachable only inside the
+# compose network. Prometheus and Grafana listen on 127.0.0.1 (use an SSH tunnel).
+#
+# Qdrant: the default is Qdrant Cloud (set RAG_QDRANT_URL and RAG_QDRANT_API_KEY in .env.prod).
+# For a local Qdrant container add:  --profile local-qdrant  and set RAG_QDRANT_URL=http://qdrant:6333
+
+name: nexora
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env.prod}
+    volumes:
+      - ./infra/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  api:
+    image: ${IMAGE:-ghcr.io/abubakarsaddique22/production_level_rag_project}:${IMAGE_TAG:-latest}
+    env_file: .env.prod
+    environment:
+      RAG_ENV: prod
+      RAG_DATABASE_URL: postgresql+asyncpg://postgres:${PG_PASSWORD:?set PG_PASSWORD in .env.prod}@postgres:5432/nexora
+      RAG_REDIS_URL: redis://redis:6379/0
+      RAG_JWT_SECRET: ${RAG_JWT_SECRET:?set RAG_JWT_SECRET in .env.prod}
+    expose:
+      - "8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - hf_cache:/home/appuser/.cache/huggingface
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn nexora_rag.api.main:app --host 0.0.0.0 --port 8000"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${PG_PASSWORD:?set PG_PASSWORD in .env.prod}
+      POSTGRES_DB: nexora
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d nexora"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    # Cache and rate limits only, so losing it is harmless. Cap the memory.
+    command: ["redis-server", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    profiles: ["local-qdrant"]
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.55.0
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=15d
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./infra/prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prom_data:/prometheus
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.3.0
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:?set GRAFANA_PASSWORD in .env.prod}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  caddy_data: {}
+  caddy_config: {}
+  pgdata: {}
+  qdrant_data: {}
+  hf_cache: {}
+  prom_data: {}
+  grafana_data: {}
