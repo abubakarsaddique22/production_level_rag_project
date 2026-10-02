@@ -20,7 +20,7 @@ env:
 
 jobs:
   # ------------------------------------------------------------------
-  # 1. Lint. Blocking: `ruff check src tests scripts` and `mypy src` must pass.
+  # 1. Lint and type check. Blocking: a ruff or mypy error fails the build.
   # ------------------------------------------------------------------
   lint:
     runs-on: ubuntu-latest
@@ -75,11 +75,10 @@ jobs:
   # 3. Integration tests against real Postgres and Redis (fake RagService).
   #    test_rbac.py is excluded: it needs a Qdrant collection filled with the
   #    real documents and the embedding models, so it stays a local test.
-  #    Informational at first; make it blocking once it is green.
+  #    Blocking: every job in this workflow must pass.
   # ------------------------------------------------------------------
   integration:
     runs-on: ubuntu-latest
-    continue-on-error: true   # TODO: remove once this job is green
     services:
       postgres:
         image: postgres:16-alpine
