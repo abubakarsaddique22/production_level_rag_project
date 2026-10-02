@@ -1,28 +1,41 @@
-# Multi-stage build — finalized properly in Step Y (Containerisation).
-# This is a working baseline so `docker build .` succeeds today.
+# # ---------- Stage 1: builder (compiler yahin hai, final image mein nahi jayega) ----------
+# FROM python:3.12-slim AS builder
 
-FROM python:3.12-slim AS base
+# RUN apt-get update && apt-get install -y --no-install-recommends build-essential \
+#     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+# RUN python -m venv /opt/venv
+# ENV PATH="/opt/venv/bin:$PATH"
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
+# WORKDIR /build
+# COPY requirements.txt .
+# RUN pip install --no-cache-dir -r requirements.txt
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# # ---------- Stage 2: runtime ----------
+# FROM python:3.12-slim AS runtime
 
-COPY src/ src/
-COPY configs/ configs/
+# ENV PYTHONUNBUFFERED=1 \
+#     PYTHONDONTWRITEBYTECODE=1 \
+#     PYTHONPATH=/app/src \
+#     PATH="/opt/venv/bin:$PATH" \
+#     HF_HOME=/home/appuser/.cache/huggingface
 
-ENV PYTHONPATH=/app/src
+# RUN useradd --system --create-home --uid 10001 appuser \
+#     && mkdir -p /home/appuser/.cache/huggingface \
+#     && chown -R appuser:appuser /home/appuser
 
-RUN useradd --create-home appuser
-USER appuser
+# COPY --from=builder /opt/venv /opt/venv
 
-EXPOSE 8000
+# WORKDIR /app
+# COPY --chown=appuser:appuser src/ src/
+# COPY --chown=appuser:appuser data/ data/
+# COPY --chown=appuser:appuser alembic/ alembic/
+# COPY --chown=appuser:appuser alembic.ini .
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
-    CMD python -c "import httpx; httpx.get('http://localhost:8000/health').raise_for_status()"
+# USER appuser
+# EXPOSE 8000
 
-CMD ["uvicorn", "nexora_rag.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# HEALTHCHECK --interval=30s --timeout=5s --start-period=120s --retries=3 \
+#     CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=4)"
+
+# CMD ["uvicorn", "nexora_rag.api.main:app", "--host", "0.0.0.0", "--port", "8000"]

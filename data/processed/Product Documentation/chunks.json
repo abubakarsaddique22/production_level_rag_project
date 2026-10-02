@@ -1,0 +1,149 @@
+[
+  {
+    "chunk_id": "NX-PRD-001-p1-c0-c9e6328f2671",
+    "content": "Nexora Product Documentation > Page 1\n\nPRODUCTS\nNexora Product Documentation\nNexaDesk, NexaFlow and NexaInsight: features, plans, service levels, security and system requirements\nDocument ID\nNX-PRD-001\nVersion\n5.2\nDocument\nowner\nProduct Management (CTO Office)\nEffective date\n1 August 2026\nApplies to\nCustomers, sales, support and\nimplementation teams\nClassification\nInternal - Confidential\nAbstract. This document describes the Nexora product suite: NexaDesk (AI-powered helpdesk), NexaFlow (workflow\nautomation) and NexaInsight (analytics). It explains architecture, key features, subscription plans and pricing, service level\nagreements, security and compliance, data residency, supported integrations, usage limits and system requirements, and\noutlines the onboarding process for a new customer workspace.\nKeywords: NexaDesk, NexaFlow, NexaInsight, RAG, helpdesk automation, subscription plans, SLA, SOC 2, integrations\n1. Product Suite Overview\nNexora Technologies provides three products on a shared platform. NexaDesk helps support teams resolve\ntickets faster with AI triage and answer suggestions grounded in the customer's knowledge base. NexaFlow\nautomates repetitive processes using a no-code workflow builder. NexaInsight turns support and workflow data\ninto dashboards and scheduled reports. All products are exposed through the Nexora Platform API\n(NX-ENG-001).\nFigure 1. Nexora product suite and shared platform.\n2. Key Features\n2.1 NexaDesk\n• AI triage: classifies tickets by topic, urgency and sentiment and routes them to the right queue.\n• Answer suggestions (RAG): agents see draft replies grounded in the customer's knowledge-base articles\nwith source links, reducing hallucination risk.\n• Multilingual: English and Urdu supported for triage, suggestions and summaries; Arabic in beta.\n• SLA timers and escalation rules, conversation summaries, and macros for common answers.\nNexora Technologies (Pvt.) Ltd.\nNX-PRD-001\nInternal use only | Nexora Product Documentation | v5.2\nPage 1 of 4\n\nImage OCR:\nNexora products\n\nNexaDesk Knowledge base\nAl helpdesk (vector index)\n\nNexora Platform API v2\nAl services: retrieval,\nLLM gateway\n\nCustomer channels\nEmail, WhatsApp,\nWeb chat, Teams\n\nCustomer data\n(PostgreSQL)\n\nNexaFlow\nWorkflow automation\n\nNexalnsight Analytics store\nAnalytics (Click House)",
+    "metadata": {
+      "doc_id": "NX-PRD-001",
+      "title": "Nexora Product Documentation",
+      "department": "Product",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Product Documentation",
+      "image_count": 1,
+      "table_count": 1,
+      "content_hash": "sha256:c9e6328f26716246c7ea6adc8e9fdcdd4f5d42e2d3d89154aa26df2607427702",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "image_ocr",
+      "chunk_size": 2311,
+      "page_content_hash": "sha256:f19d9d56e10dbd09"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-001-p1-c1-ae50d83273c9",
+    "content": "Image OCR:\nNexora products\n\nNexaDesk Knowledge base\nAl helpdesk (vector index)\n\nNexora Platform API v2\nAl services: retrieval,\nLLM gateway\n\nCustomer channels\nEmail, WhatsApp,\nWeb chat, Teams\n\nCustomer data\n(PostgreSQL)\n\nNexaFlow\nWorkflow automation\n\nNexalnsight Analytics store\nAnalytics (Click House)\n\nTables:\n| Document ID | NX-PRD-001 | Version | 5.2 |\n|:--------------|:--------------------------------|:---------------|:------------------------|\n| Document | Product Management (CTO Office) | Effective date | 1 August 2026 |\n| owner | | | |\n| Applies to | Customers, sales, support and | Classification | Internal - Confidential |\n| | implementation teams | | |",
+    "metadata": {
+      "doc_id": "NX-PRD-001",
+      "title": "Nexora Product Documentation",
+      "department": "Product",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Product Documentation",
+      "image_count": 1,
+      "table_count": 1,
+      "content_hash": "sha256:ae50d83273c9a85a35e3c3ff3b49f7338e655a79907f7f01a2bdcf3f004a28ca",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "mixed",
+      "chunk_size": 667,
+      "page_content_hash": "sha256:f19d9d56e10dbd09"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-001-p2-c0-b9f0fa1c40ed",
+    "content": "Nexora Product Documentation > Page 2\n\n2.2 NexaFlow\n• Drag-and-drop builder with more than 150 pre-built actions and triggers (ticket events, schedules,\nwebhooks).\n• Human approval steps, conditional branches and retries; every run is logged for audit.\n2.3 NexaInsight\n• Prebuilt dashboards for ticket volume, first response time, resolution time and CSAT.\n• Scheduled reports by email, CSV and PDF export, and custom metrics on the Growth and Enterprise plans.\n3. Plans and Pricing\nPricing is per agent per month in US dollars. Annual billing gives approximately a 20% discount compared with\nmonthly billing. Every new workspace starts with a 14-day free trial with Growth features.\nTable 1. Subscription plans.\nFeature\nStarter\nGrowth\nEnterprise\nPrice (annual billing)\nUSD 15 per agent per\nmonth\nUSD 39 per agent per month\nUSD 79 per agent per month\n(minimum 25 agents)\nPrice (monthly billing)\nUSD 19\nUSD 49\nUSD 99\nNexaDesk AI triage and\nsuggestions\nBasic triage only\nIncluded\nIncluded with custom model\ntuning\nNexaFlow workflows\n5 active workflows\n50 active workflows\nUnlimited\nNexaInsight\nStandard dashboards\nCustom metrics, scheduled\nreports\nCustom metrics, data export to\nwarehouse\nSingle sign-on (SAML 2.0 /\nOIDC)\nNot available\nNot available\nIncluded\nAPI rate limit\n60 requests per\nminute\n300 requests per minute\n1,200 requests per minute\nKnowledge base storage\n1 GB\n10 GB\n100 GB\n4. Service Levels and Support\nAvailability is measured monthly across production services, excluding scheduled maintenance announced 5\ndays in advance. If availability falls below the commitment, eligible customers receive service credits on the next\ninvoice.\nTable 2. Availability commitment and support by plan.\nPlan\nMonthly\nuptime\nApprox. downtime allowed (30-day\nmonth)\nSupport channel and first response\nStarter\n99.5%\n216 minutes\nEmail; within 1 business day\nGrowth\n99.9%\n43 minutes\nEmail and chat; within 8 business hours\nEnterprise\n99.95%\n22 minutes\n24x7 phone, email and chat; P1 within 1 hour;\ndedicated customer success manager\nNexora Technologies (Pvt.) Ltd.\nNX-PRD-001\nInternal use only | Nexora Product Documentation | v5.2\nPage 2 of 4",
+    "metadata": {
+      "doc_id": "NX-PRD-001",
+      "title": "Nexora Product Documentation",
+      "department": "Product",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 2,
+      "source_pdf": "Product Documentation",
+      "image_count": 0,
+      "table_count": 2,
+      "content_hash": "sha256:b9f0fa1c40edfb6256677dcd4a1174d2dcab32a94f52922a44af4f796e23b0ac",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "prose",
+      "chunk_size": 2134,
+      "page_content_hash": "sha256:aa871dd0025e2d1c"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-001-p2-c1-bf23b63f8b85",
+    "content": "Tables:\n| Feature | Starter | Growth | Enterprise |\n|:---------------------------|:---------------------|:---------------------------|:-------------------------------|\n| Price (annual billing) | USD 15 per agent per | USD 39 per agent per month | USD 79 per agent per month |\n| | month | | (minimum 25 agents) |\n| Price (monthly billing) | USD 19 | USD 49 | USD 99 |\n| NexaDesk AI triage and | Basic triage only | Included | Included with custom model |\n| suggestions | | | tuning |\n| NexaFlow workflows | 5 active workflows | 50 active workflows | Unlimited |\n| NexaInsight | Standard dashboards | Custom metrics, scheduled | Custom metrics, data export to |\n| | | reports | warehouse |\n| Single sign-on (SAML 2.0 / | Not available | Not available | Included |\n| OIDC) | | | |\n| API rate limit | 60 requests per | 300 requests per minute | 1,200 requests per minute |\n| | minute | | |\n| Knowledge base storage | 1 GB | 10 GB | 100 GB |\n\n| Plan | Monthly | Approx. downtime allowed (30-day | Support channel and first response |\n| | uptime | month) | |\n|:-----------|:----------|:-----------------------------------|:----------------------------------------------|\n| Starter | 99.5% | 216 minutes | Email; within 1 business day |\n| Growth | 99.9% | 43 minutes | Email and chat; within 8 business hours |\n| Enterprise | 99.95% | 22 minutes | 24x7 phone, email and chat; P1 within 1 hour; |\n| | | | dedicated customer success manager |",
+    "metadata": {
+      "doc_id": "NX-PRD-001",
+      "title": "Nexora Product Documentation",
+      "department": "Product",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 2,
+      "source_pdf": "Product Documentation",
+      "image_count": 0,
+      "table_count": 2,
+      "content_hash": "sha256:bf23b63f8b8542d881352add91bbbc87222b582dd1dda6b627c241ed17d2c903",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "table",
+      "chunk_size": 1433,
+      "page_content_hash": "sha256:aa871dd0025e2d1c"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-001-p3-c0-b5d3c01bbc50",
+    "content": "Nexora Product Documentation > Page 3\n\nFigure 2. Downtime allowed by the availability commitment of each plan.\n5. Security, Compliance and Data Residency\n• Nexora holds SOC 2 Type II and ISO/IEC 27001 certifications and supports GDPR data-processing\nagreements.\n• Data is encrypted in transit (TLS 1.2+) and at rest (AES-256). Role-based access control and audit logs are\navailable on all plans.\n• Customer data is not used to train shared AI models. AI features call approved model providers under\nzero-retention terms.\n• Data residency: customers choose Mumbai (India), Frankfurt (Germany) or Bahrain at workspace creation;\nthe region cannot be changed later without migration.\n• Backups are taken daily and retained for 35 days; recovery point objective is 24 hours and recovery time\nobjective is 4 hours.\n6. Integrations, Limits and Requirements\nTable 3. Usage limits and supported technologies.\nItem\nValue\nSupported channels\nEmail, web chat widget, WhatsApp Business, Microsoft Teams, Slack\nCRM and tools\nSalesforce, HubSpot, Jira, Zapier, and custom integrations via API and webhooks\nMaximum attachment size\n25 MB per file\nKnowledge base article size\nUp to 100,000 characters; supported formats: HTML, Markdown, PDF, DOCX\nSupported browsers\nLatest two versions of Chrome, Edge and Firefox; Safari 16 or newer\nMobile apps\niOS 16+ and Android 10+\n7. Customer Onboarding\nFigure 3. Typical onboarding steps for a new NexaDesk workspace.\nA typical Growth-plan customer goes live in 2 to 3 weeks. Enterprise implementations include a project plan,\nSSO configuration and a security review, and usually take 6 to 8 weeks.\nNexora Technologies (Pvt.) Ltd.\nNX-PRD-001\nInternal use only | Nexora Product Documentation | v5.2\nPage 3 of 4\n\nImage OCR:\nCreate Connect Import Configure Al Invite agents Go live and\n\nknowledge routing and 5 review\nbase answers and train after 30 days\n\nworkspace channels\n\nStarter (99.5%) 216\nGrowth (99.9%)\n\nEnterprise (99.95%)\n\nT T T\n10} 50 100 150 200\nAllowed downtime per 30-day month (minutes)",
+    "metadata": {
+      "doc_id": "NX-PRD-001",
+      "title": "Nexora Product Documentation",
+      "department": "Product",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 3,
+      "source_pdf": "Product Documentation",
+      "image_count": 2,
+      "table_count": 1,
+      "content_hash": "sha256:b5d3c01bbc50378b93565342da5dcff7e462b1be671c5807447cc67fe7d6f48a",
+      "chunk_type_hint": "mixed",
+      "chunk_index": 0,
+      "chunk_type": "image_ocr",
+      "chunk_size": 2019,
+      "page_content_hash": "sha256:097f42dd0acb44d8"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-001-p3-c1-d126a0956c24",
+    "content": "Image OCR:\nCreate Connect Import Configure Al Invite agents Go live and\n\nknowledge routing and 5 review\nbase answers and train after 30 days\n\nworkspace channels\n\nStarter (99.5%) 216\nGrowth (99.9%)\n\nEnterprise (99.95%)\n\nT T T\n10} 50 100 150 200\nAllowed downtime per 30-day month (minutes)\n\nTables:\n| Item | Value |\n|:----------------------------|:--------------------------------------------------------------------------------|\n| Supported channels | Email, web chat widget, WhatsApp Business, Microsoft Teams, Slack |\n| CRM and tools | Salesforce, HubSpot, Jira, Zapier, and custom integrations via API and webhooks |\n| Maximum attachment size | 25 MB per file |\n| Knowledge base article size | Up to 100,000 characters; supported formats: HTML, Markdown, PDF, DOCX |\n| Supported browsers | Latest two versions of Chrome, Edge and Firefox; Safari 16 or newer |\n| Mobile apps | iOS 16+ and Android 10+ |",
+    "metadata": {
+      "doc_id": "NX-PRD-001",
+      "title": "Nexora Product Documentation",
+      "department": "Product",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 3,
+      "source_pdf": "Product Documentation",
+      "image_count": 2,
+      "table_count": 1,
+      "content_hash": "sha256:d126a0956c245c12a22dfbfbd9d51148eeef0f07188bff1deef09a93883ea626",
+      "chunk_type_hint": "mixed",
+      "chunk_index": 1,
+      "chunk_type": "mixed",
+      "chunk_size": 903,
+      "page_content_hash": "sha256:097f42dd0acb44d8"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-001-p4-c0-9ae0b3277837",
+    "content": "Nexora Product Documentation > Page 4\n\n8. References\n[1] Nexora API Documentation, NX-ENG-001 (rate limits).\n[2] Nexora Product FAQ, NX-PRD-002.\n[3] AICPA SOC 2 Trust Services Criteria; ISO/IEC 27001:2022.\n[4] Nexora Master Subscription Agreement, version 2026-01.\n9. Revision History\nTable 4. Document revision history.\nVersion\nDate\nAuthor\nSummary of change\n5.0\n01 Mar 2026\nProduct Management\nIntroduced Growth and Enterprise tiers for NexaInsight\n5.1\n01 Jun 2026\nProduct Management\nAdded Urdu multilingual support and data residency\noptions\n5.2\n01 Aug 2026\nProduct Management\nUpdated pricing table and onboarding timeline\nNexora Technologies (Pvt.) Ltd.\nNX-PRD-001\nInternal use only | Nexora Product Documentation | v5.2\nPage 4 of 4\n\nTables:\n| Version | Date | Author | Summary of change |\n|----------:|:------------|:-------------------|:-------------------------------------------------------|\n| 5 | 01 Mar 2026 | Product Management | Introduced Growth and Enterprise tiers for NexaInsight |\n| 5.1 | 01 Jun 2026 | Product Management | Added Urdu multilingual support and data residency |\n| | | | options |\n| 5.2 | 01 Aug 2026 | Product Management | Updated pricing table and onboarding timeline |",
+    "metadata": {
+      "doc_id": "NX-PRD-001",
+      "title": "Nexora Product Documentation",
+      "department": "Product",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 4,
+      "source_pdf": "Product Documentation",
+      "image_count": 0,
+      "table_count": 1,
+      "content_hash": "sha256:9ae0b3277837e1fe216a78b599a08938f7ee6e1b325557c610aec643400c7d51",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "table",
+      "chunk_size": 1200,
+      "page_content_hash": "sha256:9ae0b3277837e1fe"
+    }
+  }
+]

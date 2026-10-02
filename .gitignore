@@ -6,7 +6,10 @@ __pycache__/
 *.pyc
 
 # Data (raw PDFs kept, processed/eval artifacts ignored)
-data/processed/
+# processed artifacts ignored, except chunk files (BM25 corpus needed by Docker/CI)
+data/processed/**
+!data/processed/**/
+!data/processed/**/chunks.json
 data/eval/results/
 *.jsonl.bak
 

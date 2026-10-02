@@ -1,0 +1,128 @@
+[
+  {
+    "chunk_id": "NX-FIN-002-p1-c0-5c41600c54ce",
+    "content": "Procurement Policy > Page 1\n\nFINANCE\nProcurement Policy\nApproval thresholds, competitive quotations, vendor onboarding, evaluation and procure-to-pay controls\nDocument ID\nNX-FIN-002\nVersion\n3.0\nDocument\nowner\nHead of Procurement (CFO Office)\nEffective date\n1 January 2026\nApplies to\nAll departments purchasing goods or\nservices\nClassification\nInternal - Confidential\nAbstract. This policy establishes how Nexora buys goods and services. It sets approval authority and quotation\nrequirements by purchase value, defines the vendor onboarding and evaluation process, and describes the procure-to-pay\nworkflow including three-way matching and payment terms. The objectives are value for money, transparency, segregation\nof duties and compliance with tax and legal requirements in Pakistan.\nKeywords: procurement, purchase order, quotations, RFP, vendor onboarding, approval matrix, three-way match\n1. Objectives and Roles\n• Requester: raises the purchase requisition with business justification and budget code.\n• Department head: confirms the need and budget availability.\n• Procurement team: runs quotations and tenders, negotiates and issues purchase orders (POs).\n• Finance: checks budget, matches invoices and releases payment.\n• Legal and InfoSec: review contracts and software or cloud purchases that process company or customer\ndata.\nRule: No commitment may be made to a vendor, verbally or in writing, before a PO is approved. Purchases made without an\napproved PO are not paid unless ratified by the CFO.\n2. Approval Thresholds\nApproval authority and competitive requirements depend on the total value of the purchase (excluding sales tax)\nand cannot be avoided by splitting a purchase into smaller orders.\nTable 1. Approval matrix and sourcing requirements (PKR).\nTier\nPurchase value\nSourcing requirement\nApproval\n1\nUp to 100,000\n1 quotation\nDepartment head\n2\n100,001 to 500,000\nMinimum 3 quotations\nDepartment head and Finance\nManager\n3\n500,001 to 2,500,000\n3 quotations and a comparative statement\nDepartment head and CFO\n4\n2,500,001 to 10,000,000\nFormal RFP or tender, evaluated by the\nprocurement committee\nCEO\n5\nAbove 10,000,000\nFormal RFP or tender\nCEO and Board of Directors\nNexora Technologies (Pvt.) Ltd.\nNX-FIN-002\nInternal use only | Procurement Policy | v3.0\nPage 1 of 4",
+    "metadata": {
+      "doc_id": "NX-FIN-002",
+      "title": "Procurement Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Procurement Policy",
+      "image_count": 0,
+      "table_count": 2,
+      "content_hash": "sha256:5c41600c54ce081ecb988a8946613b513e1029c2241dfd54240f5c783916a888",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "prose",
+      "chunk_size": 2289,
+      "page_content_hash": "sha256:d3d9a1be57314de8"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-002-p1-c1-3df76a9e7fd3",
+    "content": "Tables:\n| Document ID | NX-FIN-002 | Version | 3.0 |\n|:--------------|:------------------------------------|:---------------|:------------------------|\n| Document | Head of Procurement (CFO Office) | Effective date | 1 January 2026 |\n| owner | | | |\n| Applies to | All departments purchasing goods or | Classification | Internal - Confidential |\n| | services | | |\n\n| Tier | Purchase value | Sourcing requirement | Approval |\n|-------:|:------------------------|:-----------------------------------------|:----------------------------|\n| 1 | Up to 100,000 | 1 quotation | Department head |\n| 2 | 100,001 to 500,000 | Minimum 3 quotations | Department head and Finance |\n| | | | Manager |\n| 3 | 500,001 to 2,500,000 | 3 quotations and a comparative statement | Department head and CFO |\n| 4 | 2,500,001 to 10,000,000 | Formal RFP or tender, evaluated by the | CEO |\n| | | procurement committee | |\n| 5 | Above 10,000,000 | Formal RFP or tender | CEO and Board of Directors |",
+    "metadata": {
+      "doc_id": "NX-FIN-002",
+      "title": "Procurement Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Procurement Policy",
+      "image_count": 0,
+      "table_count": 2,
+      "content_hash": "sha256:3df76a9e7fd31c7c39c3a065e4efb4c0a25053782fc02e516429ac00f588db71",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "table",
+      "chunk_size": 973,
+      "page_content_hash": "sha256:d3d9a1be57314de8"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-002-p2-c0-e0dbaad3d09f",
+    "content": "Procurement Policy > Page 2\n\nFigure 1. Upper purchase value of each approval tier.\n2.1 Exceptions\n• Sole-source purchases need a written justification form (unique capability, compatibility or urgency)\napproved one level above the normal approver.\n• Emergency purchases needed to restore a production service may proceed with verbal approval of the\nCTO or CFO; the PO must be raised within 2 working days.\n• Recurring subscriptions are approved for the contract term and reviewed annually.\n3. Vendor Onboarding and Evaluation\nA vendor must be registered before its first PO. Procurement collects the vendor's NTN and sales tax\nregistration (STRN), active taxpayer status, bank account details on company letterhead, a signed\nconflict-of-interest declaration and, for IT vendors, an InfoSec questionnaire. Vendors are re-reviewed every 2\nyears.\nQuotations are scored using weighted criteria (Figure 2). Price alone does not decide the award, but the\nlowest-priced compliant vendor must be selected unless a written justification is approved.\nFigure 2. Vendor evaluation scoring weights.\nNexora Technologies (Pvt.) Ltd.\nNX-FIN-002\nInternal use only | Procurement Policy | v3.0\nPage 2 of 4\n\nImage OCR:\nTier 1\n\nTier 2\n\nTier 3\n\nTier 4\n\n0.1\n\n0.5\n\n2.5\n\n10\n\n4 6 8\nUpper limit of tier (PKR million); Tier 5 is above PKR 10 million\n\n10\n\nPrice (35%)\n\nQuality and fit (25%)\n\nDelivery time (15%)\n\nSupport and SLA (15%)\nCompliance and stability (10%)",
+    "metadata": {
+      "doc_id": "NX-FIN-002",
+      "title": "Procurement Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 2,
+      "source_pdf": "Procurement Policy",
+      "image_count": 2,
+      "table_count": 0,
+      "content_hash": "sha256:e0dbaad3d09f8ac57c9b8e5c2af2bd6dd6b0dd33a1f198ea123e1313c64ad6af",
+      "chunk_type_hint": "mixed",
+      "chunk_index": 0,
+      "chunk_type": "image_ocr",
+      "chunk_size": 1436,
+      "page_content_hash": "sha256:e0dbaad3d09f8ac5"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-002-p3-c0-37666a5e2f16",
+    "content": "Procurement Policy > Page 3\n\n4. Procure-to-Pay Process\nFigure 3. Procure-to-pay workflow.\nAn invoice is paid only when the three-way match succeeds: the PO, the goods receipt or service acceptance,\nand the vendor invoice agree on quantity, price and terms. Discrepancies are returned to the vendor within 3\nworking days.\n4.1 Payment Terms\nTable 2. Standard payment terms.\nItem\nRule\nStandard credit period\nNet 30 days from receipt of a correct invoice\nAdvance payment\nUp to 30% of PO value; above PKR 1,000,000 a bank guarantee is required\nPayment run\nWeekly on Thursday; urgent payments with CFO office approval\nWithholding taxes\nIncome tax and sales tax withholding are deducted per Pakistan tax law and depend on the\nvendor's active taxpayer status; tax certificates are issued\nInvoice currency\nPKR; foreign-currency contracts require Finance approval and use the State Bank rate on\nthe invoice date\n5. Contracts, Software and Records\n• Contracts above PKR 500,000 are reviewed by Legal; software, SaaS and cloud purchases are reviewed by\nInfoSec before approval.\n• Conflicts of interest must be declared before evaluation; an involved employee is excluded from the\ndecision.\n• Gifts from vendors above PKR 5,000 must be reported (see Employee Handbook, NX-HR-002).\n• Procurement files (requisition, quotations, evaluation, PO, GRN, invoice, payment) are retained for 7 years.\n6. References\n[1] Nexora Expense Policy, NX-FIN-001.\n[2] Nexora Employee Handbook, NX-HR-002 (conflict of interest and gifts).\n[3] Sales Tax Act, 1990 and Income Tax Ordinance, 2001 (Pakistan).\n[4] Public Procurement principles: transparency, competition and value for money (adopted as internal best practice).\nNexora Technologies (Pvt.) Ltd.\nNX-FIN-002\nInternal use only | Procurement Policy | v3.0\nPage 3 of 4\n\nImage OCR:\nPurchase Budget check Quotations Evaluation and\nrequisition (Finance) or RFP selection\n\nPO approved Goods receipt Three-way match Payment\nand issued note (GRN) PO, GRN, invoice (net 30 days)",
+    "metadata": {
+      "doc_id": "NX-FIN-002",
+      "title": "Procurement Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 3,
+      "source_pdf": "Procurement Policy",
+      "image_count": 1,
+      "table_count": 1,
+      "content_hash": "sha256:37666a5e2f16aea293da292c0c3ea6a4476c939f825d24ef5edb28334dfead2e",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "image_ocr",
+      "chunk_size": 1994,
+      "page_content_hash": "sha256:7746027c0c8be062"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-002-p3-c1-3fe1a8393cd5",
+    "content": "Image OCR:\nPurchase Budget check Quotations Evaluation and\nrequisition (Finance) or RFP selection\n\nPO approved Goods receipt Three-way match Payment\nand issued note (GRN) PO, GRN, invoice (net 30 days)\n\nTables:\n| Item | Rule |\n|:-----------------------|:-----------------------------------------------------------------------------------------|\n| Standard credit period | Net 30 days from receipt of a correct invoice |\n| Advance payment | Up to 30% of PO value; above PKR 1,000,000 a bank guarantee is required |\n| Payment run | Weekly on Thursday; urgent payments with CFO office approval |\n| Withholding taxes | Income tax and sales tax withholding are deducted per Pakistan tax law and depend on the |\n| | vendor's active taxpayer status; tax certificates are issued |\n| Invoice currency | PKR; foreign-currency contracts require Finance approval and use the State Bank rate on |\n| | the invoice date |",
+    "metadata": {
+      "doc_id": "NX-FIN-002",
+      "title": "Procurement Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 3,
+      "source_pdf": "Procurement Policy",
+      "image_count": 1,
+      "table_count": 1,
+      "content_hash": "sha256:3fe1a8393cd5de1d720333dfbeaa3f77a49794fca161e709b8548547c9efa3d6",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "mixed",
+      "chunk_size": 906,
+      "page_content_hash": "sha256:7746027c0c8be062"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-002-p4-c0-1225c5f802e5",
+    "content": "Procurement Policy > Page 4\n\n7. Revision History\nTable 3. Document revision history.\nVersion\nDate\nAuthor\nSummary of change\n2.0\n01 Jan 2025\nFinance Policy Team\nIntroduced five-tier approval matrix\n2.5\n01 Sep 2025\nFinance Policy Team\nAdded InfoSec review for SaaS purchases\n3.0\n01 Jan 2026\nFinance Policy Team\nRaised Tier 1 limit to PKR 100,000; added vendor\nscoring weights and three-way match\nNexora Technologies (Pvt.) Ltd.\nNX-FIN-002\nInternal use only | Procurement Policy | v3.0\nPage 4 of 4\n\nTables:\n| Version | Date | Author | Summary of change |\n|----------:|:------------|:--------------------|:-------------------------------------------------|\n| 2 | 01 Jan 2025 | Finance Policy Team | Introduced five-tier approval matrix |\n| 2.5 | 01 Sep 2025 | Finance Policy Team | Added InfoSec review for SaaS purchases |\n| 3 | 01 Jan 2026 | Finance Policy Team | Raised Tier 1 limit to PKR 100,000; added vendor |\n| | | | scoring weights and three-way match |",
+    "metadata": {
+      "doc_id": "NX-FIN-002",
+      "title": "Procurement Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 4,
+      "source_pdf": "Procurement Policy",
+      "image_count": 0,
+      "table_count": 1,
+      "content_hash": "sha256:1225c5f802e58bf38b0f307ccd445c8283ce04b4b355ade481dd1fb60ba0edeb",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "table",
+      "chunk_size": 957,
+      "page_content_hash": "sha256:1225c5f802e58bf3"
+    }
+  }
+]

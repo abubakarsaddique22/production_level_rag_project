@@ -1,0 +1,170 @@
+[
+  {
+    "chunk_id": "NX-ENG-003-p1-c0-e321cc6a6751",
+    "content": "Engineering Coding Standards > Page 1",
+    "metadata": {
+      "doc_id": "NX-ENG-003",
+      "title": "Engineering Coding Standards",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Coding Standards",
+      "image_count": 0,
+      "table_count": 3,
+      "content_hash": "sha256:e321cc6a67516df33f3a30aac5962b85c6c57f89af680fa252a28f8ac2cb84a5",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "prose",
+      "chunk_size": 37,
+      "page_content_hash": "sha256:5365b8a80cc2b09a"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-003-p1-c1-38f18799785b",
+    "content": "ENGINEERING\nCoding Standards\nLanguage style, naming, branching, code review, testing and security rules for all Nexora repositories\nDocument ID\nNX-ENG-003\nVersion\n2.6\nDocument\nowner\nEngineering Excellence Guild\nEffective date\n1 February 2026\nApplies to\nAll engineers and contractors\ncontributing to Nexora repositories\nClassification\nInternal - Confidential\nAbstract. This document sets the mandatory coding standards for Nexora Technologies. It defines language versions and\ntooling for Python and TypeScript, naming conventions, the Git branching model, commit message format, pull request and\ncode review rules, minimum test coverage by module tier, logging practices and security requirements. The aim is\nconsistent, readable and safe code that any engineer can review and maintain.\nKeywords: coding standards, Python, TypeScript, PEP 8, Git branching, code review, unit testing, secrets management\n1. Languages and Tooling\nTable 1. Approved languages and mandatory tools.\nArea\nStandard\nMandatory tooling\nPython (backend, data,\nAI)\nPython 3.11 or newer; PEP 8 with a 100-character line limit;\ntype hints on all public functions\nblack, ruff, mypy (strict on new\nmodules), pytest\nTypeScript (frontend,\nNode)\nTypeScript 5.x with strict mode; no implicit any\nESLint, Prettier, Jest or Vitest\nSQL\nUppercase SQL keywords; schema migrations via Alembic or\nFlyway\nsqlfluff\nInfrastructure\nTerraform 1.6+; all resources tagged with owner, service and\nenvironment\ntflint, terraform validate\nAPI design\nREST conventions in the API Documentation (NX-ENG-001);\nOpenAPI 3.1 specification kept in the repository\nspectral\nFormatters and linters run as pre-commit hooks and again in CI; formatting comments in reviews are therefore\ndiscouraged. Python dependencies are pinned in requirements.txt or pyproject.toml with a lock file.\n2. Naming Conventions\nTable 2. Naming rules.\nElement\nConvention\nExample\nPython modules and functions\nsnake_case\nload_customer_profile()\nPython classes\nPascalCase\nTicketRouter\nConstants\nUPPER_SNAKE_CASE\nMAX_RETRY_COUNT\nTypeScript variables and functions\ncamelCase\nfetchTicketList\nTypeScript components and types\nPascalCase\nTicketTable\nGit branches\ntype/JIRA-ID-short-description\nfeature/NX-1234-add-csat-filter\nDatabase tables and columns\nsnake_case, plural table names\nsupport_tickets.created_at\nNexora Technologies (Pvt.) Ltd.\nNX-ENG-003",
+    "metadata": {
+      "doc_id": "NX-ENG-003",
+      "title": "Engineering Coding Standards",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Coding Standards",
+      "image_count": 0,
+      "table_count": 3,
+      "content_hash": "sha256:38f18799785b634bdefe6e8b34780f7c7b7bdf023590f5978bf8a83855688410",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "prose",
+      "chunk_size": 2356,
+      "page_content_hash": "sha256:5365b8a80cc2b09a"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-003-p1-c2-9be6a6a1bf8f",
+    "content": "camelCase\nfetchTicketList\nTypeScript components and types\nPascalCase\nTicketTable\nGit branches\ntype/JIRA-ID-short-description\nfeature/NX-1234-add-csat-filter\nDatabase tables and columns\nsnake_case, plural table names\nsupport_tickets.created_at\nNexora Technologies (Pvt.) Ltd.\nNX-ENG-003\nInternal use only | Coding Standards | v2.6\nPage 1 of 4",
+    "metadata": {
+      "doc_id": "NX-ENG-003",
+      "title": "Engineering Coding Standards",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Coding Standards",
+      "image_count": 0,
+      "table_count": 3,
+      "content_hash": "sha256:9be6a6a1bf8f6a78de931af01b51b0f4bcf31431c8be5170a04239998544f610",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 2,
+      "chunk_type": "prose",
+      "chunk_size": 341,
+      "page_content_hash": "sha256:5365b8a80cc2b09a"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-003-p1-c3-81bf4bd54357",
+    "content": "Tables:\n| Document ID | NX-ENG-003 | Version | 2.6 |\n|:--------------|:------------------------------------|:---------------|:------------------------|\n| Document | Engineering Excellence Guild | Effective date | 1 February 2026 |\n| owner | | | |\n| Applies to | All engineers and contractors | Classification | Internal - Confidential |\n| | contributing to Nexora repositories | | |\n\n| Area | Standard | Mandatory tooling |\n|:-----------------------|:-------------------------------------------------------------|:---------------------------------|\n| Python (backend, data, | Python 3.11 or newer; PEP 8 with a 100-character line limit; | black, ruff, mypy (strict on new |\n| AI) | type hints on all public functions | modules), pytest |\n| TypeScript (frontend, | TypeScript 5.x with strict mode; no implicit any | ESLint, Prettier, Jest or Vitest |\n| Node) | | |\n| SQL | Uppercase SQL keywords; schema migrations via Alembic or | sqlfluff |\n| | Flyway | |\n| Infrastructure | Terraform 1.6+; all resources tagged with owner, service and | tflint, terraform validate |\n| | environment | |\n| API design | REST conventions in the API Documentation (NX-ENG-001); | spectral |\n| | OpenAPI 3.1 specification kept in the repository | |\n\n| Element | Convention | Example |\n|:-----------------------------------|:-------------------------------|:--------------------------------|\n| Python modules and functions | snake_case | load_customer_profile() |\n| Python classes | PascalCase | TicketRouter |\n| Constants | UPPER_SNAKE_CASE | MAX_RETRY_COUNT |\n| TypeScript variables and functions | camelCase | fetchTicketList |\n| TypeScript components and types | PascalCase | TicketTable |\n| Git branches | type/JIRA-ID-short-description | feature/NX-1234-add-csat-filter |\n| Database tables and columns | snake_case, plural table names | support_tickets.created_at |",
+    "metadata": {
+      "doc_id": "NX-ENG-003",
+      "title": "Engineering Coding Standards",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Coding Standards",
+      "image_count": 0,
+      "table_count": 3,
+      "content_hash": "sha256:81bf4bd5435712fc92f495c462c08a342717bdf0c5693d5185f4e14baac84621",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 3,
+      "chunk_type": "table",
+      "chunk_size": 1850,
+      "page_content_hash": "sha256:5365b8a80cc2b09a"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-003-p2-c0-494fc7cd08e1",
+    "content": "Engineering Coding Standards > Page 2\n\n# Not acceptable # Preferred\ndef proc(d): def route_ticket(ticket: Ticket, rules: list[Rule]) -> Queue:\n for r in rules: \"\"\"Return the queue whose rule first matches the ticket.\"\"\"\n if r(d): return r.q for rule in rules:\n if rule.matches(ticket):\n return rule.queue\n raise NoMatchingRuleError(ticket.id)\n3. Git Branching Model\nNexora uses a simplified GitFlow model (Figure 1). The main branch always mirrors production and is\nprotected; direct pushes are not allowed. Engineers create feature/* branches from develop, open a pull\nrequest, and merge after review. Release branches stabilise a version, and urgent production fixes use\nhotfix/* branches that are merged to both main and develop.\nFigure 1. Branching model: main, develop, feature, release and hotfix branches.\n3.1 Commit Messages\nCommits follow the Conventional Commits format: type(scope): summary, using the types feat, fix,\ndocs, refactor, test and chore. The summary is at most 72 characters and written in the imperative mood,\nfor example fix(tickets): prevent duplicate creation on retry.\n4. Code Review Rules\nTable 3. Pull request and review requirements.\nRule\nRequirement\nReviewers\nAt least 1 approval; 2 approvals for changes to authentication, payments, permissions or\ndata-deletion code\nSize\nKeep pull requests under 400 changed lines where possible; split larger changes\nReview turnaround\nFirst response within 1 business day\nAuthor checklist\nTests added, documentation updated, no debug code, linked Jira ticket, screenshots for UI\nchanges\nMerge conditions\nAll CI checks green, no unresolved comments, branch up to date with target\nMerge method\nSquash merge into develop; merge commit for release and hotfix branches\nNexora Technologies (Pvt.) Ltd.\nNX-ENG-003\nInternal use only | Coding Standards | v2.6\nPage 2 of 4\n\nImage OCR:\nhotfix/*\n\nrelease/*\n\ndevelop\n\nfeature/*\n\nv1.0 vl.\ne e\n\nI\n\nI\n\nI\n\n1\n\n~\n\nfeature branches merge to develop via pull request\n\nlrelease: QA and\n[bug fixes only\n\nI\n\n1\ne-e\n*\n\n1\n\nv1.1.1\n\ncoon)\nfix\n\n‘\n\\",
+    "metadata": {
+      "doc_id": "NX-ENG-003",
+      "title": "Engineering Coding Standards",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 2,
+      "source_pdf": "Coding Standards",
+      "image_count": 1,
+      "table_count": 1,
+      "content_hash": "sha256:494fc7cd08e105436abe870af95662789eb31820125935289d5c4aa3ca555e8d",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "image_ocr",
+      "chunk_size": 2037,
+      "page_content_hash": "sha256:d35cb2d7604cca28"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-003-p2-c1-3a6d0052966f",
+    "content": "Image OCR:\nhotfix/*\n\nrelease/*\n\ndevelop\n\nfeature/*\n\nv1.0 vl.\ne e\n\nI\n\nI\n\nI\n\n1\n\n~\n\nfeature branches merge to develop via pull request\n\nlrelease: QA and\n[bug fixes only\n\nI\n\n1\ne-e\n*\n\n1\n\nv1.1.1\n\ncoon)\nfix\n\n‘\n\\\n\nTables:\n| Rule | Requirement |\n|:------------------|:------------------------------------------------------------------------------------------|\n| Reviewers | At least 1 approval; 2 approvals for changes to authentication, payments, permissions or |\n| | data-deletion code |\n| Size | Keep pull requests under 400 changed lines where possible; split larger changes |\n| Review turnaround | First response within 1 business day |\n| Author checklist | Tests added, documentation updated, no debug code, linked Jira ticket, screenshots for UI |\n| | changes |\n| Merge conditions | All CI checks green, no unresolved comments, branch up to date with target |\n| Merge method | Squash merge into develop; merge commit for release and hotfix branches |",
+    "metadata": {
+      "doc_id": "NX-ENG-003",
+      "title": "Engineering Coding Standards",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 2,
+      "source_pdf": "Coding Standards",
+      "image_count": 1,
+      "table_count": 1,
+      "content_hash": "sha256:3a6d0052966f7a8143ef209a368dff75938aa00162a8ae3b30cc6cc055dde253",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "mixed",
+      "chunk_size": 948,
+      "page_content_hash": "sha256:d35cb2d7604cca28"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-003-p3-c0-11a2aee7b55c",
+    "content": "Engineering Coding Standards > Page 3\n\n5. Testing\nEvery feature and bug fix must include automated tests. Minimum line coverage depends on the risk tier of the\nmodule (Figure 2); CI fails when coverage of changed files drops below the tier threshold. Tests must be\ndeterministic, run without network access to external services, and complete within 10 minutes for the full unit\nsuite.\nFigure 2. Minimum unit-test line coverage by module tier.\nFor AI and machine-learning code, unit tests cover data validation and pre-processing, and evaluation scripts\nrun in CI on a fixed sample dataset. Prompt templates and retrieval configurations are stored in version control\nand change through pull requests like any other code.\n6. Logging, Errors and Observability\n• Use structured JSON logs with the fields timestamp, level, service, request_id and message.\n• Never log passwords, tokens, API keys or full customer content; mask e-mail addresses and phone\nnumbers.\n• Catch specific exceptions; never use a bare except. Return errors in the API error model.\n• Every service exposes /health and /ready endpoints and publishes RED metrics (rate, errors, duration).\n7. Security Requirements\n• No secrets in code. Credentials are stored in AWS Secrets Manager. Secrets found in a repository must be\nrotated immediately and reported to Security within 1 hour.\n• Dependency scanning (Dependabot), static analysis (CodeQL) and container scanning (Trivy) run on every\npull request; critical and high findings block the merge.\n• Validate and sanitise all external input; use parameterised queries only.\n• Use company-approved AI coding assistants only, and never include customer data or credentials in\nprompts (see Employee Handbook, Code of Conduct).\n8. Documentation\nEach repository contains a README.md with purpose, setup, run and test instructions, an owner and an on-call\ncontact. Public functions use Google-style docstrings. Architecture decisions are recorded as short ADR\ndocuments in /docs/adr.\n9. References\n[1] PEP 8: Style Guide for Python Code.\nNexora Technologies (Pvt.) Ltd.\nNX-ENG-003\nInternal use only | Coding Standards | v2.6\nPage 3 of 4\n\nImage OCR:\nMinimum line coverage (%)\n\n100\n\nTier 1\ncore, auth,\npayments\n\nTier 2\nservices\nand APIs\n\nTier 3\nfrontend UI\n\n70\n50\nTier 4 Tier 5\nML/AI internal\npipelines scripts",
+    "metadata": {
+      "doc_id": "NX-ENG-003",
+      "title": "Engineering Coding Standards",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 3,
+      "source_pdf": "Coding Standards",
+      "image_count": 1,
+      "table_count": 0,
+      "content_hash": "sha256:11a2aee7b55c9161126725623490d43655abbbc81d3f8effad1a8d4941e71f76",
+      "chunk_type_hint": "mixed",
+      "chunk_index": 0,
+      "chunk_type": "image_ocr",
+      "chunk_size": 2314,
+      "page_content_hash": "sha256:11a2aee7b55c9161"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-003-p4-c0-de2c1ebcc1d8",
+    "content": "Engineering Coding Standards > Page 4\n\n[2] Conventional Commits 1.0.0 specification.\n[3] Nexora Deployment SOP, NX-ENG-002.\n[4] Nexora API Documentation, NX-ENG-001.\n[5] OWASP Application Security Verification Standard (ASVS) 4.0.\n10. Revision History\nTable 4. Document revision history.\nVersion\nDate\nAuthor\nSummary of change\n2.0\n01 Jun 2025\nEngineering Excellence Guild\nAdopted tiered coverage and GitFlow model\n2.5\n01 Nov 2025\nEngineering Excellence Guild\nAdded guidance for AI/ML code and prompt templates\n2.6\n01 Feb 2026\nEngineering Excellence Guild\nRaised Tier 1 coverage to 90%; added secrets-leak\nreporting SLA\nNexora Technologies (Pvt.) Ltd.\nNX-ENG-003\nInternal use only | Coding Standards | v2.6\nPage 4 of 4\n\nTables:\n| Version | Date | Author | Summary of change |\n|----------:|:------------|:-----------------------------|:---------------------------------------------------|\n| 2 | 01 Jun 2025 | Engineering Excellence Guild | Adopted tiered coverage and GitFlow model |\n| 2.5 | 01 Nov 2025 | Engineering Excellence Guild | Added guidance for AI/ML code and prompt templates |\n| 2.6 | 01 Feb 2026 | Engineering Excellence Guild | Raised Tier 1 coverage to 90%; added secrets-leak |\n| | | | reporting SLA |",
+    "metadata": {
+      "doc_id": "NX-ENG-003",
+      "title": "Engineering Coding Standards",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 4,
+      "source_pdf": "Coding Standards",
+      "image_count": 0,
+      "table_count": 1,
+      "content_hash": "sha256:de2c1ebcc1d8f26ed6dcc08cd33b0b4d53619ff8eba856dc34c8a740e3e87147",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "table",
+      "chunk_size": 1215,
+      "page_content_hash": "sha256:de2c1ebcc1d8f26e"
+    }
+  }
+]

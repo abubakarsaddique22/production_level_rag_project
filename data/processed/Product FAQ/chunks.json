@@ -1,0 +1,149 @@
+[
+  {
+    "chunk_id": "NX-PRD-002-p1-c0-9168511812e4",
+    "content": "Product FAQ > Page 1\n\nPRODUCTS\nProduct FAQ\nAnswers to frequently asked questions about accounts, billing, features, security and troubleshooting\nDocument ID\nNX-PRD-002\nVersion\n4.0\nDocument\nowner\nCustomer Success (COO Office)\nEffective date\n1 August 2026\nApplies to\nCustomers and Nexora support staff\nClassification\nInternal - Confidential\nAbstract. This FAQ answers the most common questions about Nexora products. Questions are grouped into general,\nplans and billing, features and AI, integrations and API, security and data, and troubleshooting. Where a topic needs more\ndetail, the FAQ points to the Product Documentation (NX-PRD-001) or the API Documentation (NX-ENG-001).\nKeywords: FAQ, billing, free trial, password reset, SSO, data export, API limits, troubleshooting\n1. General\nQ. What products does Nexora offer?\nNexora offers NexaDesk (AI-powered helpdesk), NexaFlow (workflow automation) and NexaInsight (analytics).\nThey share one login and one platform.\nQ. Where is Nexora based and what are your support hours?\nNexora is headquartered in Lahore, Pakistan, with offices in Karachi and Islamabad. Support is available\nMonday to Friday, 9:00 AM to 6:00 PM PKT for Starter and Growth plans, and 24x7 for Enterprise. Contact\nsupport@nexora.example.\nQ. Which languages are supported?\nThe user interface is available in English. NexaDesk AI triage, suggestions and summaries support English and\nUrdu; Arabic is in beta.\n2. Plans and Billing\nTable 1. Quick plan comparison.\nStarter\nGrowth\nEnterprise\nPrice per agent (annual / monthly)\nUSD 15 / 19\nUSD 39 / 49\nUSD 79 / 99\nUptime commitment\n99.5%\n99.9%\n99.95%\nAPI requests per minute\n60\n300\n1,200\nSSO\nNo\nNo\nYes\nQ. Is there a free trial?\nYes. Every new workspace gets a 14-day free trial with Growth features. No credit card is needed to start.\nQ. What is the discount for annual billing?\nAnnual billing is approximately 20% cheaper than monthly billing. Annual plans are invoiced once a year in\nadvance.\nQ. What payment methods do you accept?\nCredit and debit cards for all plans. Enterprise customers can pay by bank transfer against an invoice (net 30\ndays), in USD or PKR.\nNexora Technologies (Pvt.) Ltd.\nNX-PRD-002\nInternal use only | Product FAQ | v4.0\nPage 1 of 3",
+    "metadata": {
+      "doc_id": "NX-PRD-002",
+      "title": "Product FAQ",
+      "department": "Product",
+      "version": "4.0",
+      "effective_date": "2026-08-01",
+      "page": 1,
+      "source_pdf": "Product FAQ",
+      "image_count": 0,
+      "table_count": 2,
+      "content_hash": "sha256:9168511812e48b9564561ad3ea43dc3fd4e3312603da6ecd9496d484dfa87a33",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "prose",
+      "chunk_size": 2224,
+      "page_content_hash": "sha256:3c62cc5fb4306812"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-002-p1-c1-a3fe0237190b",
+    "content": "Tables:\n| Document ID | NX-PRD-002 | Version | 4.0 |\n|:--------------|:-----------------------------------|:---------------|:------------------------|\n| Document | Customer Success (COO Office) | Effective date | 1 August 2026 |\n| owner | | | |\n| Applies to | Customers and Nexora support staff | Classification | Internal - Confidential |\n\n| | Starter | Growth | Enterprise |\n|:-----------------------------------|:------------|:------------|:-------------|\n| Price per agent (annual / monthly) | USD 15 / 19 | USD 39 / 49 | USD 79 / 99 |\n| Uptime commitment | 99.5% | 99.9% | 99.95% |\n| API requests per minute | 60 | 300 | 1,200 |\n| SSO | No | No | Yes |",
+    "metadata": {
+      "doc_id": "NX-PRD-002",
+      "title": "Product FAQ",
+      "department": "Product",
+      "version": "4.0",
+      "effective_date": "2026-08-01",
+      "page": 1,
+      "source_pdf": "Product FAQ",
+      "image_count": 0,
+      "table_count": 2,
+      "content_hash": "sha256:a3fe0237190bece6bc1f6bc3d7cff05e7c50b7c92366aa3fc2d25902d3077a4d",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "table",
+      "chunk_size": 657,
+      "page_content_hash": "sha256:3c62cc5fb4306812"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-002-p2-c0-6c9636972e48",
+    "content": "Product FAQ > Page 2",
+    "metadata": {
+      "doc_id": "NX-PRD-002",
+      "title": "Product FAQ",
+      "department": "Product",
+      "version": "4.0",
+      "effective_date": "2026-08-01",
+      "page": 2,
+      "source_pdf": "Product FAQ",
+      "image_count": 0,
+      "table_count": 0,
+      "content_hash": "sha256:6c9636972e48b8c29846dba7068b4782db2c019fd96f43e5bf4cb062561a9858",
+      "chunk_type_hint": "prose",
+      "chunk_index": 0,
+      "chunk_type": "prose",
+      "chunk_size": 20,
+      "page_content_hash": "sha256:58fc77f9a7f4bf3f"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-002-p2-c1-94229ed2db64",
+    "content": "Q. Can I cancel at any time and get a refund?\nYou can cancel at any time from Settings, then Billing. Monthly plans stop at the end of the billing month.\nRefunds are available within 14 days of the first paid charge; after that, annual plans are not refunded pro rata.\nQ. What happens to my data after cancellation?\nYou can export your data for 30 days after cancellation. After 90 days all workspace data is permanently\ndeleted, and backups expire within 35 days after that.\n3. Features and AI\nQ. How does NexaDesk suggest answers?\nNexaDesk searches your knowledge base using retrieval (RAG) and drafts a reply grounded in the top matching\narticles. Each suggestion shows its source articles so the agent can check it before sending. Suggestions are\nnever sent automatically unless you enable auto-reply for selected topics.\nQ. Does Nexora train AI models on my data?\nNo. Customer data is not used to train shared models, and model providers process prompts under\nzero-retention terms.\nQ. What file types can I add to the knowledge base?\nHTML, Markdown, PDF and DOCX, up to 100,000 characters per article. Attachments on tickets can be up to 25\nMB per file.\nQ. How many workflows can I run?\nStarter allows 5 active workflows, Growth 50, and Enterprise unlimited.\n4. Integrations and API\nQ. Which tools does Nexora integrate with?\nEmail, web chat, WhatsApp Business, Microsoft Teams and Slack channels, and Salesforce, HubSpot, Jira and\nZapier for business tools. Custom integrations use the REST API and webhooks.\nQ. What are the API rate limits?\n60 requests per minute on Starter, 300 on Growth and 1,200 on Enterprise, with short bursts of up to twice the\nlimit for 10 seconds. Exceeding the limit returns HTTP 429; wait for the Retry-After period before retrying.\nQ. How long is an API token valid?\nAccess tokens are valid for 60 minutes. Request a new token with the client-credentials grant when it expires.\n5. Security and Data\nQ. Which certifications does Nexora hold?\nSOC 2 Type II and ISO/IEC 27001. A GDPR data-processing agreement is available on request.\nQ. Can I choose where my data is stored?\nYes. When creating a workspace you select Mumbai, Frankfurt or Bahrain. Changing the region later requires a\nmigration handled by support.\nQ. Is single sign-on available?\nSAML 2.0 and OpenID Connect SSO are available on the Enterprise plan only. Starter and Growth use email",
+    "metadata": {
+      "doc_id": "NX-PRD-002",
+      "title": "Product FAQ",
+      "department": "Product",
+      "version": "4.0",
+      "effective_date": "2026-08-01",
+      "page": 2,
+      "source_pdf": "Product FAQ",
+      "image_count": 0,
+      "table_count": 0,
+      "content_hash": "sha256:94229ed2db646deb4bc457e0a37d2ec68f19f0b3b2a037800ee2835a827e06b2",
+      "chunk_type_hint": "prose",
+      "chunk_index": 1,
+      "chunk_type": "prose",
+      "chunk_size": 2383,
+      "page_content_hash": "sha256:58fc77f9a7f4bf3f"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-002-p2-c2-4c1a11368efc",
+    "content": "Q. Can I choose where my data is stored?\nYes. When creating a workspace you select Mumbai, Frankfurt or Bahrain. Changing the region later requires a\nmigration handled by support.\nQ. Is single sign-on available?\nSAML 2.0 and OpenID Connect SSO are available on the Enterprise plan only. Starter and Growth use email\nand password with optional two-factor authentication.\n6. Troubleshooting\nQ. How do I reset my password?\nChoose Forgot password on the login page. The reset link is valid for 30 minutes and can be used once. If the\nemail does not arrive, check the spam folder and confirm the address with your admin.\nNexora Technologies (Pvt.) Ltd.\nNX-PRD-002\nInternal use only | Product FAQ | v4.0\nPage 2 of 3",
+    "metadata": {
+      "doc_id": "NX-PRD-002",
+      "title": "Product FAQ",
+      "department": "Product",
+      "version": "4.0",
+      "effective_date": "2026-08-01",
+      "page": 2,
+      "source_pdf": "Product FAQ",
+      "image_count": 0,
+      "table_count": 0,
+      "content_hash": "sha256:4c1a11368efc0ff30d7409be6f455a475d8b10029ab77237f518cb1d419dc6e1",
+      "chunk_type_hint": "prose",
+      "chunk_index": 2,
+      "chunk_type": "prose",
+      "chunk_size": 709,
+      "page_content_hash": "sha256:58fc77f9a7f4bf3f"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-002-p3-c0-6e986219cb7e",
+    "content": "Product FAQ > Page 3\n\nQ. Why can't I sign in?\nFollow the checks in Figure 1. If the problem continues after these steps, contact support with the time of the\nfailed attempt and your workspace name.\nFigure 1. Sign-in troubleshooting flow.\nQ. Why is my API returning 429 errors?\nYour client exceeded the plan's rate limit. Reduce request frequency, batch calls, and use exponential backoff.\nUpgrade the plan if you need a higher limit.\nQ. Where can I check service status?\nThe public status page at status.nexora.example lists current incidents and past uptime. Enterprise customers\nalso receive incident updates by email from the on-call team.\n7. Contact\nTable 2. Support contacts.\nNeed\nContact\nResponse\nGeneral support\nsupport@nexora.example\nStarter: 1 business day; Growth: 8\nbusiness hours\nEnterprise urgent issue (P1)\nPhone line in the Enterprise portal\nWithin 1 hour, 24x7\nBilling questions\nbilling@nexora.example\n2 business days\nSecurity reports\nsecurity@nexora.example\n1 business day\n8. References\n[1] Nexora Product Documentation, NX-PRD-001.\n[2] Nexora API Documentation, NX-ENG-001.\n[3] Nexora Master Subscription Agreement, version 2026-01.\n9. Revision History\nTable 3. Document revision history.\nVersion\nDate\nAuthor\nSummary of change\n3.0\n01 Mar 2026\nCustomer Success\nAdded AI and data-use questions\n4.0\n01 Aug 2026\nCustomer Success\nUpdated pricing, refund policy and troubleshooting flow\nNexora Technologies (Pvt.) Ltd.\nNX-PRD-002\nInternal use only | Product FAQ | v4.0\nPage 3 of 3\n\nImage OCR:\nAccount locked\nafter 5 failed\nattempts?\n\nCorrect\nemail and\npassword?\n\nUses SSO\n(Enterprise)?\n\nContact IT admin to\ncheck identity provider\n\nWait 15 minutes or\nask admin to unlock\n\nReset password\n(link valid 30 min)\n\nTables:\n| Need | Contact | Response |\n|:-----------------------------|:------------------------------------|:-----------------------------------|\n| General support | support@nexora.example | Starter: 1 business day; Growth: 8 |\n| | | business hours |\n| Enterprise urgent issue (P1) | Phone line in the Enterprise portal | Within 1 hour, 24x7 |\n| Billing questions | billing@nexora.example | 2 business days |\n| Security reports | security@nexora.example | 1 business day |",
+    "metadata": {
+      "doc_id": "NX-PRD-002",
+      "title": "Product FAQ",
+      "department": "Product",
+      "version": "4.0",
+      "effective_date": "2026-08-01",
+      "page": 3,
+      "source_pdf": "Product FAQ",
+      "image_count": 1,
+      "table_count": 2,
+      "content_hash": "sha256:6e986219cb7ef4507479300a83a34864dee3bdd15e18f3befc35515279f73e54",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "mixed",
+      "chunk_size": 2192,
+      "page_content_hash": "sha256:5d5f43eed5262e87"
+    }
+  },
+  {
+    "chunk_id": "NX-PRD-002-p3-c1-a1dec681a989",
+    "content": "| Version | Date | Author | Summary of change |\n|----------:|:------------|:-----------------|:--------------------------------------------------------|\n| 3 | 01 Mar 2026 | Customer Success | Added AI and data-use questions |\n| 4 | 01 Aug 2026 | Customer Success | Updated pricing, refund policy and troubleshooting flow |",
+    "metadata": {
+      "doc_id": "NX-PRD-002",
+      "title": "Product FAQ",
+      "department": "Product",
+      "version": "4.0",
+      "effective_date": "2026-08-01",
+      "page": 3,
+      "source_pdf": "Product FAQ",
+      "image_count": 1,
+      "table_count": 2,
+      "content_hash": "sha256:a1dec681a98972c60d14e7fd78b5e43bd791c3b8f556b3ddcf6a2d363ba0c423",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "prose",
+      "chunk_size": 322,
+      "page_content_hash": "sha256:5d5f43eed5262e87"
+    }
+  }
+]

@@ -1,0 +1,149 @@
+[
+  {
+    "chunk_id": "NX-FIN-001-p1-c0-1afe3079b987",
+    "content": "Expense Policy > Page 1\n\nFINANCE\nExpense Policy\nRules for business travel, meals, conveyance, client entertainment and expense reimbursement\nDocument ID\nNX-FIN-001\nVersion\n2.3\nDocument\nowner\nFinance Controller (CFO Office)\nEffective date\n1 January 2026\nApplies to\nAll employees (limits vary by grade G1 to\nG6)\nClassification\nInternal - Confidential\nAbstract. This policy explains which business expenses Nexora reimburses, the limits that apply by employee grade, and\nhow claims are submitted, approved and paid. It covers domestic and international travel, accommodation, per diem\nallowances, local conveyance, client entertainment and travel advances. Claims must be submitted within 15 calendar days\nwith valid receipts; non-compliant claims are returned or rejected. All amounts are in Pakistani Rupees (PKR) unless stated.\nKeywords: expense policy, reimbursement, travel, per diem, hotel limit, receipts, travel advance, approval\n1. Principles\n• Spend company money as carefully as your own; choose the reasonable option, not the most expensive\none.\n• Expenses must be business-related, reasonable, documented and approved according to this policy.\n• Employees are responsible for the accuracy of their claims. False claims are gross misconduct under the\nEmployee Handbook (NX-HR-002).\n• Grades (G1 to G6) are defined in the Employee Handbook.\n2. Eligible Expenses and Limits\nTable 1. Expense categories and general limits.\nCategory\nLimit\nRules\nLocal conveyance (ride-hailing, taxi)\nActual cost\nBusiness trips only; travel between home and office is\nnot reimbursable\nPersonal vehicle for business\nPKR 35 per km\nDistance recorded from the route map; parking and toll\nfees on receipt\nBusiness meals (working lunch or dinner\nwith colleagues)\nPKR 2,500 per person\nNames of attendees and business purpose on the claim\nClient entertainment\nPKR 5,000 per person\nPre-approval from the department head if total exceeds\nPKR 50,000\nMobile phone (business use)\nPKR 5,000 per month\nGrade G4 and above, in addition to allowances in the\nBenefits Guide\nTraining and certifications\nPKR 60,000 per year\nPaid from the learning allowance in the Benefits Guide\n(NX-HR-003)\nOffice supplies and small equipment\nUp to PKR 20,000\nThrough the office administrator; larger purchases follow\nthe Procurement Policy (NX-FIN-002)\nNexora Technologies (Pvt.) Ltd.\nNX-FIN-001\nInternal use only | Expense Policy | v2.3\nPage 1 of 4",
+    "metadata": {
+      "doc_id": "NX-FIN-001",
+      "title": "Expense Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Expense Policy",
+      "image_count": 0,
+      "table_count": 2,
+      "content_hash": "sha256:1afe3079b987ce6c88db969e445784e8ec25d3b66d2210795dbeb81813010e67",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "prose",
+      "chunk_size": 2400,
+      "page_content_hash": "sha256:b652e0452927ed40"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-001-p1-c1-e19238a1c689",
+    "content": "Tables:\n| Document ID | NX-FIN-001 | Version | 2.3 |\n|:--------------|:------------------------------------------|:---------------|:------------------------|\n| Document | Finance Controller (CFO Office) | Effective date | 1 January 2026 |\n| owner | | | |\n| Applies to | All employees (limits vary by grade G1 to | Classification | Internal - Confidential |\n| | G6) | | |\n\n| Category | Limit | Rules |\n|:----------------------------------------|:---------------------|:----------------------------------------------------------|\n| Local conveyance (ride-hailing, taxi) | Actual cost | Business trips only; travel between home and office is |\n| | | not reimbursable |\n| Personal vehicle for business | PKR 35 per km | Distance recorded from the route map; parking and toll |\n| | | fees on receipt |\n| Business meals (working lunch or dinner | PKR 2,500 per person | Names of attendees and business purpose on the claim |\n| with colleagues) | | |\n| Client entertainment | PKR 5,000 per person | Pre-approval from the department head if total exceeds |\n| | | PKR 50,000 |\n| Mobile phone (business use) | PKR 5,000 per month | Grade G4 and above, in addition to allowances in the |\n| | | Benefits Guide |\n| Training and certifications | PKR 60,000 per year | Paid from the learning allowance in the Benefits Guide |\n| | | (NX-HR-003) |\n| Office supplies and small equipment | Up to PKR 20,000 | Through the office administrator; larger purchases follow |\n| | | the Procurement Policy (NX-FIN-002) |",
+    "metadata": {
+      "doc_id": "NX-FIN-001",
+      "title": "Expense Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Expense Policy",
+      "image_count": 0,
+      "table_count": 2,
+      "content_hash": "sha256:e19238a1c6899d3d3a4e34d28972b3a1c6c15c710ff20bec15b7fc11c622f27a",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "table",
+      "chunk_size": 1493,
+      "page_content_hash": "sha256:b652e0452927ed40"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-001-p2-c0-7aec954f7ae9",
+    "content": "Expense Policy > Page 2\n\n3. Business Travel\n3.1 Per Diem and Accommodation\nFor overnight travel within Pakistan, employees receive a fixed daily allowance for meals and incidental costs,\nand hotel stays are reimbursed up to the nightly cap. The caps apply in Lahore, Karachi and Islamabad; in other\ncities the hotel cap is 70% of the amount shown. Figure 1 compares the limits by grade.\nTable 2. Domestic travel limits by grade.\nGrade\nPer diem (PKR per day)\nHotel cap (PKR per night)\nAir travel class\nG1 and G2\n4,000\n15,000\nEconomy\nG3\n6,000\n15,000\nEconomy\nG4\n8,000\n20,000\nEconomy\nG5\n10,000\n30,000\nEconomy; premium economy for flights over 6\nhours\nG6\n12,000\n30,000\nBusiness class for flights over 6 hours\nFigure 1. Domestic per diem and hotel cap by employee grade.\n3.2 International Travel\nInternational trips need approval from the department head and the CFO office at least 14 days before\ndeparture. Per diem is paid in US dollars: USD 75 for G1 to G3, USD 100 for G4, USD 125 for G5 and USD 150\nfor G6. Hotels are booked through the approved travel desk within a per-night budget agreed at approval.\nEmployees must hold valid travel insurance, which the company arranges.\n3.3 Travel Advances\nAn advance of up to 80% of the estimated trip cost can be requested at least 5 working days before travel. The\nadvance must be settled with receipts within 7 days of return; unsettled advances are recovered from the next\nsalary.\n4. Claim Submission and Approval\nAll claims are submitted in the Expense portal within 15 calendar days of the expense (or of return from travel).\nClaims submitted later require the CFO office's exception approval. A receipt or tax invoice is mandatory for any\nexpense above PKR 500; for smaller amounts a signed self-declaration is accepted up to PKR 3,000 per month.\nFigure 2 shows the process.\nNexora Technologies (Pvt.) Ltd.\nNX-FIN-001\nInternal use only | Expense Policy | v2.3\nPage 2 of 4\n\nImage OCR:\nPKR\n\n35000 +\nMmm Per diem (PKR/day) @m™_ Hotel cap (PKR/night)\n\n30000 + 30,000 30,000\n\n25000 +\n20000 +\n15000 4\n10000 4\n\n5000 +\n\nG1/G2 G3 G4 GS G6",
+    "metadata": {
+      "doc_id": "NX-FIN-001",
+      "title": "Expense Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 2,
+      "source_pdf": "Expense Policy",
+      "image_count": 1,
+      "table_count": 1,
+      "content_hash": "sha256:7aec954f7ae9c132f0a3bc93562dd68071aa6c1a4df22712b8c9e7a9b50f692c",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "image_ocr",
+      "chunk_size": 2076,
+      "page_content_hash": "sha256:d4eac51d099027c6"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-001-p2-c1-51a1d490a042",
+    "content": "Image OCR:\nPKR\n\n35000 +\nMmm Per diem (PKR/day) @m™_ Hotel cap (PKR/night)\n\n30000 + 30,000 30,000\n\n25000 +\n20000 +\n15000 4\n10000 4\n\n5000 +\n\nG1/G2 G3 G4 GS G6\n\nTables:\n| Grade | Per diem (PKR per day) | Hotel cap (PKR per night) | Air travel class |\n|:----------|:-------------------------|:----------------------------|:--------------------------------------------|\n| G1 and G2 | 4,000 | 15,000 | Economy |\n| G3 | 6,000 | 15,000 | Economy |\n| G4 | 8,000 | 20,000 | Economy |\n| G5 | 10,000 | 30,000 | Economy; premium economy for flights over 6 |\n| | | | hours |\n| G6 | 12,000 | 30,000 | Business class for flights over 6 hours |",
+    "metadata": {
+      "doc_id": "NX-FIN-001",
+      "title": "Expense Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 2,
+      "source_pdf": "Expense Policy",
+      "image_count": 1,
+      "table_count": 1,
+      "content_hash": "sha256:51a1d490a042dff8b6e55fec47bab92560439e32c346db62928cbeb79cbd84fb",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "mixed",
+      "chunk_size": 627,
+      "page_content_hash": "sha256:d4eac51d099027c6"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-001-p3-c0-d70d09f3caff",
+    "content": "Expense Policy > Page 3\n\nFigure 2. Expense claim submission, approval and payment flow.\nTable 3. Approval authority for expense claims.\nClaim amount (per claim)\nApprover(s)\nUp to PKR 50,000\nLine manager, then Finance\nPKR 50,001 to 200,000\nDepartment head, then Finance\nAbove PKR 200,000\nDepartment head and CFO office\nClaims by department heads and above\nTheir reporting executive (CEO for C-level)\n5. Non-Reimbursable Expenses\n• Traffic fines, parking penalties and vehicle repairs; alcohol or any prohibited item; personal shopping,\nentertainment or gifts.\n• Travel of family members, upgrades not covered by policy, and minibar or laundry charges on trips shorter\nthan 5 days.\n• Expenses already paid through the company card, procurement or the learning allowance (no double\nclaims).\n• Expenses without a receipt above PKR 500.\n6. Audit and Non-Compliance\nFinance audits at least 10% of claims each quarter. Duplicate or falsified claims will be recovered in full and\nreported to HR; repeated late submissions may lead to a claim being held for approval by the department head.\n7. References\n[1] Nexora Employee Handbook, NX-HR-002 (grades and conduct).\n[2] Nexora Benefits Guide, NX-HR-003 (allowances).\n[3] Nexora Procurement Policy, NX-FIN-002.\n[4] Income Tax Ordinance, 2001 (Pakistan): withholding and allowable business expenses.\n8. Revision History\nTable 4. Document revision history.\nVersion\nDate\nAuthor\nSummary of change\n2.0\n01 Jan 2025\nFinance Policy Team\nIntroduced grade-based per diem and hotel caps\n2.2\n01 Jul 2025\nFinance Policy Team\nAdded international per diem and advance rules\n2.3\n01 Jan 2026\nFinance Policy Team\nReduced submission window from 30 to 15 days; added\napproval matrix\nNexora Technologies (Pvt.) Ltd.\nNX-FIN-001\nInternal use only | Expense Policy | v2.3\nPage 3 of 4\n\nImage OCR:\nFinance verifies\nreceipts and\npolicy limits\n\nSubmit claim in\nExpense portal\nwithin 15 days\n\nEmployee incurs\nbusiness expense\n\nLine manager\napproves\n\nPaid in Thursday run\n(within 7 working days)\n\nTables:\n| Claim amount (per claim) | Approver(s) |\n|:-------------------------------------|:--------------------------------------------|\n| Up to PKR 50,000 | Line manager, then Finance |\n| PKR 50,001 to 200,000 | Department head, then Finance |\n| Above PKR 200,000 | Department head and CFO office |\n| Claims by department heads and above | Their reporting executive (CEO for C-level) |",
+    "metadata": {
+      "doc_id": "NX-FIN-001",
+      "title": "Expense Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 3,
+      "source_pdf": "Expense Policy",
+      "image_count": 1,
+      "table_count": 2,
+      "content_hash": "sha256:d70d09f3caffb6836e5e00a0f16b1ee3f943e925d5941538ce20a41bdd642a6c",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "mixed",
+      "chunk_size": 2395,
+      "page_content_hash": "sha256:dc9b1c3985541ae9"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-001-p3-c1-4f7a1832ea83",
+    "content": "| Version | Date | Author | Summary of change |\n|----------:|:------------|:--------------------|:----------------------------------------------------|\n| 2 | 01 Jan 2025 | Finance Policy Team | Introduced grade-based per diem and hotel caps |\n| 2.2 | 01 Jul 2025 | Finance Policy Team | Added international per diem and advance rules |\n| 2.3 | 01 Jan 2026 | Finance Policy Team | Reduced submission window from 30 to 15 days; added |\n| | | | approval matrix |",
+    "metadata": {
+      "doc_id": "NX-FIN-001",
+      "title": "Expense Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 3,
+      "source_pdf": "Expense Policy",
+      "image_count": 1,
+      "table_count": 2,
+      "content_hash": "sha256:4f7a1832ea83de316909df9afcab42cb42bbda43ea02052b195670666d8fe2eb",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "prose",
+      "chunk_size": 459,
+      "page_content_hash": "sha256:dc9b1c3985541ae9"
+    }
+  },
+  {
+    "chunk_id": "NX-FIN-001-p4-c0-033145e23a95",
+    "content": "Expense Policy > Page 4\n\nNexora Technologies (Pvt.) Ltd.\nNX-FIN-001\nInternal use only | Expense Policy | v2.3\nPage 4 of 4",
+    "metadata": {
+      "doc_id": "NX-FIN-001",
+      "title": "Expense Policy",
+      "department": "Finance",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 4,
+      "source_pdf": "Expense Policy",
+      "image_count": 0,
+      "table_count": 0,
+      "content_hash": "sha256:033145e23a95be24b5fc8392eb0e0ff052f302d1fd2fd317a8ad50d94c6aa68e",
+      "chunk_type_hint": "prose",
+      "chunk_index": 0,
+      "chunk_type": "prose",
+      "chunk_size": 121,
+      "page_content_hash": "sha256:033145e23a95be24"
+    }
+  }
+]

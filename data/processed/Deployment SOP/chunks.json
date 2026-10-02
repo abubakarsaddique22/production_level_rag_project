@@ -1,0 +1,149 @@
+[
+  {
+    "chunk_id": "NX-ENG-002-p1-c0-93a2cb4ca2a9",
+    "content": "Deployment Standard Operating Procedure > Page 1\n\nENGINEERING\nDeployment Standard Operating Procedure\nCI/CD pipeline, environments, release windows, canary rollout, rollback and incident response\nDocument ID\nNX-ENG-002\nVersion\n3.1\nDocument\nowner\nHead of DevOps and SRE\nEffective date\n1 April 2026\nApplies to\nAll engineers, QA, release managers and\non-call staff\nClassification\nInternal - Confidential\nAbstract. This SOP defines how software is built, tested and released to production at Nexora Technologies. It describes\nthe environments, the automated CI/CD pipeline, approval gates, release windows, the canary deployment strategy, criteria\nfor automatic rollback, incident severity levels and the on-call rotation. Following this procedure keeps production changes\ntraceable and reversible.\nKeywords: CI/CD, deployment, canary release, rollback, incident severity, on-call, change management\n1. Scope and Principles\n• Every production change is traceable to an approved pull request and a change record (CHG ticket) in Jira.\n• Deployments are automated; engineers do not deploy from laptops or edit production resources manually.\n• Every release must be reversible within 15 minutes.\n• Infrastructure is defined as code (Terraform) and applications are deployed with Argo CD on Amazon EKS.\n2. Environments\nTable 1. Nexora environments.\nEnvironment\nPurpose\nDeploy trigger\nApproval\nDevelopment\nFeature testing by developers; synthetic\ndata\nEvery merge to a feature branch\n(optional)\nNone\nStaging\nIntegration, regression and performance\ntests; anonymised data\nAutomatic on merge to main\nNone\nPre-production\nFinal validation with production-like\nconfiguration\nManual trigger by release\nmanager\nQA lead\nProduction\nLive customer traffic\nManual approval after staging\ntests pass\nRelease manager and\nservice owner\n3. CI/CD Pipeline\nThe pipeline runs in GitHub Actions. A change moves through the stages in Figure 1; any failing stage stops the\npipeline and notifies the author. Code must meet the review and coverage rules in the Coding Standards\n(NX-ENG-003) before it can be merged.\nNexora Technologies (Pvt.) Ltd.\nNX-ENG-002\nInternal use only | Deployment Standard Operating Procedure | v3.1\nPage 1 of 4",
+    "metadata": {
+      "doc_id": "NX-ENG-002",
+      "title": "Deployment Standard Operating Procedure",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Deployment SOP",
+      "image_count": 0,
+      "table_count": 2,
+      "content_hash": "sha256:93a2cb4ca2a9e8439b98601124433219ab93f53d9aa20ca29469cec122fbc005",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "prose",
+      "chunk_size": 2202,
+      "page_content_hash": "sha256:17b2ff969d46120a"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-002-p1-c1-e173bdcfa3ae",
+    "content": "Tables:\n| Document ID | NX-ENG-002 | Version | 3.1 |\n|:--------------|:----------------------------------------|:---------------|:------------------------|\n| Document | Head of DevOps and SRE | Effective date | 1 April 2026 |\n| owner | | | |\n| Applies to | All engineers, QA, release managers and | Classification | Internal - Confidential |\n| | on-call staff | | |\n\n| Environment | Purpose | Deploy trigger | Approval |\n|:---------------|:-----------------------------------------|:--------------------------------|:--------------------|\n| Development | Feature testing by developers; synthetic | Every merge to a feature branch | None |\n| | data | (optional) | |\n| Staging | Integration, regression and performance | Automatic on merge to main | None |\n| | tests; anonymised data | | |\n| Pre-production | Final validation with production-like | Manual trigger by release | QA lead |\n| | configuration | manager | |\n| Production | Live customer traffic | Manual approval after staging | Release manager and |\n| | | tests pass | service owner |",
+    "metadata": {
+      "doc_id": "NX-ENG-002",
+      "title": "Deployment Standard Operating Procedure",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 1,
+      "source_pdf": "Deployment SOP",
+      "image_count": 0,
+      "table_count": 2,
+      "content_hash": "sha256:e173bdcfa3ae50401b8f925affe9a53bf0f90f8d9da499efb5ddf8faa35dac00",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "table",
+      "chunk_size": 1044,
+      "page_content_hash": "sha256:17b2ff969d46120a"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-002-p2-c0-f46bcc4adf2f",
+    "content": "Deployment Standard Operating Procedure > Page 2\n\nFigure 1. Nexora CI/CD pipeline from merge to production monitoring.\n4. Release Windows and Approvals\nTable 2. Release windows (Pakistan Standard Time).\nRelease type\nAllowed window\nApproval required\nStandard release\nTuesday and Thursday, 10:00 AM to 2:00 PM\nRelease manager and service owner\nMinor configuration change\nMonday to Thursday, 10:00 AM to 4:00 PM\nService owner\nEmergency hotfix\nAny time, including nights and weekends\nOn-call lead and CTO (or delegate);\nCHG ticket created within 24 hours\nBlackout\nFriday after 12:00 PM, weekends, public holidays,\nand the week of Eid\nStandard releases are not allowed\n5. Deployment Strategy\nStateless services use a canary rollout: the new version first receives 5% of traffic for 15 minutes, then 25% for\n15 minutes, and finally 100% (Figure 2). The API Gateway uses blue-green deployment. Database migrations\nmust be backward compatible with the previous application version (expand, migrate, contract) so that a rollback\nnever requires a schema rollback.\nFigure 2. Canary rollout schedule: 5% for 15 minutes, 25% for 15 minutes, then full rollout.\n6. Rollback\nAutomated monitoring compares the canary against the baseline. A rollback is triggered automatically, or by the\nrelease manager, if any of the following occurs:\n• HTTP 5xx error rate above 2% for 5 consecutive minutes.\n• p95 latency above 2 times the baseline for 5 consecutive minutes.\n• Failed health checks on more than 20% of new pods, or a crash loop.\nNexora Technologies (Pvt.) Ltd.\nNX-ENG-002\nInternal use only | Deployment Standard Operating Procedure | v3.1\nPage 2 of 4\n\nImage OCR:\nTraffic (%)\n\n100\n\n80\n\n60\n\n40\n\n20\n\n10\n\n20 30 40\nMinutes since deployment started\n\n50\n\n60\n\nMerge to main\n(PR approved)\n\nIntegration and\nsmoke tests\n\nBuild and SAST, dependency\nunit tests and image scan\n\nReleasel Approved Canary deploy\n\n5% to 25%\n\napproval to 100%\n\nPush image\nto registry\n\nPost-deploy\nverification\n\nDeploy to\nstaging\n\nMonitor and\nclose CHG",
+    "metadata": {
+      "doc_id": "NX-ENG-002",
+      "title": "Deployment Standard Operating Procedure",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 2,
+      "source_pdf": "Deployment SOP",
+      "image_count": 2,
+      "table_count": 1,
+      "content_hash": "sha256:f46bcc4adf2f94de8af064f555c30fa98242fd3882b17930321471886c96c3a7",
+      "chunk_type_hint": "mixed",
+      "chunk_index": 0,
+      "chunk_type": "image_ocr",
+      "chunk_size": 2003,
+      "page_content_hash": "sha256:d5a5659adfed3982"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-002-p2-c1-342768d75b8c",
+    "content": "20 30 40\nMinutes since deployment started\n\n50\n\n60\n\nMerge to main\n(PR approved)\n\nIntegration and\nsmoke tests\n\nBuild and SAST, dependency\nunit tests and image scan\n\nReleasel Approved Canary deploy\n\n5% to 25%\n\napproval to 100%\n\nPush image\nto registry\n\nPost-deploy\nverification\n\nDeploy to\nstaging\n\nMonitor and\nclose CHG\n\nTables:\n| Release type | Allowed window | Approval required |\n|:---------------------------|:--------------------------------------------------|:------------------------------------|\n| Standard release | Tuesday and Thursday, 10:00 AM to 2:00 PM | Release manager and service owner |\n| Minor configuration change | Monday to Thursday, 10:00 AM to 4:00 PM | Service owner |\n| Emergency hotfix | Any time, including nights and weekends | On-call lead and CTO (or delegate); |\n| | | CHG ticket created within 24 hours |\n| Blackout | Friday after 12:00 PM, weekends, public holidays, | Standard releases are not allowed |\n| | and the week of Eid | |",
+    "metadata": {
+      "doc_id": "NX-ENG-002",
+      "title": "Deployment Standard Operating Procedure",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 2,
+      "source_pdf": "Deployment SOP",
+      "image_count": 2,
+      "table_count": 1,
+      "content_hash": "sha256:342768d75b8ceb50c3ca10087ef2f3cfdb827b21f8e0d75983280d30e2ecd382",
+      "chunk_type_hint": "mixed",
+      "chunk_index": 1,
+      "chunk_type": "table",
+      "chunk_size": 962,
+      "page_content_hash": "sha256:d5a5659adfed3982"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-002-p3-c0-35272d534fee",
+    "content": "Deployment Standard Operating Procedure > Page 3\n\n• A SEV1 or SEV2 defect that is confirmed to originate from the release.\nFigure 3. Rollback decision flow during a canary release.\n7. Incident Severity and On-Call\nTable 3. Incident severity levels.\nLevel\nDefinition\nAcknowledge within\nUpdate frequency\nSEV1\nComplete outage or data loss affecting many customers\n15 minutes\nEvery 30 minutes\nSEV2\nMajor feature unavailable or severe degradation\n30 minutes\nEvery 60 minutes\nSEV3\nMinor feature impaired; workaround exists\n4 hours\nDaily\nSEV4\nCosmetic issue or low-impact defect\nNext business day\nAs needed\nThe on-call rotation is weekly and handled by senior engineers (G3 and above) and a secondary engineer in G2.\nThe primary on-call must be reachable within 10 minutes and able to reach a laptop within 30 minutes. On-call\nallowances are described in the Benefits Guide (NX-HR-003). SEV1 and SEV2 incidents require a written\npost-mortem within 3 working days, following a blameless format.\n8. Checklists\n8.1 Pre-Deployment\n• Change ticket approved and linked to the pull request; release notes prepared.\n• All pipeline stages passed on the exact image being released.\n• Rollback plan and database migration compatibility confirmed.\n• Customer-facing teams notified for changes visible to customers.\n• Release is inside the permitted window in Table 2.\n8.2 Post-Deployment\n• Smoke tests pass and dashboards show error rate and latency within normal range for 30 minutes.\n• Feature flags and configuration verified.\n• Release notes published and the CHG ticket closed with the final outcome.\n9. References\n[1] Nexora Coding Standards, NX-ENG-003.\n[2] Nexora API Documentation, NX-ENG-001.\n[3] Nexora Benefits Guide, NX-HR-003 (on-call allowance).\n[4] Google SRE Book: Managing Incidents; Release Engineering.\nNexora Technologies (Pvt.) Ltd.\nNX-ENG-002\nInternal use only | Deployment Standard Operating Procedure | v3.1\nPage 3 of 4\n\nImage OCR:\nCanary at 5% Metrics healthy Increase to 25%, Release\ntraffic for 15 minutes? then 100% complete\n\nRoll back to previous Open incident; post-mortem\nversion (within 15 min) within 3 working days",
+    "metadata": {
+      "doc_id": "NX-ENG-002",
+      "title": "Deployment Standard Operating Procedure",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 3,
+      "source_pdf": "Deployment SOP",
+      "image_count": 1,
+      "table_count": 1,
+      "content_hash": "sha256:35272d534fee4ccd571858917f875ad4bb2181be7e88cd2078b86a13f4d4e043",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "image_ocr",
+      "chunk_size": 2130,
+      "page_content_hash": "sha256:573d5e0d2c96d72a"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-002-p3-c1-5e3b529c2bae",
+    "content": "Image OCR:\nCanary at 5% Metrics healthy Increase to 25%, Release\ntraffic for 15 minutes? then 100% complete\n\nRoll back to previous Open incident; post-mortem\nversion (within 15 min) within 3 working days\n\nTables:\n| Level | Definition | Acknowledge within | Update frequency |\n|:--------|:------------------------------------------------------|:---------------------|:-------------------|\n| SEV1 | Complete outage or data loss affecting many customers | 15 minutes | Every 30 minutes |\n| SEV2 | Major feature unavailable or severe degradation | 30 minutes | Every 60 minutes |\n| SEV3 | Minor feature impaired; workaround exists | 4 hours | Daily |\n| SEV4 | Cosmetic issue or low-impact defect | Next business day | As needed |",
+    "metadata": {
+      "doc_id": "NX-ENG-002",
+      "title": "Deployment Standard Operating Procedure",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 3,
+      "source_pdf": "Deployment SOP",
+      "image_count": 1,
+      "table_count": 1,
+      "content_hash": "sha256:5e3b529c2bae1f2516ae696df4e34b1563236089a68830a5c526fd4dfe4dca42",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 1,
+      "chunk_type": "mixed",
+      "chunk_size": 725,
+      "page_content_hash": "sha256:573d5e0d2c96d72a"
+    }
+  },
+  {
+    "chunk_id": "NX-ENG-002-p4-c0-b215ac6f12fc",
+    "content": "Deployment Standard Operating Procedure > Page 4\n\n10. Revision History\nTable 4. Document revision history.\nVersion\nDate\nAuthor\nSummary of change\n2.0\n01 Oct 2025\nNexora Platform Engineering\nIntroduced canary strategy and automatic rollback\nthresholds\n3.0\n01 Jan 2026\nNexora Platform Engineering\nAdded blackout periods and severity table\n3.1\n01 Apr 2026\nNexora Platform Engineering\nClarified emergency hotfix approval and on-call\nreachability\nNexora Technologies (Pvt.) Ltd.\nNX-ENG-002\nInternal use only | Deployment Standard Operating Procedure | v3.1\nPage 4 of 4\n\nTables:\n| Version | Date | Author | Summary of change |\n|----------:|:------------|:----------------------------|:--------------------------------------------------|\n| 2 | 01 Oct 2025 | Nexora Platform Engineering | Introduced canary strategy and automatic rollback |\n| | | | thresholds |\n| 3 | 01 Jan 2026 | Nexora Platform Engineering | Added blackout periods and severity table |\n| 3.1 | 01 Apr 2026 | Nexora Platform Engineering | Clarified emergency hotfix approval and on-call |\n| | | | reachability |",
+    "metadata": {
+      "doc_id": "NX-ENG-002",
+      "title": "Deployment Standard Operating Procedure",
+      "department": "Engineering",
+      "version": "1.0",
+      "effective_date": "2026-01-01",
+      "page": 4,
+      "source_pdf": "Deployment SOP",
+      "image_count": 0,
+      "table_count": 1,
+      "content_hash": "sha256:b215ac6f12fcc7bdc08ff1d2332b882ec92ac8508513b07c8e54e86f06a7863c",
+      "chunk_type_hint": "table_heavy",
+      "chunk_index": 0,
+      "chunk_type": "table",
+      "chunk_size": 1071,
+      "page_content_hash": "sha256:b215ac6f12fcc7bd"
+    }
+  }
+]

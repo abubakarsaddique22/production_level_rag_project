@@ -2,11 +2,17 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
+
+# CI only needs to read the code. (The CD workflow adds packages: write itself.)
+permissions:
+  contents: read
 
 env:
   RAG_QDRANT_URL: "http://localhost:6333"
@@ -31,11 +37,11 @@ jobs:
         run: grep -E '^(ruff|mypy)==' requirements.txt | xargs pip install
 
       - name: Ruff
-        continue-on-error: true
+        continue-on-error: true   # TODO: remove once ruff passes locally
         run: ruff check src tests scripts
 
       - name: Mypy
-        continue-on-error: true
+        continue-on-error: true   # TODO: remove once mypy passes locally
         run: mypy src --ignore-missing-imports
 
   # ------------------------------------------------------------------
@@ -51,10 +57,8 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Install CPU-only torch
-        run: pip install torch --index-url https://download.pytorch.org/whl/cpu
-
-      # requirements.txt already installs the spaCy model en_core_web_sm from a wheel URL
+      # requirements.txt installs CPU-only torch (extra index on its first line)
+      # and the spaCy model en_core_web_sm from a wheel URL.
       - name: Install dependencies
         run: pip install -r requirements.txt
 
@@ -78,7 +82,7 @@ jobs:
   # ------------------------------------------------------------------
   integration:
     runs-on: ubuntu-latest
-    continue-on-error: true
+    continue-on-error: true   # TODO: remove once this job is green
     services:
       postgres:
         image: postgres:16-alpine
@@ -114,25 +118,43 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Install CPU-only torch
-        run: pip install torch --index-url https://download.pytorch.org/whl/cpu
-
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Create tables
-        run: python scripts/create_tables.py
+      # Alembic instead of create_tables.py, so CI also tests the migrations.
+      - name: Apply database migrations
+        env:
+          PYTHONPATH: src
+        run: alembic upgrade head
 
       - name: Integration tests
         run: python -m pytest tests/integration -v --ignore=tests/integration/test_rbac.py
 
   # ------------------------------------------------------------------
   # 4. The Docker image must build.
+  #    The Dockerfile copies data/processed/*/chunks.json (BM25 corpus), so
+  #    they must be committed. .gitignore needs the exception for them.
   # ------------------------------------------------------------------
   docker:
     runs-on: ubuntu-latest
     needs: unit
     steps:
       - uses: actions/checkout@v4
-      - name: Build image
-        run: docker build -t nexora-rag:ci .
+
+      - name: Check BM25 corpus is committed
+        run: |
+          if ! ls data/processed/*/chunks.json >/dev/null 2>&1; then
+            echo "::error::data/processed/*/chunks.json missing. Fix .gitignore and commit the chunk files."
+            exit 1
+          fi
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build image (with layer cache)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: nexora-rag:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
