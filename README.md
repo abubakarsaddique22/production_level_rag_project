@@ -6,7 +6,7 @@ documents their role is allowed to see. The project follows a 26-step (A to Z) p
 covers the full path from ingestion to evaluation: hybrid search, reranking, auth and RBAC, caching,
 conversation memory, guardrails, a LangGraph agent and a measured evaluation.
 
-[![CI](https://github.com/<your-github-username>/nexora-rag/actions/workflows/ci.yml/badge.svg)](https://github.com/<your-github-username>/nexora-rag/actions)
+![CI](https://github.com/abubakarsaddique22/production_level_rag_project/actions/workflows/ci.yml/badge.svg)
 
 > **Status:** Steps A to V are done. Steps W to Z (observability, experiment tracking and the rest of the blueprint) are planned.
 > See [What is not done](#what-is-not-done).
