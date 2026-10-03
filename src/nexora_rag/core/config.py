@@ -9,7 +9,9 @@ Secrets should always come from environment variables.
 
 from functools import lru_cache
 from pathlib import Path
+from typing import Self
 
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -95,8 +97,9 @@ class Settings(BaseSettings):
     # ============================================================
 
     redis_url: str = "redis://localhost:6379/0"
+    answer_cache_ttl_seconds: int = 3600  # how long an exact-match answer stays cached
 
-      # ============================================================
+    # ============================================================
     # Authentication
     # ============================================================
 
@@ -107,6 +110,17 @@ class Settings(BaseSettings):
     # ============================================================
     # Observability - Langsmith
     # ============================================================
+
+    @model_validator(mode="after")
+    def _require_real_jwt_secret_in_prod(self) -> Self:
+        """In production the app must not start with the default or a short JWT secret."""
+        if self.env == "prod" and (
+            self.jwt_secret == "CHANGE_ME_IN_ENV" or len(self.jwt_secret) < 32
+        ):
+            raise ValueError(
+                "RAG_JWT_SECRET must be a random value of at least 32 characters when RAG_ENV=prod"
+            )
+        return self
 
 
 

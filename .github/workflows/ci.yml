@@ -32,8 +32,8 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Install ruff and mypy (versions pinned in requirements.txt)
-        run: grep -E '^(ruff|mypy)==' requirements.txt | xargs pip install
+      - name: Install ruff and mypy (versions pinned in requirements-dev.txt)
+        run: grep -E '^(ruff|mypy)==' requirements-dev.txt | xargs pip install
 
       - name: Ruff
         run: ruff check src tests scripts
@@ -54,10 +54,10 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      # requirements.txt installs CPU-only torch (extra index on its first line)
-      # and the spaCy model en_core_web_sm from a wheel URL.
+      # requirements-dev.txt = runtime requirements.txt (CPU-only torch via the extra index on its
+      # first line, spaCy model from a wheel URL) + test, lint, evaluation and ingestion tools.
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements-dev.txt
 
       - name: Unit and red-team tests with coverage (core modules, gate 80%)
         run: >
@@ -115,7 +115,7 @@ jobs:
           cache: pip
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements-dev.txt
 
       # Alembic instead of create_tables.py, so CI also tests the migrations.
       - name: Apply database migrations

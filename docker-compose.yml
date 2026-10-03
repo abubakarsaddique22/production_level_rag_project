@@ -1,0 +1,36 @@
+# Local development stack: only the backing services. Run the API on your machine with `make run`.
+#
+#   make up      ->  docker compose up -d qdrant redis postgres
+#   make down    ->  docker compose down
+#
+# The production stack is docker-compose.prod.yml (see docs/deployment.md).
+
+name: nexora-dev
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nexora
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  qdrant_data: {}
+  pgdata: {}

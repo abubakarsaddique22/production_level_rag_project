@@ -22,8 +22,8 @@ api_healthy() {
   [ -n "$id" ] && [ "$(docker inspect --format '{{.State.Health.Status}}' "$id" 2>/dev/null)" = "healthy" ]
 }
 wait_healthy() {
-  # The first start downloads the models, so allow up to 5 minutes.
-  for _ in $(seq 1 60); do
+  # The first start downloads the models, so allow up to 10 minutes.
+  for _ in $(seq 1 120); do
     if api_healthy; then return 0; fi
     sleep 5
   done
@@ -42,7 +42,8 @@ if [[ "$IMAGE_REPO" == *.amazonaws.com/* ]]; then
   aws ecr get-login-password --region "$ECR_REGION" | docker login --username AWS --password-stdin "$ECR_HOST"
 fi
 $COMPOSE pull api
-$COMPOSE up -d
+# "|| true": a slow first start must not stop the script before the health check and rollback below.
+$COMPOSE up -d || echo "[warn] 'compose up' reported a problem, checking the API health anyway"
 
 if wait_healthy; then
   echo "[ok] $NEW_TAG is healthy"
@@ -56,7 +57,7 @@ $COMPOSE logs --tail 40 api || true
 if [ -n "$PREVIOUS_TAG" ] && [ "$PREVIOUS_TAG" != "$NEW_TAG" ]; then
   echo "Rolling back to $PREVIOUS_TAG"
   set_tag "$PREVIOUS_TAG"
-  $COMPOSE up -d
+  $COMPOSE up -d || true
   if wait_healthy; then echo "[ok] rolled back to $PREVIOUS_TAG"; else echo "[error] rollback also unhealthy, check the logs"; fi
 fi
 exit 1

@@ -7,7 +7,7 @@ PIP := $(VENV)/bin/pip
 setup:
 	python3 -m venv $(VENV)
 	$(PIP) install --upgrade pip
-	$(PIP) install -r requirements.txt
+	$(PIP) install -r requirements-dev.txt
 	$(VENV)/bin/pre-commit install || true
 
 up:
@@ -17,7 +17,8 @@ down:
 	docker compose down
 
 ingest:
-	PYTHONPATH=src $(PY) scripts/ingest.py --all
+	PYTHONPATH=src $(PY) -m nexora_rag.ingestion.pipeline
+	PYTHONPATH=src $(PY) -m nexora_rag.retrieval.vector_store
 
 run:
 	PYTHONPATH=src $(VENV)/bin/uvicorn nexora_rag.api.main:app --reload --app-dir src

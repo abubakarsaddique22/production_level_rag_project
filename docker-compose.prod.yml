@@ -1,10 +1,11 @@
-# Production stack (Step Y): one VM, HTTPS through Caddy, images pulled from GHCR.
+# Production stack (Step Y): one EC2 VM, HTTPS through Caddy, images pulled from Amazon ECR.
+# (The local development stack is docker-compose.yml: qdrant, redis and postgres only.)
 #
 #   docker compose --env-file .env.prod -f docker-compose.prod.yml up -d
 #
 # Or use scripts/deploy.sh <tag>, which also checks health and rolls back on failure.
 # Only Caddy (80/443) is public. Postgres, Redis and the API are reachable only inside the
-# compose network. Prometheus and Grafana listen on 127.0.0.1 (use an SSH tunnel).
+# compose network. Prometheus and Grafana listen on 127.0.0.1 (reach them with SSM port forwarding).
 #
 # Qdrant: the default is Qdrant Cloud (set RAG_QDRANT_URL and RAG_QDRANT_API_KEY in .env.prod).
 # For a local Qdrant container add:  --profile local-qdrant  and set RAG_QDRANT_URL=http://qdrant:6333
@@ -25,11 +26,11 @@ services:
       - caddy_config:/config
     depends_on:
       api:
-        condition: service_healthy
+        condition: service_started
     restart: unless-stopped
 
   api:
-    image: ${IMAGE:-ghcr.io/abubakarsaddique22/production_level_rag_project}:${IMAGE_TAG:-latest}
+    image: ${IMAGE:?set IMAGE in .env.prod}:${IMAGE_TAG:-latest}
     env_file: .env.prod
     environment:
       RAG_ENV: prod
