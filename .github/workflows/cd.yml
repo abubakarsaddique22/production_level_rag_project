@@ -1,19 +1,4 @@
 name: CD
-
-# Runs when you push a version tag, for example:  git tag v1.0.0 && git push origin v1.0.0
-# 1. builds the Docker image and pushes it to Amazon ECR (login with the AWS access keys stored in GitHub secrets)
-# 2. writes the production settings from GitHub secrets into AWS Parameter Store (encrypted)
-# 3. tells the EC2 server (through AWS Systems Manager, so port 22 can stay closed) to download
-#    the settings and run scripts/deploy.sh <tag>  (health check + automatic rollback)
-#
-# One-time setup is described in docs/deployment.md.
-#   Repository secrets:    AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, RAG_QDRANT_URL, RAG_QDRANT_API_KEY,
-#                          RAG_GROQ_API_KEY, RAG_JWT_SECRET, PG_PASSWORD, GRAFANA_PASSWORD, LANGSMITH_API_KEY
-#   Repository variables:  AWS_REGION, ECR_REPOSITORY, EC2_INSTANCE_ID, DOMAIN, S3_BACKUP_BUCKET
-#
-# Tip: use letters and digits only in generated passwords (no $ and no quotes), because the
-# values are written into a .env file that Docker Compose reads.
-
 on:
   push:
     tags: ["v*"]
