@@ -14,7 +14,7 @@ REGION="${2:?usage: server_deploy.sh <image-tag> <aws-region>}"
 PARAM="${ENV_PARAMETER:-/nexora/env-prod}"
 
 aws ssm get-parameter --name "$PARAM" --with-decryption --region "$REGION" \
-  --query Parameter.Value --output text > .env.prod.new
+  --query Parameter.Value --output text | cat > .env.prod.new
 
 KEEP_TAG=""
 if [ -f .env.prod ]; then
